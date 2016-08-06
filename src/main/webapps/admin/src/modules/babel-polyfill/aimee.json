@@ -1,0 +1,12 @@
+{
+  "name": "babel-polyfill",
+  "version": "6.9.1",
+  "description": "Babel-polyfill",
+  "author": "gavinning",
+  "keywords": "babel-polyfill",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aimeejs/babel-polyfill.git",
+    "bugs": "https:/github.com/aimeejs/babel-polyfill/issues"
+  }
+}

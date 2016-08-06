@@ -1,0 +1,65 @@
+{
+    "name": "Metronic",
+    "path": [
+        {
+            "source": "../../assets/global/plugins",
+            "target": "/public/plugins"
+        },
+        {
+            "source": "../../assets/admin/pages/css",
+            "target": "/public/css/admin"
+        },
+        {
+            "source": "../../assets/global/css",
+            "target": "/public/css"
+        },
+        {
+            "source": "../../assets/admin/layout3/css",
+            "target": "/public/css"
+        },
+        {
+            "source": "../../assets/admin/layout3/img",
+            "target": "/public/img"
+        },
+        {
+            "source": "../../assets/admin/pages/scripts",
+            "target": "/public/js/pages"
+        },
+        {
+            "source": "../../assets/admin/layout3/scripts",
+            "target": "/public/js"
+        },
+        {
+            "source": "../../assets/global/scripts",
+            "target": "/public/js/global"
+        },
+        {
+            "source": "../../assets/admin/layout/img",
+            "target": "/public/img"
+        },
+        {
+            "source": "",
+            "target": ""
+        },
+        {
+            "source": "",
+            "target": ""
+        },
+        {
+            "source": "",
+            "target": ""
+        },
+        {
+            "source": "",
+            "target": ""
+        },
+        {
+            "source": "",
+            "target": ""
+        },
+        {
+            "source": "",
+            "target": ""
+        }
+    ]
+}
