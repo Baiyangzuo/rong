@@ -68,9 +68,8 @@ class App extends Base {
         this.guid = guid();
         this.aimee = { app: true };
         this.renderString = 'lincoapp-id-';
-        this._config = {};
         this.CONFIG = new Config;
-        this.CONFIG.init(this._config);
+        this.CONFIG.init({});
     }
 
     init(data) {
@@ -82,18 +81,18 @@ class App extends Base {
         // 检查默认数据是存在config
         this._data.config ?
             // 存在则直接赋值
-            this._config = this._data.config:
+            this.CONFIG.init(this._data.config):
             // 不存在则初始化
-            this._data.config = this._config = {};
+            this._data.config = this.CONFIG.get();
 
         // 构建临时Zepto对象，App编译前skin、addClass等操作将作用于此
         this.__app = aimee.$('div');
-        this.onload();
         return this;
     }
 
     // 编译数据并缓存App Zepto对象
     compile(data) {
+        this._prevApp = this._app;
         // Compile
         this._app = $(this.template(data || this.getData()));
         // Merge id, className
@@ -128,6 +127,7 @@ class App extends Base {
     }
 
     render(id) {
+        this.onload();
         this.compile();
         privates.render(this, id);
         return this;
@@ -145,7 +145,7 @@ class App extends Base {
             data = $.extend(true, {}, this.getData(), data);
 
         this.compile(data)
-
+        this._prevApp.replaceWith(this._app);
         return this;
     }
 
@@ -226,7 +226,7 @@ class App extends Base {
         return this.getApp().find(selector);
     }
 
-    _export(App, fn) {
+    export(App, fn) {
         var thisPage;
         var app = new App;
         this.app ? '' : this.app = {};
@@ -292,7 +292,7 @@ class App extends Base {
             }
             // 单个组件调用返回app对象
             else{
-                return this._export(require(id), fn);
+                return this.export(require(id), fn);
             }
         }
     }
@@ -300,7 +300,7 @@ class App extends Base {
     // Rewrite
 
     // 初始化后
-    onload(app) {
+    onload() {
         return this
     }
 
@@ -315,7 +315,7 @@ class App extends Base {
     }
 
     // 页面渲染后，被覆盖
-    pagerender() {
+    pagerender(app) {
         return this
     }
 }

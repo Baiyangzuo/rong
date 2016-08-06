@@ -1,0 +1,7 @@
+tbody
+    each item, i in list
+        tr
+            td(data-type="number")= i+1
+            each value, key in item
+                td(data-type= key)
+                    .inner= value

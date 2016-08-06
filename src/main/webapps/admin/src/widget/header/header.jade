@@ -1,1 +1,289 @@
-.lincoapp-header
+.lincoapp-header.page-header
+    .page-header-top
+        .container
+            // BEGIN LOGO
+            .page-logo
+                a(href='index.html')
+                    img.logo-default(src='/public/img/logo-default.png', alt='logo')
+            // END LOGO
+            // BEGIN RESPONSIVE MENU TOGGLER
+            a.menu-toggler(href='javascript:;')
+            // END RESPONSIVE MENU TOGGLER
+            // BEGIN TOP NAVIGATION MENU
+            .top-menu
+                ul.nav.navbar-nav.pull-right
+                    // BEGIN NOTIFICATION DROPDOWN
+                    li#header_notification_bar.dropdown.dropdown-extended.dropdown-dark.dropdown-notification
+                        a.dropdown-toggle(href='javascript:;', data-toggle='dropdown', data-hover='dropdown', data-close-others='true')
+                            i.icon-bell
+                            span.badge.badge-default 7
+                        ul.dropdown-menu
+                            li.external
+                                h3
+                                    | You have 
+                                    strong 12 pending
+                                    |  tasks
+                                a(href='javascript:;') view all
+                            li
+                                .slimScrollDiv(style='position: relative; overflow: hidden; width: auto; height: 250px;')
+                                    ul.dropdown-menu-list.scroller(style='height: 250px; overflow: hidden; width: auto;', data-handle-color='#637283', data-initialized='1')
+                                        li
+                                            a(href='javascript:;')
+                                                span.time just now
+                                                span.details
+                                                    span.label.label-sm.label-icon.label-success
+                                                        i.fa.fa-plus
+                                                    |                                       New user registered.
+                                        li
+                                            a(href='javascript:;')
+                                                span.time 3 mins
+                                                span.details
+                                                    span.label.label-sm.label-icon.label-danger
+                                                        i.fa.fa-bolt
+                                                    |                                       Server #12 overloaded.
+                                        li
+                                            a(href='javascript:;')
+                                                span.time 10 mins
+                                                span.details
+                                                    span.label.label-sm.label-icon.label-warning
+                                                        i.fa.fa-bell-o
+                                                    |                                       Server #2 not responding.
+                                        li
+                                            a(href='javascript:;')
+                                                span.time 14 hrs
+                                                span.details
+                                                    span.label.label-sm.label-icon.label-info
+                                                        i.fa.fa-bullhorn
+                                                    |                                       Application error.
+                                        li
+                                            a(href='javascript:;')
+                                                span.time 2 days
+                                                span.details
+                                                    span.label.label-sm.label-icon.label-danger
+                                                        i.fa.fa-bolt
+                                                    |                                       Database overloaded 68%.
+                                        li
+                                            a(href='javascript:;')
+                                                span.time 3 days
+                                                span.details
+                                                    span.label.label-sm.label-icon.label-danger
+                                                        i.fa.fa-bolt
+                                                    |                                       A user IP blocked.
+                                        li
+                                            a(href='javascript:;')
+                                                span.time 4 days
+                                                span.details
+                                                    span.label.label-sm.label-icon.label-warning
+                                                        i.fa.fa-bell-o
+                                                    |                                       Storage Server #4 not responding dfdfdfd.
+                                        li
+                                            a(href='javascript:;')
+                                                span.time 5 days
+                                                span.details
+                                                    span.label.label-sm.label-icon.label-info
+                                                        i.fa.fa-bullhorn
+                                                    |                                       System Error.
+                                        li
+                                            a(href='javascript:;')
+                                                span.time 9 days
+                                                span.details
+                                                    span.label.label-sm.label-icon.label-danger
+                                                        i.fa.fa-bolt
+                                                    |                                       Storage server failed.
+                                    .slimScrollBar(style='width: 7px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px; background: rgb(99, 114, 131);')
+                                    .slimScrollRail(style='width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(234, 234, 234);')
+                    // END NOTIFICATION DROPDOWN
+                    // BEGIN TODO DROPDOWN
+                    li#header_task_bar.dropdown.dropdown-extended.dropdown-dark.dropdown-tasks
+                        a.dropdown-toggle(href='javascript:;', data-toggle='dropdown', data-hover='dropdown', data-close-others='true')
+                            i.icon-calendar
+                            span.badge.badge-default 3
+                        ul.dropdown-menu.extended.tasks
+                            li.external
+                                h3
+                                    | You have 
+                                    strong 12 pending
+                                    |  tasks
+                                a(href='javascript:;') view all
+                            li
+                                .slimScrollDiv(style='position: relative; overflow: hidden; width: auto; height: 275px;')
+                                    ul.dropdown-menu-list.scroller(style='height: 275px; overflow: hidden; width: auto;', data-handle-color='#637283', data-initialized='1')
+                                        li
+                                            a(href='javascript:;')
+                                                span.task
+                                                    span.desc New release v1.2 
+                                                    span.percent 30%
+                                                span.progress
+                                                    span.progress-bar.progress-bar-success(style='width: 40%;', aria-valuenow='40', aria-valuemin='0', aria-valuemax='100')
+                                                        span.sr-only 40% Complete
+                                        li
+                                            a(href='javascript:;')
+                                                span.task
+                                                    span.desc Application deployment
+                                                    span.percent 65%
+                                                span.progress
+                                                    span.progress-bar.progress-bar-danger(style='width: 65%;', aria-valuenow='65', aria-valuemin='0', aria-valuemax='100')
+                                                        span.sr-only 65% Complete
+                                        li
+                                            a(href='javascript:;')
+                                                span.task
+                                                    span.desc Mobile app release
+                                                    span.percent 98%
+                                                span.progress
+                                                    span.progress-bar.progress-bar-success(style='width: 98%;', aria-valuenow='98', aria-valuemin='0', aria-valuemax='100')
+                                                        span.sr-only 98% Complete
+                                        li
+                                            a(href='javascript:;')
+                                                span.task
+                                                    span.desc Database migration
+                                                    span.percent 10%
+                                                span.progress
+                                                    span.progress-bar.progress-bar-warning(style='width: 10%;', aria-valuenow='10', aria-valuemin='0', aria-valuemax='100')
+                                                        span.sr-only 10% Complete
+                                        li
+                                            a(href='javascript:;')
+                                                span.task
+                                                    span.desc Web server upgrade
+                                                    span.percent 58%
+                                                span.progress
+                                                    span.progress-bar.progress-bar-info(style='width: 58%;', aria-valuenow='58', aria-valuemin='0', aria-valuemax='100')
+                                                        span.sr-only 58% Complete
+                                        li
+                                            a(href='javascript:;')
+                                                span.task
+                                                    span.desc Mobile development
+                                                    span.percent 85%
+                                                span.progress
+                                                    span.progress-bar.progress-bar-success(style='width: 85%;', aria-valuenow='85', aria-valuemin='0', aria-valuemax='100')
+                                                        span.sr-only 85% Complete
+                                        li
+                                            a(href='javascript:;')
+                                                span.task
+                                                    span.desc New UI release
+                                                    span.percent 38%
+                                                span.progress.progress-striped
+                                                    span.progress-bar.progress-bar-important(style='width: 38%;', aria-valuenow='18', aria-valuemin='0', aria-valuemax='100')
+                                                        span.sr-only 38% Complete
+                                    .slimScrollBar(style='width: 7px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px; background: rgb(99, 114, 131);')
+                                    .slimScrollRail(style='width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(234, 234, 234);')
+                    // END TODO DROPDOWN
+                    li.droddown.dropdown-separator
+                        span.separator
+                    // BEGIN INBOX DROPDOWN
+                    li#header_inbox_bar.dropdown.dropdown-extended.dropdown-dark.dropdown-inbox
+                        a.dropdown-toggle(href='javascript:;', data-toggle='dropdown', data-hover='dropdown', data-close-others='true')
+                            span.circle 3
+                            span.corner
+                        ul.dropdown-menu
+                            li.external
+                                h3
+                                    | You have 
+                                    strong 7 New
+                                    |  Messages
+                                a(href='javascript:;') view all
+                            li
+                                .slimScrollDiv(style='position: relative; overflow: hidden; width: auto; height: 275px;')
+                                    ul.dropdown-menu-list.scroller(style='height: 275px; overflow: hidden; width: auto;', data-handle-color='#637283', data-initialized='1')
+                                        li
+                                            a(href='inbox.html?a=view')
+                                                span.photo
+                                                    img.img-circle(src='/public/img/avatar2.jpg', alt='')
+                                                span.subject
+                                                    span.from Lisa Wong
+                                                    span.time Just Now 
+                                                span.message Vivamus sed auctor nibh congue nibh. auctor nibh auctor nibh...
+                                        li
+                                            a(href='inbox.html?a=view')
+                                                span.photo
+                                                    img.img-circle(src='/public/img/avatar3.jpg', alt='')
+                                                span.subject
+                                                    span.from Richard Doe
+                                                    span.time 16 mins 
+                                                span.message Vivamus sed congue nibh auctor nibh congue nibh. auctor nibh auctor nibh...
+                                        li
+                                            a(href='inbox.html?a=view')
+                                                span.photo
+                                                    img.img-circle(src='/public/img/avatar1.jpg', alt='')
+                                                span.subject
+                                                    span.from Bob Nilson
+                                                    span.time 2 hrs 
+                                                span.message Vivamus sed nibh auctor nibh congue nibh. auctor nibh auctor nibh...
+                                        li
+                                            a(href='inbox.html?a=view')
+                                                span.photo
+                                                    img.img-circle(src='/public/img/avatar2.jpg', alt='')
+                                                span.subject
+                                                    span.from Lisa Wong
+                                                    span.time 40 mins 
+                                                span.message Vivamus sed auctor 40% nibh congue nibh...
+                                        li
+                                            a(href='inbox.html?a=view')
+                                                span.photo
+                                                    img.img-circle(src='/public/img/avatar3.jpg', alt='')
+                                                span.subject
+                                                    span.from Richard Doe
+                                                    span.time 46 mins 
+                                                span.message Vivamus sed congue nibh auctor nibh congue nibh. auctor nibh auctor nibh...
+                                    .slimScrollBar(style='width: 7px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px; background: rgb(99, 114, 131);')
+                                    .slimScrollRail(style='width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(234, 234, 234);')
+                    // END INBOX DROPDOWN
+                    // BEGIN USER LOGIN DROPDOWN
+                    li.dropdown.dropdown-user.dropdown-dark
+                        a.dropdown-toggle(href='javascript:;', data-toggle='dropdown', data-hover='dropdown', data-close-others='true')
+                            img.img-circle(alt='', src='/public/img/avatar9.jpg')
+                            span.username.username-hide-mobile Nick
+                        ul.dropdown-menu.dropdown-menu-default
+                            li
+                                a(href='extra_profile.html')
+                                    i.icon-user
+                                    |  My Profile
+                            li
+                                a(href='page_calendar.html')
+                                    i.icon-calendar
+                                    |  My Calendar
+                            li
+                                a(href='inbox.html')
+                                    i.icon-envelope-open
+                                    |  My Inbox 
+                                    span.badge.badge-danger 3
+                            li
+                                a(href='javascript:;')
+                                    i.icon-rocket
+                                    |  My Tasks 
+                                    span.badge.badge-success 7
+                            li.divider
+                            li
+                                a(href='extra_lock.html')
+                                    i.icon-lock
+                                    |  Lock Screen
+                            li
+                                a(href='login.html')
+                                    i.icon-key
+                                    |  Log Out
+                    // END USER LOGIN DROPDOWN
+                    // BEGIN USER LOGIN DROPDOWN
+                    li.dropdown.dropdown-extended.quick-sidebar-toggler
+                        span.sr-only Toggle Quick Sidebar
+                        i.icon-logout
+                    // END USER LOGIN DROPDOWN
+            // END TOP NAVIGATION MENU
+    .page-header-menu
+        .container
+            // BEGIN HEADER SEARCH BOX
+            form.search-form(action='extra_search.html', method='GET')
+                .input-group
+                    input.form-control(type='text', placeholder='Search', name='query')
+                    span.input-group-btn
+                        a.btn.submit(href='javascript:;')
+                            i.icon-magnifier
+            // END HEADER SEARCH BOX
+            // BEGIN MEGA MENU
+            // DOC: Apply "hor-menu-light" class after the "hor-menu" class below to have a horizontal menu with white background
+            // DOC: Remove data-hover="dropdown" and data-close-others="true" attributes below to disable the dropdown opening on mouse hover
+            .hor-menu
+                ul.nav.navbar-nav
+                    li.active
+                        a(href='/admin') Dashboard
+                    li
+                        a(href='#/demo') Demo
+            // END MEGA MENU

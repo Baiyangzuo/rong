@@ -25,11 +25,30 @@ class home extends Page {
     }
 
     onload() {
-        
+
     }
 
     prerender(data) {
+        let Table = require('table')
+        data = data || this.getData()
+
         this.exports('header')
+        this.exports('header-bar')
+        this.exports('breadcrumb')
+
+        this.use({
+            'table': app => {
+                app.init(data.table).config({
+                    length: 1
+                })
+            },
+            'panel': app => {
+                let panelData = {title: data.table.title};
+                app.init(panelData).render('#lincoapp-oc-usertable');
+                let tablePlace = app.find('.portlet-body');
+                this.query('table').render(tablePlace);
+            }
+        })
     }
 
     postrender(data) {

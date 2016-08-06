@@ -226,7 +226,6 @@ class Page extends Base {
     export(App, fn) {
         var data = {};
         var app = new App;
-        this.app ? '' : this.app = {};
 
         // 检查简单调用
         // data === fn
@@ -346,10 +345,22 @@ class Page extends Base {
 
     running() {
         var page = this;
-        [].slice.call(arguments, 0)
+        Array.from(arguments)
         .forEach(function(item){
             item.call(page)
         })
+    }
+
+    use(id, fn) {
+        if($.isPlainObject(id)){
+            $.each(id, (k, v) => this.export(require(k), v));
+            return this;
+        }
+        if(fn){
+            this.export(require(id), fn);
+            return this;
+        }
+        return new (require(id));
     }
 
     // Rewrite

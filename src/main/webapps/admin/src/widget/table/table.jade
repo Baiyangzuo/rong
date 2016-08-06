@@ -1,0 +1,9 @@
+.lincoapp-table
+    table.table
+        thead
+            tr
+                th(data-type="number") $
+                each value, key in map
+                    th(data-type= key)= value
+        include ./tbody
+    .pagination
