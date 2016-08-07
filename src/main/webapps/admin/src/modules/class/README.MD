@@ -18,10 +18,20 @@ npm i aimee-class --save
 var Class = require('aimee-class')
 ```
 
-### Inherit
+### Usage
 ```js
-instances.is = require('is');
-instances.extend = require('extend');
+class App extends Class {
+	contructor(){}
+}
+```
+
+### Method
+``App.is`` 继承自 [is](https://github.com/aimeejs/is)  
+``App.extend`` 继承自 [extend](https://github.com/aimeejs/extend)  
+``App.clone`` 深度复制一个对象
+```js
+let obj = { a: 1 }
+let objclone = App.clone(obj) // => { a: 1 }
 ```
 
 ```

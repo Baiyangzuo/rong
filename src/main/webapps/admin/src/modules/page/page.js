@@ -353,14 +353,19 @@ class Page extends Base {
 
     use(id, fn) {
         if($.isPlainObject(id)){
-            $.each(id, (k, v) => this.export(require(k), v));
+            // appname^Number 表示同一个app被多次使用
+            $.each(id, (k, v) => this.export(require(k.split('^')[0]), v));
             return this;
         }
         if(fn){
             this.export(require(id), fn);
             return this;
         }
-        return new (require(id));
+        let app = new (require(id));
+        // 缓存app对象到页面
+        this.app[app.name] ? '' : this.app[app.name] = [];
+        this.app[app.name].push(app);
+        return app;
     }
 
     // Rewrite

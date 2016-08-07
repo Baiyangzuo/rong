@@ -1,0 +1,33 @@
+doctype html
+head
+    meta(charset='utf-8')
+    title Metronic | Lock Screen 1
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(content='width=device-width, initial-scale=1.0', name='viewport')
+    meta(http-equiv='Content-type', content='text/html; charset=utf-8')
+    meta(content='', name='description')
+    meta(content='', name='author')
+    link(href='/public/plugins/bootstrap/css/bootstrap.min.css', rel='stylesheet', type='text/css')
+    link(href='/public/css/admin/lock.css', rel='stylesheet', type='text/css')
+    link#style_components(href='/public/css/components-rounded.css', rel='stylesheet', type='text/css')
+    link(rel='shortcut icon', href='favicon.ico')
+.page-lock
+    .page-logo
+        a.brand(href='index.html')
+            img(src='/public/img/logo-big.png', alt='logo')
+    .page-body
+        .lock-head
+            | Locked
+        .lock-body
+            .pull-left.lock-avatar-block
+                img.lock-avatar(src='/public/img/photo3.jpg')
+            form.lock-form.pull-left(action='index.html', method='post')
+                h4 Amanda Smith
+                .form-group
+                    input.form-control.placeholder-no-fix(type='password', autocomplete='off', placeholder='Password', name='password')
+                .form-actions
+                    button.btn.btn-success.uppercase(type='submit') Login
+        .lock-bottom
+            a(href='') Not Amanda Smith?
+    .page-footer-custom
+        | 2014 © Metronic. Admin Dashboard Template.

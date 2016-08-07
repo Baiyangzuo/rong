@@ -12,6 +12,7 @@ class Base {
     constructor() {
         this.is = is;
         this.extend = extend;
+        this.clone = obj => this.extend(true, {}, obj);
     }
 }
 

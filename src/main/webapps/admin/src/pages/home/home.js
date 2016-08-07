@@ -25,42 +25,76 @@ class home extends Page {
     }
 
     onload() {
-
+        aimee.app.loading2.show().center()
     }
 
     prerender(data) {
         let Table = require('table')
         data = data || this.getData()
 
-        this.exports('header')
+        this.exports('header footer')
         this.exports('header-bar')
         this.exports('breadcrumb')
 
         this.use({
-            'table': app => {
-                app.init(data.table).config({
-                    length: 1
-                })
+            // 构建基础统计
+            'panel^1': app => {
+                app
+                    .init({title: 'STATS'})
+                    .config('action.date', true)
+                    .config('icon.className', 'icon-bar-chart theme-font')
+                    .render().addClass('col-md-6 col-sm-12');
+                this.use('stats')
+                    .init().render(app.find('.portlet-body'));
             },
-            'panel': app => {
-                let panelData = {title: data.table.title};
-                app.init(panelData).render('#lincoapp-oc-usertable');
-                let tablePlace = app.find('.portlet-body');
-                this.query('table').render(tablePlace);
+
+            // 构建转化率
+            'panel^2': app => {
+                app
+                    .init({title: 'CONVERSION'})
+                    .config('action.date', true)
+                    .config('icon.className', 'icon-bar-chart theme-font')
+                    .render().addClass('col-md-6 col-sm-12');
+                this.use('conversion')
+                    .init()
+                    .render(app.find('.portlet-body'));
+            },
+
+            // 构建用户表
+            'panel^3': app => {
+                app
+                    .init({title: data.table.title})
+                    .config('action.date', true)
+                    .config('icon.className', 'fa fa-user font-green-sharp')
+                    .render().addClass('col-md-12');
+                this.use('table')
+                    .init(data.table)
+                    .config('page.length', 1)
+                    .config('ctrl', 'delete')
+                    .render(app.find('.portlet-body'));
             }
         })
     }
 
     postrender(data) {
-
+        this.autoscreen()
     }
 
     enter() {
-
+        aimee.app.loading2.hide()
     }
 
     leave() {
 
+    }
+
+    // Full page
+    autoscreen() {
+        let container = this.find('.page-container');
+        let headerHeight = this.query('header').getApp().height();
+        let footerHeight = this.query('footer').getApp().height();
+        let minHeight = window.innerHeight - headerHeight - footerHeight;
+        container.css('min-height', minHeight + 'px');
     }
 }
 

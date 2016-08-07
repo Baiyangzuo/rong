@@ -11,9 +11,8 @@ var aimee, router;
 aimee = require('aimee');
 router = require('router');
 
-// aimee
-//     .reg('zepto')
-//     .reg('autoscreen');
+aimee
+    .reg('loading2');
 
 router
     .option('pages/home')
