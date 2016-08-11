@@ -1,0 +1,26 @@
+{
+  "name": "top",
+  "version": "1.0.0",
+  "description": "",
+  "author": "",
+  "keywords": "",
+  "dependencies": {
+    "emmet": "~1.0.0",
+    "app": "~2.1.2",
+    "is": "~1.0.0",
+    "mock": "~1.0.0",
+    "base": "~1.1.0",
+    "config": "~2.1.1",
+    "pm": "~2.0.0",
+    "zepto": "~1.0.1",
+    "page": "~2.1.2",
+    "autoscreen": "~2.1.0",
+    "guid": "~1.0.0",
+    "router": "~2.0.0",
+    "extend": "~1.0.0",
+    "aimee": "~2.0.1",
+    "class": "~2.1.0",
+    "reset": "~1.0.3",
+    "loading": "~1.1.0"
+  }
+}

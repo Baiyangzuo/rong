@@ -33,5 +33,6 @@ module.exports = {
     // 用户UUID
     userguid: Sequelize.TEXT('tiny'),
     ip: Sequelize.STRING,
-    ua: Sequelize.TEXT
+    ua: Sequelize.TEXT,
+    stack: Sequelize.TEXT
 }

@@ -7,8 +7,11 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var routes = require('./routes');
 var format = require('date-format');
-
+var paths = require('./models/system/paths');
 var app = express();
+
+// 注册关键路径
+paths(__dirname);
 
 // logger reg time
 logger.token('time', function getId(req) {
