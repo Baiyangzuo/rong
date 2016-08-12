@@ -15,8 +15,8 @@ define('pages/home/home.json', function(require, exports, module) {
 
 });
 
-;/*!header/header.json*/
-define('header/header.json', function(require, exports, module) {
+;/*!apply/apply.json*/
+define('apply/apply.json', function(require, exports, module) {
 
   /*!
    * Mock data for mock.js
@@ -32,8 +32,8 @@ define('header/header.json', function(require, exports, module) {
 
 });
 
-;/*!apply/apply.json*/
-define('apply/apply.json', function(require, exports, module) {
+;/*!header/header.json*/
+define('header/header.json', function(require, exports, module) {
 
   /*!
    * Mock data for mock.js

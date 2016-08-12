@@ -13,7 +13,8 @@ class Info {
         return {
             info: this.getInfo(),
             user: this.getUser(),
-            stats: this.getStats()
+            stats: this.getStats(),
+            cookies: this.req.cookies
         }
     }
 
@@ -22,13 +23,14 @@ class Info {
             username: this.req.body.username,
             tel: this.req.body.tel,
             gender: this.req.body.gender,
-            userguid: this.req.body.userguid
+            userguid: this.req.body.userguid,
+            ip: clientIp(this.req)
         }
         return this.user
     }
 
     getStats() {
-        this.user = {
+        this.stats = {
             ip: clientIp(this.req),
             ua: this.req.headers['user-agent'],
             status: 'success',
@@ -36,7 +38,7 @@ class Info {
             username: this.req.body.username,
             userguid: this.req.body.userguid
         }
-        return this.user
+        return this.stats
     }
 
     getInfo() {

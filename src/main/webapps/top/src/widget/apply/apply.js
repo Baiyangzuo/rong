@@ -36,7 +36,9 @@ class apply extends App {
                 this.post(
                     data,
                     msg => {
-                        console.log(msg)
+                        console.log(msg);
+                        let num = Number(cookie.get('userRegSuccess') || 0);
+                        cookie.set('userRegSuccess', ++num, { expires: 7*365, path: '/' })
                     },
                     err => {
                         console.log(err.status)

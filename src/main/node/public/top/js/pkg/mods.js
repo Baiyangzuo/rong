@@ -3235,6 +3235,1240 @@ define('autoscreen', function(require, exports, module) {
 
 });
 
+;/*!form/app*/
+define('form/app', function(require, exports, module) {
+
+  /*!
+   * apps For Aimeejs.from
+   * https://github.com/gavinning/aimee
+   *
+   * Aimee-app
+   * Date: 2016-05-25
+   * 所有表单控件的基础类，所有表单控件应该继承此类
+   *
+   */
+  'use strict';
+  
+  Object.defineProperty(exports, '__esModule', {
+      value: true
+  });
+  
+  var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+  
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+  
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+  
+  var _config = require('config');
+  
+  var _config2 = _interopRequireDefault(_config);
+  
+  var App = (function () {
+  
+      // 初始化tagName
+      // 创建基础dom
+  
+      function App(tagName) {
+          _classCallCheck(this, App);
+  
+          this.attributes = {};
+          this.tagName = tagName || 'div';
+          this.dom = this.create(this.tagName);
+          this.$ = $(this.dom);
+          this.extend = require('extend');
+          this.config = new _config2['default'].Config();
+      }
+  
+      /**
+       * 创建dom方法 ** 不建议重写
+       * @param   {String}  el tagName
+       * @return  {Node}       Node节点
+       * @example this.create('input')
+       */
+  
+      _createClass(App, [{
+          key: 'create',
+          value: function create(el) {
+              return document.createElement(el);
+          }
+      }, {
+          key: 'show',
+          value: function show() {
+              this.$.show();
+          }
+      }, {
+          key: 'hide',
+          value: function hide() {
+              this.$.hide();
+          }
+  
+          /**
+           * 配置方法
+           * @param   {Object}  config 配置项
+           * @example this.setting({css: true})
+           */
+      }, {
+          key: 'setting',
+          value: function setting(config) {
+              this.config.merge(config);
+              return this;
+          }
+  
+          /**
+           * 属性设置 ** 不建议重写
+           * @param   {String}  key   要设置的属性KEY
+           * @param   {Object}  key   要设置的属性MAP
+           * @param   {Any}     value 为真时单一针对key进行赋值
+           * @return  {Object}        根据参数返回
+           * @example [example]
+           */
+      }, {
+          key: 'attr',
+          value: function attr(key, value) {
+              // KEY为字符串
+              if (typeof key === 'string') {
+                  // VALUE为真是赋值
+                  if (value) {
+                      this.$.attr(key, value);
+                      this.attributes[key] = value;
+                      return this;
+                  } else {
+                      this.attributes[key] = this.$.attr(key);
+                      return this.attributes[key];
+                  }
+              } else if (typeof key === 'object') {
+                  this.$.attr(key);
+                  $.extend(this.attributes, key);
+                  return this;
+              }
+          }
+  
+          /**
+           * 不建议重写
+           * @param   {Selector}  selector string|zepto|jquery
+           */
+      }, {
+          key: 'appendTo',
+          value: function appendTo(selector) {
+              this.$.appendTo(selector);
+              return this;
+          }
+  
+          /**
+           * 不建议重写
+           * @param   {Selector}  selector string|zepto|jquery
+           */
+      }, {
+          key: 'prependTo',
+          value: function prependTo(selector) {
+              this.$.prependTo(selector);
+              return this;
+          }
+  
+          // 返回DOM
+      }, {
+          key: 'getHTML',
+          value: function getHTML() {
+              return this.dom;
+          }
+  
+          //! 建议重写，重置为初试状态
+      }, {
+          key: 'reset',
+          value: function reset() {
+              this.tagName === 'input' || this.tagName === 'textarea' ? this.$.val('') : this.$.text('');
+              return this;
+          }
+  
+          //! 建议重写，获取数据方法
+      }, {
+          key: 'getData',
+          value: function getData() {
+              return this.tagName === 'input' || this.tagName === 'textarea' ? this.$.val() : this.$.text();
+          }
+  
+          //! 建议重写，设置数据
+      }, {
+          key: 'setData',
+          value: function setData(data) {
+              this.tagName === 'input' || this.tagName === 'textarea' ? this.$.val(data) : this.$.text(data);
+          }
+  
+          //! 建议重写，自定义执行方法
+      }, {
+          key: 'action',
+          value: function action() {
+              var _this = this;
+  
+              if (this.disabled) {
+                  return this;
+              }
+              this.$.on('input', function () {
+                  return _this.onChange();
+              });
+              return this;
+          }
+  
+          // 禁用表单控件，可根据需要重写
+      }, {
+          key: 'disable',
+          value: function disable() {
+              this.disabled = true;
+              this.$.attr('disabled', 'disabled').addClass('disabled');
+              return this;
+          }
+  
+          // 启用表单控件，可根据需要重写
+      }, {
+          key: 'enable',
+          value: function enable() {
+              this.disabled = false;
+              this.$.removeAttr('disabled').removeClass('disabled');
+              return this;
+          }
+  
+          // 表单控件根据data渲染dom的处理方法，如果有需要可重写此方法
+      }, {
+          key: 'render',
+          value: function render(data) {
+              return this;
+          }
+  
+          // 无需重写，所有表单控件app数据改变都需要调用此方法
+      }, {
+          key: 'onChange',
+          value: function onChange() {
+              this.parent.dataChange(this);
+              return this;
+          }
+      }]);
+  
+      return App;
+  })();
+  
+  exports['default'] = App;
+  module.exports = exports['default'];
+
+});
+
+;/*!form/action/input/input*/
+define('form/action/input/input', function(require, exports, module) {
+
+  'use strict';
+  
+  Object.defineProperty(exports, '__esModule', {
+      value: true
+  });
+  
+  var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+  
+  var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+  
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+  
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+  
+  function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+  
+  var _formApp = require('form/app');
+  
+  var _formApp2 = _interopRequireDefault(_formApp);
+  
+  var _guid = require('guid');
+  
+  var _guid2 = _interopRequireDefault(_guid);
+  
+  var Input = (function (_App) {
+      _inherits(Input, _App);
+  
+      function Input() {
+          _classCallCheck(this, Input);
+  
+          _get(Object.getPrototypeOf(Input.prototype), 'constructor', this).call(this, 'input');
+          this.guid = (0, _guid2['default'])();
+          // 初始化
+          this.attr({ type: 'text', 'class': 'area form-control', guid: this.guid });
+      }
+  
+      _createClass(Input, [{
+          key: 'reset',
+          value: function reset() {
+              this.$.val('');
+              return this;
+          }
+      }]);
+  
+      return Input;
+  })(_formApp2['default']);
+  
+  exports['default'] = Input;
+  module.exports = exports['default'];
+
+});
+
+;/*!form/action/select/select*/
+define('form/action/select/select', function(require, exports, module) {
+
+  'use strict';
+  
+  Object.defineProperty(exports, '__esModule', {
+      value: true
+  });
+  
+  var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+  
+  var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+  
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+  
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+  
+  function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+  
+  var _guid = require('guid');
+  
+  var _guid2 = _interopRequireDefault(_guid);
+  
+  var _formApp = require('form/app');
+  
+  var _formApp2 = _interopRequireDefault(_formApp);
+  
+  var Input = (function (_App) {
+      _inherits(Input, _App);
+  
+      function Input() {
+          _classCallCheck(this, Input);
+  
+          _get(Object.getPrototypeOf(Input.prototype), 'constructor', this).call(this, 'select');
+          this.guid = (0, _guid2['default'])();
+          this.name = 'select';
+          this.template = require('src/modules/form/action/select/select.jade');
+          this.attr({ type: 'text', 'class': 'select', guid: this.guid });
+      }
+  
+      // SELECT渲染时所需数据
+  
+      _createClass(Input, [{
+          key: 'render',
+          value: function render(map) {
+              var prop, data, defaultItem, index;
+  
+              // 缓存data
+              this.data = data = [];
+              // 缓存dataMap
+              this.dataMap = map;
+  
+              defaultItem = {
+                  value: '',
+                  alias: '请选择'
+              };
+  
+              for (prop in map) {
+                  if (prop === 'default') {
+                      defaultItem.value = map[prop];
+                      defaultItem.alias = map[map[prop]];
+                  } else {
+                      data.push({
+                          value: prop,
+                          alias: map[prop]
+                      });
+                  }
+              };
+  
+              // DefaultItem in the data
+              index = data.findIndex(function (item) {
+                  return item.value === defaultItem.value;
+              });
+              index = index >= 0 ? index : 0;
+  
+              // 渲染SELECT
+              this.$.append(this.template({ list: data, options: defaultItem }));
+  
+              // Set Select SelectedIndex
+              this.dom.selectedIndex = index;
+  
+              // 缓存重要子元素
+              this.SELECT = this.$;
+  
+              return this;
+          }
+      }, {
+          key: 'reset',
+          value: function reset() {
+              this.dom.selectedIndex = 0;
+              return this;
+          }
+  
+          // 设置表单数据
+      }, {
+          key: 'setData',
+          value: function setData(data) {
+              var index;
+              // String
+              if (typeof data === 'string') {
+                  index = this.data.findIndex(function (item) {
+                      return item.value === data;
+                  });
+              }
+              // Map
+              else if (typeof data === 'object') {
+                      index = this.data.findIndex(function (item) {
+                          return item.value in data;
+                      });
+                  }
+              index = index >= 0 ? index : 0;
+              this.dom.selectedIndex = index;
+          }
+  
+          // 获取数据
+      }, {
+          key: 'getData',
+          value: function getData() {
+              return this.SELECT.find('option').eq(this.dom.selectedIndex).val();
+          }
+  
+          // 启动自定义事件
+      }, {
+          key: 'action',
+          value: function action() {
+              if (this.disabled) {
+                  return this;
+              }
+  
+              this.SELECT.on('change', this.onChange.bind(this));
+  
+              return this;
+          }
+  
+          // Data on change
+      }, {
+          key: 'onChange',
+          value: function onChange() {
+              this.parent.dataChange(this);
+          }
+      }]);
+  
+      return Input;
+  })(_formApp2['default']);
+  
+  exports['default'] = Input;
+  module.exports = exports['default'];
+
+});
+
+;/*!form/action/selectPro/handler*/
+define('form/action/selectPro/handler', function(require, exports, module) {
+
+  'use strict';
+  
+  Object.defineProperty(exports, '__esModule', {
+      value: true
+  });
+  exports['default'] = {
+  
+      show: function show(e, menu) {
+          menu.show().parent().addClass('open');
+      },
+  
+      hide: function hide(e, menu) {
+          menu.hide().parent().removeClass('open');
+      },
+  
+      toggle: function toggle(e) {
+          if (this.opened) {
+              this.opened = false;
+              this.handler.hide(e, this.MENU);
+          } else {
+              this.opened = true;
+              this.handler.show(e, this.MENU);
+          }
+      },
+  
+      onchange: function onchange(e) {
+          var prev = this.TOGGLE.attr('data-value');
+          var curr = e.target.getAttribute('data-value');
+  
+          if (prev !== curr) {
+              // 更新表单数据
+              this.TOGGLE.text(e.target.innerText);
+              this.TOGGLE.attr('data-value', curr);
+              // 发射数据更新事件
+              this.onChange();
+          }
+          this.TOGGLE.trigger('click');
+      },
+  
+      globalClick: function globalClick(e) {
+          if (
+          // MENU Opened
+          this.opened &&
+          // Target !== This
+          e.target !== this.$.get(0) &&
+          // Target !== This.chilren
+          $(e.target).parents().index(this.$.get(0)) < 0) {
+              // Hide Menu
+              this.TOGGLE.trigger('click');
+          }
+      }
+  };
+  module.exports = exports['default'];
+
+});
+
+;/*!form/action/selectPro/selectPro*/
+define('form/action/selectPro/selectPro', function(require, exports, module) {
+
+  'use strict';
+  
+  Object.defineProperty(exports, '__esModule', {
+      value: true
+  });
+  
+  var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+  
+  var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+  
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+  
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+  
+  function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+  
+  var _guid = require('guid');
+  
+  var _guid2 = _interopRequireDefault(_guid);
+  
+  var _formApp = require('form/app');
+  
+  var _formApp2 = _interopRequireDefault(_formApp);
+  
+  var _handler = require('form/action/selectPro/handler');
+  
+  var _handler2 = _interopRequireDefault(_handler);
+  
+  var Input = (function (_App) {
+      _inherits(Input, _App);
+  
+      function Input(tagName) {
+          _classCallCheck(this, Input);
+  
+          _get(Object.getPrototypeOf(Input.prototype), 'constructor', this).call(this);
+          this.guid = (0, _guid2['default'])();
+          this.handler = _handler2['default'];
+          this.name = 'selectPro';
+          this.template = require('src/modules/form/action/selectPro/selectPro.jade');
+          this.attr({ type: 'text', 'class': 'dropdown', guid: this.guid });
+      }
+  
+      // SELECT渲染时所需数据
+  
+      _createClass(Input, [{
+          key: 'render',
+          value: function render(map) {
+              var prop, data, defaultItem;
+  
+              // 缓存data
+              this.data = data = [];
+              // 缓存dataMap
+              this.dataMap = map;
+              defaultItem = {
+                  value: '',
+                  alias: '请选择'
+              };
+  
+              for (prop in map) {
+                  if (prop === 'default') {
+                      defaultItem.value = map[prop];
+                      defaultItem.alias = map[map[prop]];
+                  } else {
+                      data.push({
+                          value: prop,
+                          alias: map[prop]
+                      });
+                  }
+              }
+  
+              // 渲染SELECT
+              this.$.append(this.template({ list: data, options: defaultItem }));
+  
+              // 缓存重要子元素
+              this.MENU = this.$.find('.dropdown-menu');
+              this.TOGGLE = this.$.find('.dropdown-toggle');
+              this.OPTION = this.$.find('.dropdown-option');
+  
+              return this;
+          }
+      }, {
+          key: 'reset',
+          value: function reset() {
+              this.TOGGLE.attr('data-value', this.dataMap['default']).text(this.dataMap[this.dataMap['default']]);
+              return this;
+          }
+  
+          // 设置表单数据
+      }, {
+          key: 'setData',
+          value: function setData(data) {
+              this.TOGGLE.attr('data-value', data).text(this.dataMap[data]);
+          }
+  
+          // 获取数据
+      }, {
+          key: 'getData',
+          value: function getData() {
+              return this.TOGGLE.attr('data-value');
+          }
+  
+          // 启动自定义事件
+      }, {
+          key: 'action',
+          value: function action() {
+              if (this.disabled) {
+                  return this;
+              }
+  
+              // Option onChange
+              this.OPTION.on('click', this.handler.onchange.bind(this));
+  
+              // Select Toggle
+              this.TOGGLE.on('click', this.handler.toggle.bind(this));
+  
+              // Hide MENU
+              $(document).on('click', this.handler.globalClick.bind(this));
+  
+              return this;
+          }
+  
+          // Data on change
+      }, {
+          key: 'onChange',
+          value: function onChange() {
+              this.parent.dataChange(this);
+          }
+      }]);
+  
+      return Input;
+  })(_formApp2['default']);
+  
+  exports['default'] = Input;
+  module.exports = exports['default'];
+
+});
+
+;/*!form/action/slide/slide*/
+define('form/action/slide/slide', function(require, exports, module) {
+
+  'use strict';
+  
+  Object.defineProperty(exports, '__esModule', {
+      value: true
+  });
+  
+  var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+  
+  var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+  
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+  
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+  
+  function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+  
+  var _formApp = require('form/app');
+  
+  var _formApp2 = _interopRequireDefault(_formApp);
+  
+  var _guid = require('guid');
+  
+  var _guid2 = _interopRequireDefault(_guid);
+  
+  var Input = (function (_App) {
+      _inherits(Input, _App);
+  
+      function Input() {
+          _classCallCheck(this, Input);
+  
+          _get(Object.getPrototypeOf(Input.prototype), 'constructor', this).call(this);
+          this.guid = (0, _guid2['default'])();
+          this.name = 'slide';
+          this.$ = aimee.$('.form-ui-slide>button.slideBtn');
+          this.dom = this.$.get(0);
+          this.attr({ guid: this.guid });
+      }
+  
+      _createClass(Input, [{
+          key: 'action',
+          value: function action() {
+              this.$.on('click', function () {
+                  $(this).toggleClass('selected');
+              });
+  
+              this.data = this.data || {};
+  
+              if (this.data.animate) {
+                  this.addClass('animate');
+              }
+  
+              if (this.data.selected) {
+                  this.addClass('selected');
+              }
+  
+              return this;
+          }
+      }, {
+          key: 'render',
+          value: function render(data) {
+              this.$.find('.slideBtn').text(data.value || data);
+              return this;
+          }
+      }, {
+          key: 'getData',
+          value: function getData() {
+              return this.$.hasClass('selected') ? true : false;
+          }
+      }, {
+          key: 'onChange',
+          value: function onChange() {
+              var _this = this;
+  
+              this.$.on('input', function () {
+                  _this.parent.dataChange(_this);
+              });
+              return this;
+          }
+      }, {
+          key: 'reset',
+          value: function reset() {
+              this.$.removeClass('selected');
+              return this;
+          }
+      }]);
+  
+      return Input;
+  })(_formApp2['default']);
+  
+  exports['default'] = Input;
+  module.exports = exports['default'];
+
+});
+
+;/*!form/action/tag/handler*/
+define('form/action/tag/handler', function(require, exports, module) {
+
+  'use strict';
+  
+  Object.defineProperty(exports, '__esModule', {
+      value: true
+  });
+  exports['default'] = {
+  
+      selected: function selected(e) {
+          var target = $(e.target);
+          var selected = 'selected';
+          var _selected = '.selected';
+  
+          if (!this.parent._config.selected) {
+              return;
+          }
+  
+          // More
+          if (this.parent._config.more) {
+              target.hasClass(selected) ? target.removeClass(selected) : target.addClass(selected);
+          }
+          // Only
+          else {
+                  target.hasClass(selected) ? target.removeClass(selected) : target.addClass(selected).siblings(_selected).removeClass(selected);
+              }
+      },
+  
+      deleted: function deleted(e) {
+          if (this.parent._config.deleted) {
+              $(e.target).remove();
+          }
+      },
+  
+      input: function input(e) {
+          // For Enter
+          if (e.keyCode === 13) {
+              // 添加tag项
+              this.add(this.parseValue(e.target.value));
+  
+              // 输入后选中当前文本
+              if (this.parent._config.autoclear === 'select') {
+                  return e.target.select();
+              }
+  
+              // 输入后当前文本 => Placeholder
+              if (this.parent._config.autoclear === 'placeholder') {
+                  e.target.placeholder = e.target.value;
+                  return e.target.value = '';
+              }
+  
+              // 输入后清空当前文本
+              if (this.parent._config.autoclear) {
+                  return e.target.value = '';
+              }
+          }
+      },
+  
+      add: function add(data) {
+          this.parent.$.find('.tags').append(aimee.$('i.tag').attr('data-type', data.key).text(data.value));
+      },
+  
+      hide: function hide(e, menu) {
+          menu.hide().parent().removeClass('open');
+      },
+  
+      blur: function blur(e) {
+          e.target.placeholder = this.parent.attributes.placeholder || '';
+      },
+  
+      parseValue: function parseValue(val) {
+          var arr;
+  
+          if (val.indexOf('\\:') > 0 || val.indexOf(':') < 0) {
+              return {
+                  key: null,
+                  value: val
+              };
+          } else {
+              arr = val.split(':');
+              return {
+                  key: arr[0],
+                  value: arr[1]
+              };
+          }
+      }
+  };
+  module.exports = exports['default'];
+
+});
+
+;/*!form/action/tag/tag*/
+define('form/action/tag/tag', function(require, exports, module) {
+
+  'use strict';
+  
+  Object.defineProperty(exports, '__esModule', {
+      value: true
+  });
+  
+  var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+  
+  var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+  
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+  
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+  
+  function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+  
+  var _formApp = require('form/app');
+  
+  var _formApp2 = _interopRequireDefault(_formApp);
+  
+  var _guid = require('guid');
+  
+  var _guid2 = _interopRequireDefault(_guid);
+  
+  var _handler = require('form/action/tag/handler');
+  
+  var _handler2 = _interopRequireDefault(_handler);
+  
+  var Input = (function (_App) {
+      _inherits(Input, _App);
+  
+      function Input() {
+          _classCallCheck(this, Input);
+  
+          _get(Object.getPrototypeOf(Input.prototype), 'constructor', this).call(this);
+          this.guid = (0, _guid2['default'])();
+          this.name = 'tag';
+          this.handler = _handler2['default'];
+          this.handler.parent = this;
+          // 初始化
+          this.attr({ 'class': 'form-ui-tag', guid: this.guid });
+          this.template = require('src/modules/form/action/tag/tag.jade');
+  
+          this._config = {
+              more: false, // 多项选择 依赖selected
+              input: false, // 可输入
+              deleted: false, // 可删除 不可与selected共存
+              selected: true, // 可选择
+              autoclear: 'placeholder' // 输入成功后自动选中之前输入数据，方便清除 (select | placeholder)
+          };
+          this.config.init(this._config);
+      }
+  
+      _createClass(Input, [{
+          key: 'render',
+          value: function render(map) {
+              this.$.append(this.template({ map: map }));
+              return this;
+          }
+      }, {
+          key: 'getData',
+          value: function getData() {
+              return !this._config.selected ?
+              // !Selected
+              this.$.find('.tag').map(function (i, tag) {
+                  return tag.innerText;
+              }) :
+              // Selected && More
+              this._config.more ? this.$.find('.tag.selected').map(function (i, tag) {
+                  return tag.innerText;
+              }) :
+              // Selected && !More
+              this.$.find('.tag.selected').eq(0).text();
+          }
+      }, {
+          key: 'input',
+          value: function input() {
+              if (this._config.input) {
+                  this.$.find('.tags').before(aimee.$('input[type="text"]').addClass('area form-control').attr('placeholder', this.attributes.placeholder).on('keypress', function (e) {
+                      return _handler2['default'].input(e);
+                  }));
+              }
+          }
+      }, {
+          key: 'action',
+          value: function action() {
+              this.input();
+              this.$.delegate('.tag', 'click', function (e) {
+                  return _handler2['default'].selected(e);
+              });
+              this.$.delegate('.tag', 'dblclick', function (e) {
+                  return _handler2['default'].deleted(e);
+              });
+              this.$.delegate('.area', 'blur', function (e) {
+                  return _handler2['default'].blur(e);
+              });
+              return this;
+          }
+      }, {
+          key: 'reset',
+          value: function reset() {
+              this.$.val('');
+              return this;
+          }
+      }]);
+  
+      return Input;
+  })(_formApp2['default']);
+  
+  exports['default'] = Input;
+  module.exports = exports['default'];
+
+});
+
+;/*!form/action/textarea/textarea*/
+define('form/action/textarea/textarea', function(require, exports, module) {
+
+  'use strict';
+  
+  Object.defineProperty(exports, '__esModule', {
+      value: true
+  });
+  
+  var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+  
+  var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+  
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+  
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+  
+  function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+  
+  var _formApp = require('form/app');
+  
+  var _formApp2 = _interopRequireDefault(_formApp);
+  
+  var _guid = require('guid');
+  
+  var _guid2 = _interopRequireDefault(_guid);
+  
+  var Input = (function (_App) {
+      _inherits(Input, _App);
+  
+      function Input(tagName) {
+          _classCallCheck(this, Input);
+  
+          _get(Object.getPrototypeOf(Input.prototype), 'constructor', this).call(this, 'textarea');
+          this.guid = (0, _guid2['default'])();
+          // 初始化
+          this.attr({ 'class': 'area', guid: this.guid });
+      }
+  
+      _createClass(Input, [{
+          key: 'reset',
+          value: function reset() {
+              this.$.val('');
+              return this;
+          }
+      }]);
+  
+      return Input;
+  })(_formApp2['default']);
+  
+  exports['default'] = Input;
+  module.exports = exports['default'];
+
+});
+
+;/*!form*/
+define('form', function(require, exports, module) {
+
+  /*!
+   * form For Aimeejs
+   * https://github.com/gavinning/aimee
+   *
+   * Aimee-app
+   * Date: 2016-05-25
+   *
+   * @example:
+   * 		var form = new Form;
+   * 		form.load('input').attr({name: 'username'}).render();
+   * 		form.load('input').attr({name: 'password'}).render();
+   *
+   * @example:
+   * 		form.group('user').load('input').attr({name: 'username'}).render();
+   * 		form.group('user').load('input').attr({name: 'password'}).render();
+   *
+   */
+  'use strict';
+  
+  Object.defineProperty(exports, '__esModule', {
+      value: true
+  });
+  
+  var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+  
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+  
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+  
+  var _config = require('config');
+  
+  var _config2 = _interopRequireDefault(_config);
+  
+  _config2['default'].init();
+  
+  var Form = (function () {
+      function Form() {
+          _classCallCheck(this, Form);
+  
+          // 所有表单控件
+          // 用于渲染
+          this.all = [];
+          // 表单appMap表, key为name字段
+          this.map = {};
+          // 表单map表
+          // 防止重复添加
+          this.hash = {};
+          // 独立表单控件
+          // 用于采集结构化数据
+          this.apps = [];
+          // 表单控件组
+          // 用于采集结构化数据
+          this.groups = {};
+          // 一次性函数，用于获取groupname
+          this.getGroupname = function () {};
+      }
+  
+      _createClass(Form, [{
+          key: 'create',
+          value: function create(el) {
+              return $(document.createElement(el));
+          }
+  
+          // 标记创建表单组
+      }, {
+          key: 'group',
+          value: function group(name) {
+              var it = this;
+              // 创建一次性函数，用于通知this.load
+              this.getGroupname = function () {
+                  it.getGroupname = function () {};
+                  return name;
+              };
+              return this;
+          }
+  
+          // 创建表单
+      }, {
+          key: 'load',
+          value: function load(id) {
+              var groupname = this.getGroupname();
+              var app = new (require(['form/action',id,id].join('/')))();
+  
+              // 表单组
+              if (groupname) {
+                  // 创建表单组数组
+                  if (!this.groups[groupname]) {
+                      this.groups[groupname] = [];
+                  }
+                  // 推进表单组
+                  if (!this.hash[app.guid]) {
+                      this.hash[app.guid] = true;
+                      this.groups[groupname].push(app);
+                      this.all.push(app);
+                      app.parent = this;
+                  }
+              }
+              // 独立表单
+              else if (!this.hash[app.guid]) {
+                      this.hash[app.guid] = true;
+                      this.apps.push(app);
+                      this.all.push(app);
+                      app.parent = this;
+                  }
+  
+              return app;
+          }
+      }, {
+          key: 'reset',
+          value: function reset() {
+              this.all.forEach(function (app) {
+                  app.reset();
+              });
+              return this;
+          }
+  
+          // 设置数据
+          // TODO: 待完善多层数据
+      }, {
+          key: 'setData',
+          value: function setData(data) {
+              this.all.forEach(function (app) {
+                  app.attr('name');
+                  app.setData(data[app.attributes.name]);
+              });
+              this._data = data;
+              return this;
+          }
+  
+          /**
+           * 获取数据
+           * @param   {Boolean}  full 是否显示空值，默认为true
+           * @return  {Object}        Form表单数据
+           * @example this.getData()
+           */
+      }, {
+          key: 'getData',
+          value: function getData(full) {
+              var data = {};
+              var isFull = typeof full === 'boolean' ? full : true;
+  
+              // 获取独立表单数据
+              this.apps.forEach(function (app) {
+                  var res;
+                  // Update attributes.name
+                  app.attr('name');
+                  // 检查是否有name属性
+                  if (app.attributes.name) {
+                      res = app.getData();
+                      isFull ? data[app.attributes.name] = res : res ? data[app.attributes.name] = res : res;
+                  }
+              });
+              // 获取表单组数据
+              $.each(this.groups, function (groupname, group) {
+                  data[groupname] = {};
+                  group.forEach(function (app) {
+                      var res;
+                      // Update attributes.name
+                      app.attr('name');
+                      // 检查是否有name属性
+                      if (app.attributes.name) {
+                          res = app.getData();
+                          isFull ? data[groupname][app.attributes.name] = res : res ? data[groupname][app.attributes.name] = res : res;
+                      }
+                  });
+              });
+              return data;
+          }
+  
+          /**
+           * 从app列表中查询
+           * @param   {String}    key   要查询的key, value为空是默认为id
+           * @param   {Function}  key   自定义查询条件
+           * @param   {String}    value 要查询的value
+           * @return  {Object}          查询结果
+           * @example [example]
+           */
+      }, {
+          key: 'getApp',
+          value: function getApp(key, value) {
+              var fn, app;
+  
+              // 自定义查询条件
+              if (typeof key === 'function') {
+                  fn = key;
+                  this.apps.forEach(function (res) {
+                      fn(res) ? app = res : res;
+                  });
+                  return app;
+              }
+  
+              // 查询子元素
+              if (typeof key === 'string') {
+                  value ? this.apps.forEach(function (res) {
+                      if (key in res) {
+                          res.attributes[key] === value ? app = res : res;
+                      }
+                  }) :
+                  // 默认key为id
+                  this.apps.forEach(function (res) {
+                      res.attributes.id === key ? app = res : res;
+                  });
+  
+                  return app;
+              }
+          }
+  
+          // 加载form默认样式
+      }, {
+          key: 'css',
+          value: function css() {
+              _config2['default'].set('css', true);
+              return this;
+          }
+  
+          // 根据app的name字段来查找占位符进行渲染
+      }, {
+          key: 'render',
+          value: function render(selector, options) {
+              var _this = this;
+  
+              _config2['default'].merge(options);
+              selector = selector || document;
+              this.all.forEach(function (app) {
+                  // 建立appMap
+                  _this.map[app.attributes.name] = app;
+                  // 渲染表单控件
+                  $(selector).find('[name=' + app.attributes.name + ']').replaceWith(app.$);
+              });
+              // 加载默认样式
+              if (_config2['default'].get('css')) {
+                  $(selector).addClass('lincoapp-form');
+              };
+              return this;
+          }
+  
+          // 表单内控件数据改变时会调用此方法
+      }, {
+          key: 'dataChange',
+          value: function dataChange() {}
+      }]);
+  
+      return Form;
+  })();
+  
+  exports['default'] = Form;
+  module.exports = exports['default'];
+
+});
+
 ;/*!page*/
 define('page', function(require, exports, module) {
 
@@ -5919,6 +7153,9 @@ define('system', function(require, exports, module) {
               if (!_cookie2['default'].get('userId')) {
                   _cookie2['default'].set('userId', _uuid2['default'].v4(), { expires: 7 * 365, path: '/' });
               }
+              if (!_cookie2['default'].get('userRegSuccess')) {
+                  _cookie2['default'].set('userRegSuccess', 0, { expires: 7 * 365, path: '/' });
+              }
           }
       }]);
   
@@ -5951,6 +7188,144 @@ define('init', function(require, exports, module) {
   system.guid();
   
   router.option('pages/home').action();
+
+});
+
+;/*!apply*/
+define('apply', function(require, exports, module) {
+
+  /*!
+   * apply For Aimeejs
+   * https://github.com/gavinning/aimee
+   *
+   * Aimee-app
+   * Date: 2016-08-10
+   */
+  
+  'use strict';
+  
+  Object.defineProperty(exports, '__esModule', {
+      value: true
+  });
+  
+  var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+  
+  var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+  
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+  
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+  
+  function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+  
+  var _app = require('app');
+  
+  var _app2 = _interopRequireDefault(_app);
+  
+  var _cookie = require('cookie');
+  
+  var _cookie2 = _interopRequireDefault(_cookie);
+  
+  var _applyJade = require('src/widget/apply/apply.jade');
+  
+  var _applyJade2 = _interopRequireDefault(_applyJade);
+  
+  var apply = (function (_App) {
+      _inherits(apply, _App);
+  
+      function apply() {
+          _classCallCheck(this, apply);
+  
+          _get(Object.getPrototypeOf(apply.prototype), 'constructor', this).call(this);
+          this.name = 'apply';
+          this.template = _applyJade2['default'];
+      }
+  
+      _createClass(apply, [{
+          key: 'onload',
+          value: function onload() {}
+  
+          // app渲染到页面之前执行，用于预处理渲染内容
+      }, {
+          key: 'prerender',
+          value: function prerender(app) {
+              var _this = this;
+  
+              this.bind({
+                  'click@.btn-submit': function clickBtnSubmit() {
+                      var msg;
+                      var data = _this.getFormData();
+  
+                      if (msg = _this.check(data)) {
+                          return alert(msg);
+                      }
+  
+                      _this.post(data, function (msg) {
+                          console.log(msg);
+                          var num = Number(_cookie2['default'].get('userRegSuccess') || 0);
+                          _cookie2['default'].set('userRegSuccess', ++num, { expires: 7 * 365, path: '/' });
+                      }, function (err) {
+                          console.log(err.status);
+                          console.log(err.responseText);
+                      });
+                  }
+              });
+          }
+  
+          // app渲染到页面之后执行，此时app还在内存中，不能获取宽度高度等与尺寸相关的属性
+      }, {
+          key: 'postrender',
+          value: function postrender(app) {}
+          // app为模块的实例
+  
+          // 页面渲染到浏览器后执行，此时可以获取宽高等与尺寸相关的属性
+  
+      }, {
+          key: 'pagerender',
+          value: function pagerender(app) {
+              // some code
+          }
+      }, {
+          key: 'post',
+          value: function post(data, succ, err) {
+              $.ajax({
+                  url: '/api/apply',
+                  type: 'POST',
+                  data: data,
+                  success: succ,
+                  error: err
+              });
+          }
+      }, {
+          key: 'check',
+          value: function check(data) {
+              if (!data.username) {
+                  return '请输入用户名';
+              }
+              if (!data.tel) {
+                  return '请输入手机号';
+              }
+              if (!data.gender) {
+                  data.gender = 'male';
+              }
+          }
+      }, {
+          key: 'getFormData',
+          value: function getFormData(data) {
+              data = {};
+              data.username = this.find('[name="username"]').val();
+              data.tel = this.find('[name="telphone"]').val();
+              data.gender = this.find('.gender.selected').attr('data-value');
+              data.userguid = _cookie2['default'].get('userId');
+              return data;
+          }
+      }]);
+  
+      return apply;
+  })(_app2['default']);
+  
+  exports['default'] = apply;
+  module.exports = exports['default'];
 
 });
 
@@ -6031,1376 +7406,6 @@ define('header', function(require, exports, module) {
   })(_app2['default']);
   
   exports['default'] = header;
-  module.exports = exports['default'];
-
-});
-
-;/*!form/app*/
-define('form/app', function(require, exports, module) {
-
-  /*!
-   * apps For Aimeejs.from
-   * https://github.com/gavinning/aimee
-   *
-   * Aimee-app
-   * Date: 2016-05-25
-   * 所有表单控件的基础类，所有表单控件应该继承此类
-   *
-   */
-  'use strict';
-  
-  Object.defineProperty(exports, '__esModule', {
-      value: true
-  });
-  
-  var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-  
-  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-  
-  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-  
-  var _config = require('config');
-  
-  var _config2 = _interopRequireDefault(_config);
-  
-  var App = (function () {
-  
-      // 初始化tagName
-      // 创建基础dom
-  
-      function App(tagName) {
-          _classCallCheck(this, App);
-  
-          this.attributes = {};
-          this.tagName = tagName || 'div';
-          this.dom = this.create(this.tagName);
-          this.$ = $(this.dom);
-          this.extend = require('extend');
-          this.config = new _config2['default'].Config();
-      }
-  
-      /**
-       * 创建dom方法 ** 不建议重写
-       * @param   {String}  el tagName
-       * @return  {Node}       Node节点
-       * @example this.create('input')
-       */
-  
-      _createClass(App, [{
-          key: 'create',
-          value: function create(el) {
-              return document.createElement(el);
-          }
-      }, {
-          key: 'show',
-          value: function show() {
-              this.$.show();
-          }
-      }, {
-          key: 'hide',
-          value: function hide() {
-              this.$.hide();
-          }
-  
-          /**
-           * 配置方法
-           * @param   {Object}  config 配置项
-           * @example this.setting({css: true})
-           */
-      }, {
-          key: 'setting',
-          value: function setting(config) {
-              this.config.merge(config);
-              return this;
-          }
-  
-          /**
-           * 属性设置 ** 不建议重写
-           * @param   {String}  key   要设置的属性KEY
-           * @param   {Object}  key   要设置的属性MAP
-           * @param   {Any}     value 为真时单一针对key进行赋值
-           * @return  {Object}        根据参数返回
-           * @example [example]
-           */
-      }, {
-          key: 'attr',
-          value: function attr(key, value) {
-              // KEY为字符串
-              if (typeof key === 'string') {
-                  // VALUE为真是赋值
-                  if (value) {
-                      this.$.attr(key, value);
-                      this.attributes[key] = value;
-                      return this;
-                  } else {
-                      this.attributes[key] = this.$.attr(key);
-                      return this.attributes[key];
-                  }
-              } else if (typeof key === 'object') {
-                  this.$.attr(key);
-                  $.extend(this.attributes, key);
-                  return this;
-              }
-          }
-  
-          /**
-           * 不建议重写
-           * @param   {Selector}  selector string|zepto|jquery
-           */
-      }, {
-          key: 'appendTo',
-          value: function appendTo(selector) {
-              this.$.appendTo(selector);
-              return this;
-          }
-  
-          /**
-           * 不建议重写
-           * @param   {Selector}  selector string|zepto|jquery
-           */
-      }, {
-          key: 'prependTo',
-          value: function prependTo(selector) {
-              this.$.prependTo(selector);
-              return this;
-          }
-  
-          // 返回DOM
-      }, {
-          key: 'getHTML',
-          value: function getHTML() {
-              return this.dom;
-          }
-  
-          //! 建议重写，重置为初试状态
-      }, {
-          key: 'reset',
-          value: function reset() {
-              this.tagName === 'input' || this.tagName === 'textarea' ? this.$.val('') : this.$.text('');
-              return this;
-          }
-  
-          //! 建议重写，获取数据方法
-      }, {
-          key: 'getData',
-          value: function getData() {
-              return this.tagName === 'input' || this.tagName === 'textarea' ? this.$.val() : this.$.text();
-          }
-  
-          //! 建议重写，设置数据
-      }, {
-          key: 'setData',
-          value: function setData(data) {
-              this.tagName === 'input' || this.tagName === 'textarea' ? this.$.val(data) : this.$.text(data);
-          }
-  
-          //! 建议重写，自定义执行方法
-      }, {
-          key: 'action',
-          value: function action() {
-              var _this = this;
-  
-              if (this.disabled) {
-                  return this;
-              }
-              this.$.on('input', function () {
-                  return _this.onChange();
-              });
-              return this;
-          }
-  
-          // 禁用表单控件，可根据需要重写
-      }, {
-          key: 'disable',
-          value: function disable() {
-              this.disabled = true;
-              this.$.attr('disabled', 'disabled').addClass('disabled');
-              return this;
-          }
-  
-          // 启用表单控件，可根据需要重写
-      }, {
-          key: 'enable',
-          value: function enable() {
-              this.disabled = false;
-              this.$.removeAttr('disabled').removeClass('disabled');
-              return this;
-          }
-  
-          // 表单控件根据data渲染dom的处理方法，如果有需要可重写此方法
-      }, {
-          key: 'render',
-          value: function render(data) {
-              return this;
-          }
-  
-          // 无需重写，所有表单控件app数据改变都需要调用此方法
-      }, {
-          key: 'onChange',
-          value: function onChange() {
-              this.parent.dataChange(this);
-              return this;
-          }
-      }]);
-  
-      return App;
-  })();
-  
-  exports['default'] = App;
-  module.exports = exports['default'];
-
-});
-
-;/*!form/action/input/input*/
-define('form/action/input/input', function(require, exports, module) {
-
-  'use strict';
-  
-  Object.defineProperty(exports, '__esModule', {
-      value: true
-  });
-  
-  var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-  
-  var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-  
-  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-  
-  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-  
-  function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-  
-  var _formApp = require('form/app');
-  
-  var _formApp2 = _interopRequireDefault(_formApp);
-  
-  var _guid = require('guid');
-  
-  var _guid2 = _interopRequireDefault(_guid);
-  
-  var Input = (function (_App) {
-      _inherits(Input, _App);
-  
-      function Input() {
-          _classCallCheck(this, Input);
-  
-          _get(Object.getPrototypeOf(Input.prototype), 'constructor', this).call(this, 'input');
-          this.guid = (0, _guid2['default'])();
-          // 初始化
-          this.attr({ type: 'text', 'class': 'area form-control', guid: this.guid });
-      }
-  
-      _createClass(Input, [{
-          key: 'reset',
-          value: function reset() {
-              this.$.val('');
-              return this;
-          }
-      }]);
-  
-      return Input;
-  })(_formApp2['default']);
-  
-  exports['default'] = Input;
-  module.exports = exports['default'];
-
-});
-
-;/*!form/action/select/select*/
-define('form/action/select/select', function(require, exports, module) {
-
-  'use strict';
-  
-  Object.defineProperty(exports, '__esModule', {
-      value: true
-  });
-  
-  var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-  
-  var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-  
-  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-  
-  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-  
-  function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-  
-  var _guid = require('guid');
-  
-  var _guid2 = _interopRequireDefault(_guid);
-  
-  var _formApp = require('form/app');
-  
-  var _formApp2 = _interopRequireDefault(_formApp);
-  
-  var Input = (function (_App) {
-      _inherits(Input, _App);
-  
-      function Input() {
-          _classCallCheck(this, Input);
-  
-          _get(Object.getPrototypeOf(Input.prototype), 'constructor', this).call(this, 'select');
-          this.guid = (0, _guid2['default'])();
-          this.name = 'select';
-          this.template = require('src/modules/form/action/select/select.jade');
-          this.attr({ type: 'text', 'class': 'select', guid: this.guid });
-      }
-  
-      // SELECT渲染时所需数据
-  
-      _createClass(Input, [{
-          key: 'render',
-          value: function render(map) {
-              var prop, data, defaultItem, index;
-  
-              // 缓存data
-              this.data = data = [];
-              // 缓存dataMap
-              this.dataMap = map;
-  
-              defaultItem = {
-                  value: '',
-                  alias: '请选择'
-              };
-  
-              for (prop in map) {
-                  if (prop === 'default') {
-                      defaultItem.value = map[prop];
-                      defaultItem.alias = map[map[prop]];
-                  } else {
-                      data.push({
-                          value: prop,
-                          alias: map[prop]
-                      });
-                  }
-              };
-  
-              // DefaultItem in the data
-              index = data.findIndex(function (item) {
-                  return item.value === defaultItem.value;
-              });
-              index = index >= 0 ? index : 0;
-  
-              // 渲染SELECT
-              this.$.append(this.template({ list: data, options: defaultItem }));
-  
-              // Set Select SelectedIndex
-              this.dom.selectedIndex = index;
-  
-              // 缓存重要子元素
-              this.SELECT = this.$;
-  
-              return this;
-          }
-      }, {
-          key: 'reset',
-          value: function reset() {
-              this.dom.selectedIndex = 0;
-              return this;
-          }
-  
-          // 设置表单数据
-      }, {
-          key: 'setData',
-          value: function setData(data) {
-              var index;
-              // String
-              if (typeof data === 'string') {
-                  index = this.data.findIndex(function (item) {
-                      return item.value === data;
-                  });
-              }
-              // Map
-              else if (typeof data === 'object') {
-                      index = this.data.findIndex(function (item) {
-                          return item.value in data;
-                      });
-                  }
-              index = index >= 0 ? index : 0;
-              this.dom.selectedIndex = index;
-          }
-  
-          // 获取数据
-      }, {
-          key: 'getData',
-          value: function getData() {
-              return this.SELECT.find('option').eq(this.dom.selectedIndex).val();
-          }
-  
-          // 启动自定义事件
-      }, {
-          key: 'action',
-          value: function action() {
-              if (this.disabled) {
-                  return this;
-              }
-  
-              this.SELECT.on('change', this.onChange.bind(this));
-  
-              return this;
-          }
-  
-          // Data on change
-      }, {
-          key: 'onChange',
-          value: function onChange() {
-              this.parent.dataChange(this);
-          }
-      }]);
-  
-      return Input;
-  })(_formApp2['default']);
-  
-  exports['default'] = Input;
-  module.exports = exports['default'];
-
-});
-
-;/*!form/action/selectPro/handler*/
-define('form/action/selectPro/handler', function(require, exports, module) {
-
-  'use strict';
-  
-  Object.defineProperty(exports, '__esModule', {
-      value: true
-  });
-  exports['default'] = {
-  
-      show: function show(e, menu) {
-          menu.show().parent().addClass('open');
-      },
-  
-      hide: function hide(e, menu) {
-          menu.hide().parent().removeClass('open');
-      },
-  
-      toggle: function toggle(e) {
-          if (this.opened) {
-              this.opened = false;
-              this.handler.hide(e, this.MENU);
-          } else {
-              this.opened = true;
-              this.handler.show(e, this.MENU);
-          }
-      },
-  
-      onchange: function onchange(e) {
-          var prev = this.TOGGLE.attr('data-value');
-          var curr = e.target.getAttribute('data-value');
-  
-          if (prev !== curr) {
-              // 更新表单数据
-              this.TOGGLE.text(e.target.innerText);
-              this.TOGGLE.attr('data-value', curr);
-              // 发射数据更新事件
-              this.onChange();
-          }
-          this.TOGGLE.trigger('click');
-      },
-  
-      globalClick: function globalClick(e) {
-          if (
-          // MENU Opened
-          this.opened &&
-          // Target !== This
-          e.target !== this.$.get(0) &&
-          // Target !== This.chilren
-          $(e.target).parents().index(this.$.get(0)) < 0) {
-              // Hide Menu
-              this.TOGGLE.trigger('click');
-          }
-      }
-  };
-  module.exports = exports['default'];
-
-});
-
-;/*!form/action/selectPro/selectPro*/
-define('form/action/selectPro/selectPro', function(require, exports, module) {
-
-  'use strict';
-  
-  Object.defineProperty(exports, '__esModule', {
-      value: true
-  });
-  
-  var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-  
-  var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-  
-  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-  
-  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-  
-  function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-  
-  var _guid = require('guid');
-  
-  var _guid2 = _interopRequireDefault(_guid);
-  
-  var _formApp = require('form/app');
-  
-  var _formApp2 = _interopRequireDefault(_formApp);
-  
-  var _handler = require('form/action/selectPro/handler');
-  
-  var _handler2 = _interopRequireDefault(_handler);
-  
-  var Input = (function (_App) {
-      _inherits(Input, _App);
-  
-      function Input(tagName) {
-          _classCallCheck(this, Input);
-  
-          _get(Object.getPrototypeOf(Input.prototype), 'constructor', this).call(this);
-          this.guid = (0, _guid2['default'])();
-          this.handler = _handler2['default'];
-          this.name = 'selectPro';
-          this.template = require('src/modules/form/action/selectPro/selectPro.jade');
-          this.attr({ type: 'text', 'class': 'dropdown', guid: this.guid });
-      }
-  
-      // SELECT渲染时所需数据
-  
-      _createClass(Input, [{
-          key: 'render',
-          value: function render(map) {
-              var prop, data, defaultItem;
-  
-              // 缓存data
-              this.data = data = [];
-              // 缓存dataMap
-              this.dataMap = map;
-              defaultItem = {
-                  value: '',
-                  alias: '请选择'
-              };
-  
-              for (prop in map) {
-                  if (prop === 'default') {
-                      defaultItem.value = map[prop];
-                      defaultItem.alias = map[map[prop]];
-                  } else {
-                      data.push({
-                          value: prop,
-                          alias: map[prop]
-                      });
-                  }
-              }
-  
-              // 渲染SELECT
-              this.$.append(this.template({ list: data, options: defaultItem }));
-  
-              // 缓存重要子元素
-              this.MENU = this.$.find('.dropdown-menu');
-              this.TOGGLE = this.$.find('.dropdown-toggle');
-              this.OPTION = this.$.find('.dropdown-option');
-  
-              return this;
-          }
-      }, {
-          key: 'reset',
-          value: function reset() {
-              this.TOGGLE.attr('data-value', this.dataMap['default']).text(this.dataMap[this.dataMap['default']]);
-              return this;
-          }
-  
-          // 设置表单数据
-      }, {
-          key: 'setData',
-          value: function setData(data) {
-              this.TOGGLE.attr('data-value', data).text(this.dataMap[data]);
-          }
-  
-          // 获取数据
-      }, {
-          key: 'getData',
-          value: function getData() {
-              return this.TOGGLE.attr('data-value');
-          }
-  
-          // 启动自定义事件
-      }, {
-          key: 'action',
-          value: function action() {
-              if (this.disabled) {
-                  return this;
-              }
-  
-              // Option onChange
-              this.OPTION.on('click', this.handler.onchange.bind(this));
-  
-              // Select Toggle
-              this.TOGGLE.on('click', this.handler.toggle.bind(this));
-  
-              // Hide MENU
-              $(document).on('click', this.handler.globalClick.bind(this));
-  
-              return this;
-          }
-  
-          // Data on change
-      }, {
-          key: 'onChange',
-          value: function onChange() {
-              this.parent.dataChange(this);
-          }
-      }]);
-  
-      return Input;
-  })(_formApp2['default']);
-  
-  exports['default'] = Input;
-  module.exports = exports['default'];
-
-});
-
-;/*!form/action/slide/slide*/
-define('form/action/slide/slide', function(require, exports, module) {
-
-  'use strict';
-  
-  Object.defineProperty(exports, '__esModule', {
-      value: true
-  });
-  
-  var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-  
-  var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-  
-  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-  
-  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-  
-  function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-  
-  var _formApp = require('form/app');
-  
-  var _formApp2 = _interopRequireDefault(_formApp);
-  
-  var _guid = require('guid');
-  
-  var _guid2 = _interopRequireDefault(_guid);
-  
-  var Input = (function (_App) {
-      _inherits(Input, _App);
-  
-      function Input() {
-          _classCallCheck(this, Input);
-  
-          _get(Object.getPrototypeOf(Input.prototype), 'constructor', this).call(this);
-          this.guid = (0, _guid2['default'])();
-          this.name = 'slide';
-          this.$ = aimee.$('.form-ui-slide>button.slideBtn');
-          this.dom = this.$.get(0);
-          this.attr({ guid: this.guid });
-      }
-  
-      _createClass(Input, [{
-          key: 'action',
-          value: function action() {
-              this.$.on('click', function () {
-                  $(this).toggleClass('selected');
-              });
-  
-              this.data = this.data || {};
-  
-              if (this.data.animate) {
-                  this.addClass('animate');
-              }
-  
-              if (this.data.selected) {
-                  this.addClass('selected');
-              }
-  
-              return this;
-          }
-      }, {
-          key: 'render',
-          value: function render(data) {
-              this.$.find('.slideBtn').text(data.value || data);
-              return this;
-          }
-      }, {
-          key: 'getData',
-          value: function getData() {
-              return this.$.hasClass('selected') ? true : false;
-          }
-      }, {
-          key: 'onChange',
-          value: function onChange() {
-              var _this = this;
-  
-              this.$.on('input', function () {
-                  _this.parent.dataChange(_this);
-              });
-              return this;
-          }
-      }, {
-          key: 'reset',
-          value: function reset() {
-              this.$.removeClass('selected');
-              return this;
-          }
-      }]);
-  
-      return Input;
-  })(_formApp2['default']);
-  
-  exports['default'] = Input;
-  module.exports = exports['default'];
-
-});
-
-;/*!form/action/tag/handler*/
-define('form/action/tag/handler', function(require, exports, module) {
-
-  'use strict';
-  
-  Object.defineProperty(exports, '__esModule', {
-      value: true
-  });
-  exports['default'] = {
-  
-      selected: function selected(e) {
-          var target = $(e.target);
-          var selected = 'selected';
-          var _selected = '.selected';
-  
-          if (!this.parent._config.selected) {
-              return;
-          }
-  
-          // More
-          if (this.parent._config.more) {
-              target.hasClass(selected) ? target.removeClass(selected) : target.addClass(selected);
-          }
-          // Only
-          else {
-                  target.hasClass(selected) ? target.removeClass(selected) : target.addClass(selected).siblings(_selected).removeClass(selected);
-              }
-      },
-  
-      deleted: function deleted(e) {
-          if (this.parent._config.deleted) {
-              $(e.target).remove();
-          }
-      },
-  
-      input: function input(e) {
-          // For Enter
-          if (e.keyCode === 13) {
-              // 添加tag项
-              this.add(this.parseValue(e.target.value));
-  
-              // 输入后选中当前文本
-              if (this.parent._config.autoclear === 'select') {
-                  return e.target.select();
-              }
-  
-              // 输入后当前文本 => Placeholder
-              if (this.parent._config.autoclear === 'placeholder') {
-                  e.target.placeholder = e.target.value;
-                  return e.target.value = '';
-              }
-  
-              // 输入后清空当前文本
-              if (this.parent._config.autoclear) {
-                  return e.target.value = '';
-              }
-          }
-      },
-  
-      add: function add(data) {
-          this.parent.$.find('.tags').append(aimee.$('i.tag').attr('data-type', data.key).text(data.value));
-      },
-  
-      hide: function hide(e, menu) {
-          menu.hide().parent().removeClass('open');
-      },
-  
-      blur: function blur(e) {
-          e.target.placeholder = this.parent.attributes.placeholder || '';
-      },
-  
-      parseValue: function parseValue(val) {
-          var arr;
-  
-          if (val.indexOf('\\:') > 0 || val.indexOf(':') < 0) {
-              return {
-                  key: null,
-                  value: val
-              };
-          } else {
-              arr = val.split(':');
-              return {
-                  key: arr[0],
-                  value: arr[1]
-              };
-          }
-      }
-  };
-  module.exports = exports['default'];
-
-});
-
-;/*!form/action/tag/tag*/
-define('form/action/tag/tag', function(require, exports, module) {
-
-  'use strict';
-  
-  Object.defineProperty(exports, '__esModule', {
-      value: true
-  });
-  
-  var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-  
-  var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-  
-  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-  
-  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-  
-  function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-  
-  var _formApp = require('form/app');
-  
-  var _formApp2 = _interopRequireDefault(_formApp);
-  
-  var _guid = require('guid');
-  
-  var _guid2 = _interopRequireDefault(_guid);
-  
-  var _handler = require('form/action/tag/handler');
-  
-  var _handler2 = _interopRequireDefault(_handler);
-  
-  var Input = (function (_App) {
-      _inherits(Input, _App);
-  
-      function Input() {
-          _classCallCheck(this, Input);
-  
-          _get(Object.getPrototypeOf(Input.prototype), 'constructor', this).call(this);
-          this.guid = (0, _guid2['default'])();
-          this.name = 'tag';
-          this.handler = _handler2['default'];
-          this.handler.parent = this;
-          // 初始化
-          this.attr({ 'class': 'form-ui-tag', guid: this.guid });
-          this.template = require('src/modules/form/action/tag/tag.jade');
-  
-          this._config = {
-              more: false, // 多项选择 依赖selected
-              input: false, // 可输入
-              deleted: false, // 可删除 不可与selected共存
-              selected: true, // 可选择
-              autoclear: 'placeholder' // 输入成功后自动选中之前输入数据，方便清除 (select | placeholder)
-          };
-          this.config.init(this._config);
-      }
-  
-      _createClass(Input, [{
-          key: 'render',
-          value: function render(map) {
-              this.$.append(this.template({ map: map }));
-              return this;
-          }
-      }, {
-          key: 'getData',
-          value: function getData() {
-              return !this._config.selected ?
-              // !Selected
-              this.$.find('.tag').map(function (i, tag) {
-                  return tag.innerText;
-              }) :
-              // Selected && More
-              this._config.more ? this.$.find('.tag.selected').map(function (i, tag) {
-                  return tag.innerText;
-              }) :
-              // Selected && !More
-              this.$.find('.tag.selected').eq(0).text();
-          }
-      }, {
-          key: 'input',
-          value: function input() {
-              if (this._config.input) {
-                  this.$.find('.tags').before(aimee.$('input[type="text"]').addClass('area form-control').attr('placeholder', this.attributes.placeholder).on('keypress', function (e) {
-                      return _handler2['default'].input(e);
-                  }));
-              }
-          }
-      }, {
-          key: 'action',
-          value: function action() {
-              this.input();
-              this.$.delegate('.tag', 'click', function (e) {
-                  return _handler2['default'].selected(e);
-              });
-              this.$.delegate('.tag', 'dblclick', function (e) {
-                  return _handler2['default'].deleted(e);
-              });
-              this.$.delegate('.area', 'blur', function (e) {
-                  return _handler2['default'].blur(e);
-              });
-              return this;
-          }
-      }, {
-          key: 'reset',
-          value: function reset() {
-              this.$.val('');
-              return this;
-          }
-      }]);
-  
-      return Input;
-  })(_formApp2['default']);
-  
-  exports['default'] = Input;
-  module.exports = exports['default'];
-
-});
-
-;/*!form/action/textarea/textarea*/
-define('form/action/textarea/textarea', function(require, exports, module) {
-
-  'use strict';
-  
-  Object.defineProperty(exports, '__esModule', {
-      value: true
-  });
-  
-  var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-  
-  var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-  
-  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-  
-  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-  
-  function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-  
-  var _formApp = require('form/app');
-  
-  var _formApp2 = _interopRequireDefault(_formApp);
-  
-  var _guid = require('guid');
-  
-  var _guid2 = _interopRequireDefault(_guid);
-  
-  var Input = (function (_App) {
-      _inherits(Input, _App);
-  
-      function Input(tagName) {
-          _classCallCheck(this, Input);
-  
-          _get(Object.getPrototypeOf(Input.prototype), 'constructor', this).call(this, 'textarea');
-          this.guid = (0, _guid2['default'])();
-          // 初始化
-          this.attr({ 'class': 'area', guid: this.guid });
-      }
-  
-      _createClass(Input, [{
-          key: 'reset',
-          value: function reset() {
-              this.$.val('');
-              return this;
-          }
-      }]);
-  
-      return Input;
-  })(_formApp2['default']);
-  
-  exports['default'] = Input;
-  module.exports = exports['default'];
-
-});
-
-;/*!form*/
-define('form', function(require, exports, module) {
-
-  /*!
-   * form For Aimeejs
-   * https://github.com/gavinning/aimee
-   *
-   * Aimee-app
-   * Date: 2016-05-25
-   *
-   * @example:
-   * 		var form = new Form;
-   * 		form.load('input').attr({name: 'username'}).render();
-   * 		form.load('input').attr({name: 'password'}).render();
-   *
-   * @example:
-   * 		form.group('user').load('input').attr({name: 'username'}).render();
-   * 		form.group('user').load('input').attr({name: 'password'}).render();
-   *
-   */
-  'use strict';
-  
-  Object.defineProperty(exports, '__esModule', {
-      value: true
-  });
-  
-  var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-  
-  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-  
-  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-  
-  var _config = require('config');
-  
-  var _config2 = _interopRequireDefault(_config);
-  
-  _config2['default'].init();
-  
-  var Form = (function () {
-      function Form() {
-          _classCallCheck(this, Form);
-  
-          // 所有表单控件
-          // 用于渲染
-          this.all = [];
-          // 表单appMap表, key为name字段
-          this.map = {};
-          // 表单map表
-          // 防止重复添加
-          this.hash = {};
-          // 独立表单控件
-          // 用于采集结构化数据
-          this.apps = [];
-          // 表单控件组
-          // 用于采集结构化数据
-          this.groups = {};
-          // 一次性函数，用于获取groupname
-          this.getGroupname = function () {};
-      }
-  
-      _createClass(Form, [{
-          key: 'create',
-          value: function create(el) {
-              return $(document.createElement(el));
-          }
-  
-          // 标记创建表单组
-      }, {
-          key: 'group',
-          value: function group(name) {
-              var it = this;
-              // 创建一次性函数，用于通知this.load
-              this.getGroupname = function () {
-                  it.getGroupname = function () {};
-                  return name;
-              };
-              return this;
-          }
-  
-          // 创建表单
-      }, {
-          key: 'load',
-          value: function load(id) {
-              var groupname = this.getGroupname();
-              var app = new (require(['form/action',id,id].join('/')))();
-  
-              // 表单组
-              if (groupname) {
-                  // 创建表单组数组
-                  if (!this.groups[groupname]) {
-                      this.groups[groupname] = [];
-                  }
-                  // 推进表单组
-                  if (!this.hash[app.guid]) {
-                      this.hash[app.guid] = true;
-                      this.groups[groupname].push(app);
-                      this.all.push(app);
-                      app.parent = this;
-                  }
-              }
-              // 独立表单
-              else if (!this.hash[app.guid]) {
-                      this.hash[app.guid] = true;
-                      this.apps.push(app);
-                      this.all.push(app);
-                      app.parent = this;
-                  }
-  
-              return app;
-          }
-      }, {
-          key: 'reset',
-          value: function reset() {
-              this.all.forEach(function (app) {
-                  app.reset();
-              });
-              return this;
-          }
-  
-          // 设置数据
-          // TODO: 待完善多层数据
-      }, {
-          key: 'setData',
-          value: function setData(data) {
-              this.all.forEach(function (app) {
-                  app.attr('name');
-                  app.setData(data[app.attributes.name]);
-              });
-              this._data = data;
-              return this;
-          }
-  
-          /**
-           * 获取数据
-           * @param   {Boolean}  full 是否显示空值，默认为true
-           * @return  {Object}        Form表单数据
-           * @example this.getData()
-           */
-      }, {
-          key: 'getData',
-          value: function getData(full) {
-              var data = {};
-              var isFull = typeof full === 'boolean' ? full : true;
-  
-              // 获取独立表单数据
-              this.apps.forEach(function (app) {
-                  var res;
-                  // Update attributes.name
-                  app.attr('name');
-                  // 检查是否有name属性
-                  if (app.attributes.name) {
-                      res = app.getData();
-                      isFull ? data[app.attributes.name] = res : res ? data[app.attributes.name] = res : res;
-                  }
-              });
-              // 获取表单组数据
-              $.each(this.groups, function (groupname, group) {
-                  data[groupname] = {};
-                  group.forEach(function (app) {
-                      var res;
-                      // Update attributes.name
-                      app.attr('name');
-                      // 检查是否有name属性
-                      if (app.attributes.name) {
-                          res = app.getData();
-                          isFull ? data[groupname][app.attributes.name] = res : res ? data[groupname][app.attributes.name] = res : res;
-                      }
-                  });
-              });
-              return data;
-          }
-  
-          /**
-           * 从app列表中查询
-           * @param   {String}    key   要查询的key, value为空是默认为id
-           * @param   {Function}  key   自定义查询条件
-           * @param   {String}    value 要查询的value
-           * @return  {Object}          查询结果
-           * @example [example]
-           */
-      }, {
-          key: 'getApp',
-          value: function getApp(key, value) {
-              var fn, app;
-  
-              // 自定义查询条件
-              if (typeof key === 'function') {
-                  fn = key;
-                  this.apps.forEach(function (res) {
-                      fn(res) ? app = res : res;
-                  });
-                  return app;
-              }
-  
-              // 查询子元素
-              if (typeof key === 'string') {
-                  value ? this.apps.forEach(function (res) {
-                      if (key in res) {
-                          res.attributes[key] === value ? app = res : res;
-                      }
-                  }) :
-                  // 默认key为id
-                  this.apps.forEach(function (res) {
-                      res.attributes.id === key ? app = res : res;
-                  });
-  
-                  return app;
-              }
-          }
-  
-          // 加载form默认样式
-      }, {
-          key: 'css',
-          value: function css() {
-              _config2['default'].set('css', true);
-              return this;
-          }
-  
-          // 根据app的name字段来查找占位符进行渲染
-      }, {
-          key: 'render',
-          value: function render(selector, options) {
-              var _this = this;
-  
-              _config2['default'].merge(options);
-              selector = selector || document;
-              this.all.forEach(function (app) {
-                  // 建立appMap
-                  _this.map[app.attributes.name] = app;
-                  // 渲染表单控件
-                  $(selector).find('[name=' + app.attributes.name + ']').replaceWith(app.$);
-              });
-              // 加载默认样式
-              if (_config2['default'].get('css')) {
-                  $(selector).addClass('lincoapp-form');
-              };
-              return this;
-          }
-  
-          // 表单内控件数据改变时会调用此方法
-      }, {
-          key: 'dataChange',
-          value: function dataChange() {}
-      }]);
-  
-      return Form;
-  })();
-  
-  exports['default'] = Form;
-  module.exports = exports['default'];
-
-});
-
-;/*!apply*/
-define('apply', function(require, exports, module) {
-
-  /*!
-   * apply For Aimeejs
-   * https://github.com/gavinning/aimee
-   *
-   * Aimee-app
-   * Date: 2016-08-10
-   */
-  
-  'use strict';
-  
-  Object.defineProperty(exports, '__esModule', {
-      value: true
-  });
-  
-  var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-  
-  var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-  
-  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-  
-  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-  
-  function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-  
-  var _app = require('app');
-  
-  var _app2 = _interopRequireDefault(_app);
-  
-  var _cookie = require('cookie');
-  
-  var _cookie2 = _interopRequireDefault(_cookie);
-  
-  var _applyJade = require('src/widget/apply/apply.jade');
-  
-  var _applyJade2 = _interopRequireDefault(_applyJade);
-  
-  var apply = (function (_App) {
-      _inherits(apply, _App);
-  
-      function apply() {
-          _classCallCheck(this, apply);
-  
-          _get(Object.getPrototypeOf(apply.prototype), 'constructor', this).call(this);
-          this.name = 'apply';
-          this.template = _applyJade2['default'];
-      }
-  
-      _createClass(apply, [{
-          key: 'onload',
-          value: function onload() {}
-  
-          // app渲染到页面之前执行，用于预处理渲染内容
-      }, {
-          key: 'prerender',
-          value: function prerender(app) {
-              var _this = this;
-  
-              this.bind({
-                  'click@.btn-submit': function clickBtnSubmit() {
-                      var msg;
-                      var data = _this.getFormData();
-  
-                      if (msg = _this.check(data)) {
-                          return alert(msg);
-                      }
-  
-                      _this.post(data, function (msg) {
-                          console.log(msg);
-                      }, function (err) {
-                          console.log(err.status);
-                          console.log(err.responseText);
-                      });
-                  }
-              });
-          }
-  
-          // app渲染到页面之后执行，此时app还在内存中，不能获取宽度高度等与尺寸相关的属性
-      }, {
-          key: 'postrender',
-          value: function postrender(app) {}
-          // app为模块的实例
-  
-          // 页面渲染到浏览器后执行，此时可以获取宽高等与尺寸相关的属性
-  
-      }, {
-          key: 'pagerender',
-          value: function pagerender(app) {
-              // some code
-          }
-      }, {
-          key: 'post',
-          value: function post(data, succ, err) {
-              $.ajax({
-                  url: '/api/apply',
-                  type: 'POST',
-                  data: data,
-                  success: succ,
-                  error: err
-              });
-          }
-      }, {
-          key: 'check',
-          value: function check(data) {
-              if (!data.username) {
-                  return '请输入用户名';
-              }
-              if (!data.tel) {
-                  return '请输入手机号';
-              }
-              if (!data.gender) {
-                  data.gender = 'male';
-              }
-          }
-      }, {
-          key: 'getFormData',
-          value: function getFormData(data) {
-              data = {};
-              data.username = this.find('[name="username"]').val();
-              data.tel = this.find('[name="telphone"]').val();
-              data.gender = this.find('.gender.selected').attr('data-value');
-              data.userguid = _cookie2['default'].get('userId');
-              return data;
-          }
-      }]);
-  
-      return apply;
-  })(_app2['default']);
-  
-  exports['default'] = apply;
   module.exports = exports['default'];
 
 });

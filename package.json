@@ -23,6 +23,7 @@
     "jade": "~1.11.0",
     "less-middleware": "1.0.x",
     "linco.lab": "^1.0.0",
+    "lru-cache": "^4.0.1",
     "md5": "^2.1.0",
     "morgan": "~1.6.1",
     "mysql": "^2.11.1",

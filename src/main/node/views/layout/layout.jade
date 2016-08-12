@@ -1,7 +1,22 @@
 doctype html
 html
-  head
-    title= title
-    link(rel='stylesheet', href='/css/style.css')
-  body
-    block content
+    head
+        meta(charset='utf-8')
+        title Aimeejs
+        meta(name='viewport', content='width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,shrink-to-fit=no')
+        meta(name='author', content='gavinning')
+        meta(name='copyright', content='Copyright (c) 2016 rong.')
+        meta(name='description', content='Aimeejs')
+        meta(name='format-detection', content='telephone=no')
+        meta(http-equiv='pragma', content='no-cache')
+        meta(http-equiv='Cache-Control', content='no-cache, must-revalidate')
+        link(rel='apple-touch-icon-precomposed', href='/images/desktop.png')
+        // <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
+        block css
+            link(rel='stylesheet', href='/css/common.css')
+        script(src='/public/plugins/jquery.min.js')
+        script(src='/js/libs/cookie.js')
+        script(src='/js/top/models/aimee.js')
+        script(src='/js/top/models/page.js')
+        
+    block body

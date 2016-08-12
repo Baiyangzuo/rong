@@ -7,5 +7,7 @@ module.exports = dirname => {
         system  : path.join(dirname, 'models/system'),
         info    : path.join(dirname, 'models/system/info'),
         stats   : path.join(dirname, 'models/system/stats'),
+        score   : path.join(dirname, 'models/system/score'),
+        cache   : path.join(dirname, 'models/system/cache'),
     }
 }

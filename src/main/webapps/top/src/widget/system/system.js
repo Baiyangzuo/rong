@@ -10,6 +10,9 @@ class System {
         if(!cookie.get('userId')){
             cookie.set('userId', uuid.v4(), { expires: 7*365, path: '/' })
         }
+        if(!cookie.get('userRegSuccess')){
+            cookie.set('userRegSuccess', 0, { expires: 7*365, path: '/' })
+        }
     }
 }
 

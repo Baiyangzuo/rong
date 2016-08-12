@@ -1,5 +1,9 @@
 extends ../layout/layout
 
-block content
-  h1= title
-  p Welcome to #{title}
+block append css
+    link(rel="stylesheet", href="/css/top/home.css")
+
+block body
+    body
+        include app/apply
+        script(src="/js/top/pages/home.js")

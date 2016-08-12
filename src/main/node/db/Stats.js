@@ -24,14 +24,13 @@ module.exports = {
      * 3 : other
      */
     status: Sequelize.INTEGER,
-    // 相关表名
-    tablename: Sequelize.STRING,
-    // 目标ID
-    targetId: Sequelize.INTEGER(11).UNSIGNED,
+    referrer: Sequelize.TEXT,
     // 操作用户
     username: Sequelize.STRING,
     // 用户UUID
-    userguid: Sequelize.TEXT('tiny'),
+    userguid: Sequelize.UUID,
+    // 注册成功的id
+    userId: Sequelize.INTEGER(11).UNSIGNED,
     ip: Sequelize.STRING,
     ua: Sequelize.TEXT,
     stack: Sequelize.TEXT
