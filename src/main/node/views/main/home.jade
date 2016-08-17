@@ -1,0 +1,100 @@
+extends ../layout/layout
+
+block append css
+    link(rel="stylesheet", href="/css/top/home.css")
+
+block body
+    body
+        .top
+            .inner
+                a.reg 快速注册
+                a 访问手机版    
+            
+        .header
+            .inner
+                .logo
+                    img(src="/images/logo.png", alt="")
+        
+        .content
+            .banner
+                .inner
+                    img(src="/images/banner.jpg", alt="")
+            .bar
+                .inner
+                    each key, i in new Array(4)
+                        .item
+                            img(src="/images/#{i+1}.png", alt="")
+                    .clear            
+                    
+            
+            .section.conts
+                .inner
+                    h1 信用贷款
+                    .pros
+                        .list
+                            .item
+                                .title 房产贷
+                                .desc 有房就能贷
+                                .desc 按揭房、二手房、新房贷款
+                                a.apply 立即申请
+                                .icon
+                                    img(src="/images/5.png", alt="")
+                            .item
+                                .title 汽车贷
+                                .desc 按揭车，新车贷款
+                                .desc 门槛低，最快一天到账
+                                a.apply 立即申请
+                                .icon
+                                    img(src="/images/6.png", alt="")
+                            .item
+                                .title 车主贷
+                                .desc 不压车、不压证
+                                a.apply 立即申请
+                                .icon
+                                    img(src="/images/7.png", alt="")
+                            .clear
+                        .list
+                            .item
+                                .title 信用贷
+                                .desc 无房无车无抵押
+                                .desc 最高200万，最快一天放款
+                                a.apply 立即申请
+                                .icon
+                                    img(src="/images/8.png", alt="")
+                            .item
+                                .title 短期贷
+                                .desc 资金周转 随贷随还
+                                .desc 有房有车有店铺，最快一天到账
+                                a.apply 立即申请
+                                .icon
+                                    img(src="/images/9.png", alt="")
+                            .item
+                                .title 企业贷
+                                .desc 适用于企业专项贷款
+                                a.apply 立即申请
+                                .icon
+                                    img(src="/images/10.png", alt="")
+                            .clear
+                    
+                    .regpanel
+                        .title 申请贷款
+                        include app/apply
+                    .clear
+            
+            .section.links
+                .inner
+                    h1 合作机构
+                    .list
+                        each key, i in new Array(6)
+                            .item(class= i===0 ? 'first' : '')
+                                img(src="/images/a#{i+1}.png", alt="")
+                        .clear
+                    .list
+                        each key, i in new Array(6)
+                            .item(class= i===0 ? 'first' : '')
+                                img(src="/images/a#{i+6}.png", alt="")
+                        .clear
+        
+            .footer
+                .inner
+        script(src="/js/top/pages/home.js")

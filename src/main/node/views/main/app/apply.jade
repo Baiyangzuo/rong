@@ -1,11 +1,17 @@
 .lincoapp-apply(data-code='0')
     .form
         .group
+            span.u-title 请输入您的姓名
             input.input(type='text', value='gavinning', name='username', placeholder='Username')
         .group
+            span.u-title 请输入您的手机号
             input.input(type='text', value='123', name='telphone', placeholder='Telphone')
         .group
             .checkbox
-                span.gender.male.selected(data-value='male') 男
-                spam.gender.female(data-value='female') 女
-        button.btn-submit 提交
+                span.gender.male.selected(data-value='male') 先生
+                spam.gender.female(data-value='female') 女士
+        .group
+            span.u-title 请输入验证码
+            input.input(type='text', value='123', name='telphone', placeholder='Telphone')
+
+        button.btn-submit 立即申请
