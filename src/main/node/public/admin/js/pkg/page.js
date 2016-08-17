@@ -8,5 +8,210 @@ var jade_indent = [];
 buf.push("\n<div class=\"page\">\n  <div id=\"lincoapp-id-header\"></div>\n  <div class=\"page-container\">\n    <div id=\"lincoapp-id-header-bar\"></div>\n    <div class=\"page-content\">\n      <div class=\"container\">\n        <div id=\"lincoapp-id-breadcrumb\"></div>\n        <div class=\"row\">\n          <div id=\"lincoapp-id-panel\"></div>\n          <div id=\"lincoapp-id-panel\"></div>\n        </div>\n        <div class=\"row\">\n          <div id=\"lincoapp-id-panel\"></div>\n        </div>\n      </div>\n    </div>\n  </div>\n  <div id=\"lincoapp-id-footer\"></div>\n</div>");;return buf.join("");
 } 
 });
+;/*!pages/home/map*/
+define('pages/home/map', function(require, exports, module) {
+
+  "use strict";
+  
+  Object.defineProperty(exports, "__esModule", {
+      value: true
+  });
+  var dateType = {
+      0: "#today",
+      1: "#week",
+      2: "#month",
+      3: "#all"
+  };
+  exports.dateType = dateType;
+
+});
+
 ;/*!pages/home*/
-define("pages/home",function(e,t,n){"use strict";function o(e){return e&&e.__esModule?e:{"default":e}}function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function i(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(t,"__esModule",{value:!0});var a=function(){function e(e,t){for(var n=0;n<t.length;n++){var o=t[n];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}return function(t,n,o){return n&&e(t.prototype,n),o&&e(t,o),t}}(),c=function(e,t,n){for(var o=!0;o;){var r=e,i=t,a=n;o=!1,null===r&&(r=Function.prototype);var c=Object.getOwnPropertyDescriptor(r,i);if(void 0!==c){if("value"in c)return c.value;var l=c.get;return void 0===l?void 0:l.call(a)}var u=Object.getPrototypeOf(r);if(null===u)return void 0;e=u,t=i,n=a,o=!0,c=u=void 0}},l=e("page"),u=o(l),s=e("src/pages/home/home.jade"),f=o(s),p=function(t){function n(){r(this,n),c(Object.getPrototypeOf(n.prototype),"constructor",this).call(this),this.name="home",this.template=f["default"]}return i(n,t),a(n,[{key:"onload",value:function(){aimee.app.loading2.show().center()}},{key:"prerender",value:function(t){{var n=this;e("table")}t=t||this.getData(),this.exports("header footer"),this.exports("header-bar"),this.exports("breadcrumb"),this.use({"panel^1":function(e){e.init({title:"STATS"}).config("action.date",!0).config("icon.className","icon-bar-chart theme-font").render().addClass("col-md-6 col-sm-12"),n.use("stats").init().render(e.find(".portlet-body"))},"panel^2":function(e){e.init({title:"CONVERSION"}).config("action.date",!0).config("icon.className","icon-bar-chart theme-font").render().addClass("col-md-6 col-sm-12"),n.use("conversion").init().render(e.find(".portlet-body"))},"panel^3":function(e){e.init({title:t.table.title}).config("action.date",!0).config("icon.className","fa fa-user font-green-sharp").render().addClass("col-md-12"),n.use("table").init(t.table).config("page.length",1).config("ctrl","delete").render(e.find(".portlet-body"))}})}},{key:"postrender",value:function(){this.autoscreen()}},{key:"enter",value:function(){aimee.app.loading2.hide()}},{key:"leave",value:function(){}},{key:"autoscreen",value:function(){var e=this.find(".page-container"),t=this.query("header").getApp().height(),n=this.query("footer").getApp().height(),o=window.innerHeight-t-n;e.css("min-height",o+"px")}},{key:"ajaxconfig",get:function(){return{url:"/tmp/test.json",dataType:"json"}}}]),n}(u["default"]);t["default"]=new p,n.exports=t["default"]});
+define('pages/home', function(require, exports, module) {
+
+  /*!
+   * home For Aimeejs
+   * https://github.com/gavinning/aimee
+   *
+   * Aimee-page
+   * Date: 2016-08-06
+   */
+  
+  'use strict';
+  
+  Object.defineProperty(exports, '__esModule', {
+      value: true
+  });
+  
+  var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+  
+  var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+  
+  function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
+  
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+  
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+  
+  function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+  
+  var _page = require('page');
+  
+  var _page2 = _interopRequireDefault(_page);
+  
+  var _homeJade = require('src/pages/home/home.jade');
+  
+  var _homeJade2 = _interopRequireDefault(_homeJade);
+  
+  var _map = require('pages/home/map');
+  
+  var Map = _interopRequireWildcard(_map);
+  
+  var home = (function (_Page) {
+      _inherits(home, _Page);
+  
+      function home() {
+          _classCallCheck(this, home);
+  
+          _get(Object.getPrototypeOf(home.prototype), 'constructor', this).call(this);
+          this.name = 'home';
+          this.template = _homeJade2['default'];
+      }
+  
+      _createClass(home, [{
+          key: 'onload',
+          value: function onload() {
+              aimee.app.loading2.show().center();
+          }
+      }, {
+          key: 'prerender',
+          value: function prerender(data) {
+              var _this = this;
+  
+              console.log(data, 1999);
+              var Table = require('table');
+  
+              this.exports('header footer');
+              this.exports('header-bar');
+              // this.exports('breadcrumb')
+  
+              this.use({
+                  // // 构建基础统计
+                  // 'panel^1': app => {
+                  //     app
+                  //         .init({title: 'STATS'})
+                  //         .config('action.date', true)
+                  //         .config('icon.className', 'icon-bar-chart theme-font')
+                  //         .render().addClass('col-md-6 col-sm-12');
+                  //     this.use('stats')
+                  //         .init().render(app.find('.portlet-body'));
+                  // },
+                  //
+                  // // 构建转化率
+                  // 'panel^2': app => {
+                  //     app
+                  //         .init({title: 'CONVERSION'})
+                  //         .config('action.date', true)
+                  //         .config('icon.className', 'icon-bar-chart theme-font')
+                  //         .render().addClass('col-md-6 col-sm-12');
+                  //     this.use('conversion')
+                  //         .init()
+                  //         .render(app.find('.portlet-body'));
+                  // },
+  
+                  // 构建用户表
+                  'panel^3': function panel3(app) {
+                      app.init({ title: 'USER' }).config('action.date', true).config('icon.className', 'fa fa-user font-green-sharp').render().addClass('col-md-12 panel-user').find('.portlet-body').append(aimee.create('#today')).append(aimee.create('#week')).append(aimee.create('#month')).append(aimee.create('#all'));
+                      _this.use('table').init(data.data)
+                      // 日期类型
+                      .config('datetype', 0)
+                      // 单页长度
+                      .config('page.length', 10).config('ctrl', 'delete').render(app.find('#today'));
+                  }
+              });
+  
+              this.bind({
+                  'click@.btn-date': function clickBtnDate(e) {
+                      _this.loadData($(e.target).attr('data-type') || 0);
+                  },
+  
+                  'click@.lincoapp-header-bar': function clickLincoappHeaderBar(e) {
+                      console.log(99);
+                  },
+  
+                  'click@.btn-sm': function clickBtnSm() {
+                      var it = $(this);
+                      var i = it.index();
+                      var parent = it.parents('.lincoapp-panel');
+                      var tables = parent.find('.lincoapp-table');
+                      it.addClass('active').siblings('.active').removeClass('active');
+                      tables.eq(i).length ? tables.eq(i).show().siblings().hide() : tables.hide();
+                  }
+              });
+          }
+      }, {
+          key: 'postrender',
+          value: function postrender(data) {
+              this.autoscreen();
+          }
+      }, {
+          key: 'enter',
+          value: function enter() {
+              aimee.app.loading2.hide();
+          }
+      }, {
+          key: 'leave',
+          value: function leave() {}
+  
+          // Full page
+      }, {
+          key: 'autoscreen',
+          value: function autoscreen() {
+              var container = this.find('.page-container');
+              var headerHeight = this.query('header').getApp().height();
+              var footerHeight = this.query('footer').getApp().height();
+              var minHeight = window.innerHeight - headerHeight - footerHeight;
+              container.css('min-height', minHeight + 'px');
+          }
+      }, {
+          key: 'loadData',
+          value: function loadData(type) {
+              var _this2 = this;
+  
+              var $dom = this.find('.panel-user').find(Map.dateType[type]);
+              if ($dom.length) {
+                  aimee.app.loading2.show();
+                  $.ajax({
+                      url: '/rose/getUsers?date=' + type,
+                      type: 'GET',
+                      success: function success(data) {
+                          _this2.use('table').init(data.data).config('page.length', 10).config('datetype', type).render($dom);
+                          aimee.app.loading2.hide();
+                      },
+                      error: function error(err) {
+                          console.log(err);
+                          alert(err);
+                      }
+                  });
+              }
+          }
+      }, {
+          key: 'loadMonthData',
+          value: function loadMonthData() {}
+      }, {
+          key: 'ajaxconfig',
+          get: function get() {
+              return {
+                  url: '/rose/getUsers',
+                  dataType: 'json'
+              };
+          }
+      }]);
+  
+      return home;
+  })(_page2['default']);
+  
+  exports['default'] = new home();
+  module.exports = exports['default'];
+
+});

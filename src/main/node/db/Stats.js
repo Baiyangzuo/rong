@@ -10,6 +10,14 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true
     },
+    // 注册成功的id
+    userId: Sequelize.INTEGER(11).UNSIGNED,
+    // 操作用户
+    username: Sequelize.STRING,
+    // TEL
+    tel: Sequelize.BIGINT(11).UNSIGNED,
+    // 用户UUID
+    userguid: Sequelize.UUID,
     /**
      * 统计类型
      * 1 : PV
@@ -24,14 +32,8 @@ module.exports = {
      * 3 : other
      */
     status: Sequelize.INTEGER,
-    referrer: Sequelize.TEXT,
-    // 操作用户
-    username: Sequelize.STRING,
-    // 用户UUID
-    userguid: Sequelize.UUID,
-    // 注册成功的id
-    userId: Sequelize.INTEGER(11).UNSIGNED,
     ip: Sequelize.STRING,
     ua: Sequelize.TEXT,
+    referrer: Sequelize.TEXT,
     stack: Sequelize.TEXT
 }

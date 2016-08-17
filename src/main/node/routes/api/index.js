@@ -24,11 +24,19 @@ router.post('/apply', function(req, res, next) {
         // 创建用户
         db.list.Person.create(user)
         .then(val => {
+            info.user.id = val.id;
+            info.stats.status = 1;
+            // 统计RV
+            stats.rv(info, val);
             // 缓存创建成功IP
             cache.get('ips').push(info.stats.ip);
             res.json({code: 0, msg: 'success'})
         })
         .catch(err => {
+            info.stats.status = 2;
+            info.stats.stack = err.stack;
+            // 统计RV
+            stats.rv(info);
             res.status(500).send(err.message)
         })
     })

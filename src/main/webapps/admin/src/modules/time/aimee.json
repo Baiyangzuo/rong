@@ -1,0 +1,17 @@
+{
+  "name": "time",
+  "version": "0.1.0",
+  "description": "时间格式化",
+  "author": "gavinning",
+  "keywords": [
+    "time",
+    "time format",
+    "date",
+    "date format"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aimeejs/time.git",
+    "bugs": "https:/github.com/aimeejs/time/issues"
+  }
+}

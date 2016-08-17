@@ -7,7 +7,7 @@
         margin-bottom: 0;
     }
 
-    .glyphicon-trash{
+    .btn-default{
         color: #313534;
         background-color: #e5e6e6;
         border-color: #e5e6e6;
@@ -16,5 +16,26 @@
 
     [data-type="ctrl"]{
         text-align: right;
+    }
+
+    .pagination{
+        margin: 0;
+    }
+
+    .table-footer{
+        .box();
+        padding: 10px 0;
+
+        .blue{
+            color: @blue;
+            margin: 0 2px;
+        }
+
+        .info{
+            .box-flex();
+            text-align: left;
+            line-height: 34px;
+            cursor: default;
+        }
     }
 }

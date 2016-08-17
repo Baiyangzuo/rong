@@ -172,7 +172,7 @@ class Page extends Base {
         $.each(events, (key, fn) => {
             let pair = key.split('@');
             let evts = pair[0].split(/,\s*/g);
-            evts.forEach((type) => {
+            evts.forEach(type => {
                 this.on(type, pair[1], fn)
             })
         })
@@ -264,6 +264,7 @@ class Page extends Base {
 
         // 缓存引用页面对象
         app.page = this;
+        app.parent = this;
 
         // 缓存pm对象
         app.pm = this.pm;
@@ -351,9 +352,10 @@ class Page extends Base {
         })
     }
 
+    // 批量加载app
     use(id, fn) {
         if($.isPlainObject(id)){
-            // appname^Number 表示同一个app被多次使用
+            // appname^Number 表示同一个app被多次使用，^Number仅作为标记，没有特殊意义
             $.each(id, (k, v) => this.export(require(k.split('^')[0]), v));
             return this;
         }

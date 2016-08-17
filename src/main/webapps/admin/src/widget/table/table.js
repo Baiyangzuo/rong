@@ -6,6 +6,7 @@
  * Date: 2016-08-06
  */
 
+import g from 'g';
 import App from 'app';
 import tbody from 'tbody.jade';
 import template from 'table.jade';
@@ -20,6 +21,7 @@ class table extends App {
     }
 
     onload() {
+        let data = this.getData();
         // 配置文件数据模型
         let CONFIGMODEL = {
             // 所有数据
@@ -33,18 +35,27 @@ class table extends App {
             },
             // 操作列 删除-复制-编辑
             ctrl: 'delete.copy.edit'
-        }
+        };
 
         // 缓存数据
         this.config('data', this.clone(this.getData()));
         // 是否开启分页
         this.config('page') && this.pagination();
+
+        // 重建Map
+        if(!data.map){
+            data.map = {};
+            g.getKeyArray(data.list[0]).forEach(key => {
+                data.map[key] = key
+            })
+        }
     }
 
     // app渲染到页面之前执行，用于预处理渲染内容
     prerender(app) {
-        this.config('page') && this.paginator();
-        this.config('ctrl') && this.ctrl();
+        this.ctrl();
+        this.getExcel();
+        this.paginator();
     }
 
     // app渲染到页面之后执行，此时app还在内存中，不能获取宽度高度等与尺寸相关的属性
@@ -75,9 +86,10 @@ class table extends App {
 
     // 计算分页
     pagination() {
+        if(!this.config('page')) return;
         let data = this.getData();
         let length = this.config('page.length');
-        let total = data.list.length/length;
+        let total = Math.ceil(data.list.length/length);
         this.config('page.total', total);
         data.list = data.list.slice(0, length);
     }
@@ -85,7 +97,7 @@ class table extends App {
     // 加载分页模块
     paginator() {
         this.find('.pagination').jqPaginator({
-            totalPages: this.config('page.total'),
+            totalPages: this.config('page.total') || 1,
             visiblePages: 5,
             currentPage: 1,
             first: aimee.create('li.first>a{首页}'),
@@ -102,11 +114,32 @@ class table extends App {
         })
     }
 
+    getExcel() {
+        let type = this.config('datetype');
+        if(type === undefined) return;
+        this.on('click', '.glyphicon-save', e => {
+            $.ajax({
+                url: '/rose/getExcel',
+                type: 'POST',
+                data: {date: type},
+                success: id => {
+                    location.href = '/rose/getExcel?id=' + id;
+                },
+                error: xhr => {
+                    alert(xhr.status + ': ' + xhr.responseText)
+                }
+            })
+        })
+    }
+
     ctrl() {
+        if(!this.config('ctrl')) return;
         // Add ctrl
         this.find('thead [data-type="ctrl"]').length ||
         this.find('thead > tr').append(
-            aimee.$('th[data-type="ctrl"]').text('Control')
+            aimee.$('th[data-type="ctrl"]').html(
+                aimee.create('button.btn.btn-default.glyphicon.glyphicon-save')
+            )
         )
         this.find('tbody> tr').each((i, tr) => {
             $(tr).append(aimee.$('td[data-type="ctrl"]>.inner').html(

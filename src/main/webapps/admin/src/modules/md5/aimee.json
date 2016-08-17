@@ -1,0 +1,12 @@
+{
+  "name": "md5",
+  "version": "2.3.0",
+  "description": "md5",
+  "author": "gavinning",
+  "keywords": "md5",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aimeejs/md5.git",
+    "bugs": "https:/github.com/aimeejs/md5/issues"
+  }
+}

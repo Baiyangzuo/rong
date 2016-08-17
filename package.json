@@ -1,6 +1,6 @@
 {
   "name": "rong",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "./src/main/node/bin/www",
   "private": true,
   "scripts": {
@@ -10,6 +10,7 @@
     "aimee-extend": "^1.0.1",
     "aimee-is": "^1.1.0",
     "bash-color": "0.0.4",
+    "blueimp-md5": "^2.3.0",
     "body-parser": "~1.13.2",
     "client-ip": "^0.2.0",
     "co": "^4.6.0",
@@ -19,14 +20,17 @@
     "debug": "~2.2.0",
     "express": "~4.13.1",
     "express-session": "^1.14.0",
+    "gre": "^0.1.0",
     "guid": "0.0.12",
     "jade": "~1.11.0",
+    "json-xlsx": "^0.1.1",
     "less-middleware": "1.0.x",
     "linco.lab": "^1.0.0",
     "lru-cache": "^4.0.1",
     "md5": "^2.1.0",
     "morgan": "~1.6.1",
     "mysql": "^2.11.1",
+    "node-g": "^1.0.0",
     "sequelize": "^3.23.6",
     "serve-favicon": "~2.3.0",
     "vpm-config": "^2.0.0"

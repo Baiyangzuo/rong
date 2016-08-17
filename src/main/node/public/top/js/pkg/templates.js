@@ -116,7 +116,7 @@ var jade_mixins = {};
 var jade_interp;
 
 var jade_indent = [];
-buf.push("\n<div class=\"lincoapp-apply\">\n  <div class=\"form\">\n    <div class=\"group\">\n      <input type=\"text\" value=\"gavinning\" name=\"username\" placeholder=\"Username\" class=\"input\"/>\n    </div>\n    <div class=\"group\">\n      <input type=\"text\" value=\"123\" name=\"telphone\" placeholder=\"Telphone\" class=\"input\"/>\n    </div>\n    <div class=\"group\">\n      <div class=\"checkbox\"><span data-value=\"male\" class=\"gender male selected\">男</span>\n        <spam data-value=\"female\" class=\"gender female\">女</spam>\n      </div>\n    </div>\n    <button class=\"btn-submit\">提交</button>\n  </div>\n</div>");;return buf.join("");
+buf.push("\n<div class=\"lincoapp-apply\">\n  <div class=\"form\">\n    <div class=\"group\">\n      <input type=\"text\" value=\"gavinning\" name=\"username\" placeholder=\"Username\" class=\"input\"/>\n    </div>\n    <div class=\"group\">\n      <input type=\"text\" value=\"13001033940\" name=\"telphone\" placeholder=\"Telphone\" class=\"input\"/>\n    </div>\n    <div class=\"group\">\n      <div class=\"checkbox\"><span data-value=\"male\" class=\"gender male selected\">男</span>\n        <spam data-value=\"female\" class=\"gender female\">女</spam>\n      </div>\n    </div>\n    <button class=\"btn-submit\">提交</button>\n  </div>\n</div>");;return buf.join("");
 } 
 });
 ;/*!src/widget/header/header.jade*/

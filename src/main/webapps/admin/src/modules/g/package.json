@@ -1,0 +1,24 @@
+{
+  "name": "node-g",
+  "version": "1.0.0",
+  "description": "lib",
+  "main": "g.js",
+  "scripts": {
+    "test": "node map"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aimeejs/g.git"
+  },
+  "keywords": [
+    "lib",
+    "aimee",
+    "aimeejs"
+  ],
+  "author": "gavinning",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Aimeejs/g/issues"
+  },
+  "homepage": "https://github.com/Aimeejs/g#readme"
+}

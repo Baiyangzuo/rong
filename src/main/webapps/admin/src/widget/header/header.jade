@@ -3,7 +3,7 @@
         .container
             // BEGIN LOGO
             .page-logo
-                a(href='index.html')
+                a(href='/rose')
                     img.logo-default(src='/public/img/logo-default.png', alt='logo')
             // END LOGO
             // BEGIN RESPONSIVE MENU TOGGLER
@@ -230,8 +230,8 @@
                     // BEGIN USER LOGIN DROPDOWN
                     li.dropdown.dropdown-user.dropdown-dark
                         a.dropdown-toggle(href='javascript:;', data-toggle='dropdown', data-hover='dropdown', data-close-others='true')
-                            img.img-circle(alt='', src='/public/img/avatar9.jpg')
-                            span.username.username-hide-mobile Nick
+                            img.img-circle(alt='', src='/images/1.jpg')
+                            span.username.username-hide-mobile
                         ul.dropdown-menu.dropdown-menu-default
                             li
                                 a(href='extra_profile.html')
@@ -262,7 +262,7 @@
                                     |  Log Out
                     // END USER LOGIN DROPDOWN
                     // BEGIN USER LOGIN DROPDOWN
-                    li.dropdown.dropdown-extended.quick-sidebar-toggler
+                    li.linkto.dropdown.dropdown-extended.quick-sidebar-toggler(data-href="/rose/logout")
                         span.sr-only Toggle Quick Sidebar
                         i.icon-logout
                     // END USER LOGIN DROPDOWN
@@ -283,7 +283,7 @@
             .hor-menu
                 ul.nav.navbar-nav
                     li.active
-                        a(href='/admin') Dashboard
+                        a(href='/rose') Dashboard
                     li
                         a(href='#/demo') Demo
             // END MEGA MENU

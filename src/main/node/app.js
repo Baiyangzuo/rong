@@ -7,11 +7,9 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var routes = require('./routes');
 var format = require('date-format');
-var paths = require('./models/system/paths');
+var paths = require('./models/system/paths')(__dirname);
 var app = express();
 
-// 注册关键路径
-paths(__dirname);
 
 // logger reg time
 logger.token('time', function getId(req) {
@@ -19,13 +17,13 @@ logger.token('time', function getId(req) {
 })
 
 // view engine setup
-// app.set('env', 'production')
+app.set('env', 'production');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('[:time] :remote-user :remote-addr :method :url HTTP/:http-version :status :res[content-length] referrer[:referrer]'));
+app.use(logger('[:time] :remote-user :remote-addr :method :status :url HTTP/:http-version :res[content-length] referrer[:referrer]'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());

@@ -1,33 +1,49 @@
 doctype html
 head
     meta(charset='utf-8')
-    title Metronic | Lock Screen 1
+    title Metronic | Login
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(content='width=device-width, initial-scale=1.0', name='viewport')
     meta(http-equiv='Content-type', content='text/html; charset=utf-8')
     meta(content='', name='description')
-    meta(content='', name='author')
+    meta(content='gavinning', name='author')
     link(href='/public/plugins/bootstrap/css/bootstrap.min.css', rel='stylesheet', type='text/css')
     link(href='/public/css/admin/lock.css', rel='stylesheet', type='text/css')
     link#style_components(href='/public/css/components-rounded.css', rel='stylesheet', type='text/css')
-    link(rel='shortcut icon', href='favicon.ico')
-.page-lock
-    .page-logo
-        a.brand(href='index.html')
-            img(src='/public/img/logo-big.png', alt='logo')
-    .page-body
-        .lock-head
-            | Locked
-        .lock-body
-            .pull-left.lock-avatar-block
-                img.lock-avatar(src='/public/img/photo3.jpg')
-            form.lock-form.pull-left(action='index.html', method='post')
-                h4 Amanda Smith
-                .form-group
-                    input.form-control.placeholder-no-fix(type='password', autocomplete='off', placeholder='Password', name='password')
-                .form-actions
-                    button.btn.btn-success.uppercase(type='submit') Login
-        .lock-bottom
-            a(href='') Not Amanda Smith?
-    .page-footer-custom
-        | 2014 © Metronic. Admin Dashboard Template.
+    link(href='/css/common.css', rel='stylesheet', type='text/css')
+    link(href='/css/top/login.css', rel='stylesheet', type='text/css')
+    //- link(rel='shortcut icon', href='favicon.ico')
+    script(src='/public/plugins/jquery.min.js')
+    script(src='/js/libs/verification-code.js')
+    script(src='/js/libs/cookie.js')
+    script(src='/js/libs/md5.js')
+    script(src='/js/libs/crypto.js')
+    script(src='/js/top/models/aimee.js')
+    script(src='/js/top/models/page.js')
+body
+    .page-lock
+        .page-logo
+            a.brand(href='/rose')
+                img(src='/public/img/logo-big.png', alt='logo')
+        .page-body
+            .lock-head
+                | Login
+            .lock-body
+                .pull-left.lock-avatar-block
+                    img.lock-avatar(src='/images/1.jpg')
+                .lock-form.pull-left
+                    .form-group
+                        input.form-control.placeholder-no-fix(type='text', autocomplete='off', placeholder='Username', name='username', value="gavinning")
+                    .form-group
+                        input.form-control.placeholder-no-fix(type='password', autocomplete='off', placeholder='Password', name='password', value="8891")
+                    .form-group.vcode
+                        input.form-control.placeholder-no-fix.vcode-input(type='text', autocomplete='off', name='vcode')
+                        img.vcode-img.bigloading(src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII=", alt="")
+                        .clear
+                    .form-actions
+                        button.btn.btn-success.uppercase(type='submit') Login
+            .lock-bottom
+                a(href='') Connect US?
+        .page-footer-custom
+            | 2016 © Metronic. Power by 叶长歌
+    script(src='/js/top/pages/login.js')

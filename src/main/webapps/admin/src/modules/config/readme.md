@@ -5,6 +5,9 @@
 
 #### Install
 
+![INFO](https://nodei.co/npm/vpm-config.png?downloads=true&downloadRank=true&stars=true)  
+![DOWNLOAD](https://nodei.co/npm-dl/vpm-config.png?height=3)  
+
 ```sh
 # For Aimee
 aimee i config

@@ -2,7 +2,7 @@
  * Stats
  */
 
-var Info = require('./info');
+var db = require(paths.db);
 
 class Stats {
     constructor() {
@@ -21,14 +21,20 @@ class Stats {
 
     }
 
-    rv(status, req) {
-        var data = this.get(req);
+    rv(info) {
         db.list.Stats.create({
             type: 3,
-            status: status,
-            userId: userId,
-            username: data.user.username,
-            userguid: data.user.userguid
+            ip: info.stats.ip,
+            ua: info.stats.ua,
+            tel: info.user.tel,
+            userId: info.user.id,
+            stack: info.stats.stack,
+            status: info.stats.status,
+            username: info.user.username,
+            userguid: info.user.userguid,
+            referrer: info.stats.referer
         })
     }
 }
+
+module.exports = Stats;

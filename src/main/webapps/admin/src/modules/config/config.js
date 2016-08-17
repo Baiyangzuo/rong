@@ -127,9 +127,9 @@ class Config {
         }
 
         if(typeof key === 'string'){
-            return value ?
-                this.set(key, value):
-                this.get(key);
+            return value === undefined ?
+                this.get(key):
+                this.set(key, value);
         }
     }
 

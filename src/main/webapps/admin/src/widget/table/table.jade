@@ -6,4 +6,8 @@
                 each value, key in map
                     th(data-type= key)= value
         include ./tbody
-    .pagination
+    .table-footer
+        .info 共
+            span.blue= config.data.list.length
+            | 条数据
+        .pagination
