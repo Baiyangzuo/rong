@@ -1,3 +1,4 @@
+
 @import '../libs/base';
 
 @yellow : #ff6600;
@@ -10,9 +11,13 @@
 .banner .inner,
 .section .inner
 {
-    max-width: 1200px;
+    width: 1200px;
     padding: 0 10px;
     margin: 0 auto;
+}
+
+.links .inner{
+    width: 1240px;
 }
 
 .top{
@@ -229,6 +234,26 @@
         font-size: 16px;
         color: #fff;
         background: @yellow;
+    }
+
+    .vcode{
+        .input{
+            width: 110px;
+        }
+
+        .u-img,
+        .u-input{
+            float: left;
+        }
+
+        .u-img{
+            margin-left: 10px;
+
+            img{
+                width: 114px;
+                height: 38px;
+            }
+        }
     }
 }
 
