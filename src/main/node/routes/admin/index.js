@@ -63,7 +63,12 @@ router.get('/login', (req, res, next) => {
 // req.query.date: (0|1|2)(today|week|month)
 .get('/getUsers', (req, res) => {
     if(req.query.date === undefined || !req.session.user){
-        return res.json({code: 0, list: []})
+        return res.json({
+            code: 0,
+            data: {
+                list: []
+            }
+        })
     }
     db.list.Person.findAll({
         where: g.getTimeQuery(req.query.date),
@@ -104,9 +109,11 @@ router.get('/login', (req, res, next) => {
             gre.info(req.body.date, arr, 'Empty data')
             res.status(400).send('Empty data')
         }else {
-            // 下载日志
-            gre.trace(req.session.user.username, 'datetype:' + req.body.date, 'download', filepath);
-            excel.src(arr).dest(id => res.send(id))
+            excel.src(arr).dest(id => {
+                // 下载日志
+                gre.trace(req.session.user.username, 'datetype:' + req.body.date, 'download', id);
+                res.send(id)
+            })
         }
     })
     .catch(err => {

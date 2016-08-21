@@ -8000,6 +8000,125 @@ define('router', function(require, exports, module) {
 
 });
 
+;/*!time/lib/format*/
+define('time/lib/format', function(require, exports, module) {
+
+  "use strict";
+  
+  module.exports = asString;
+  asString.asString = asString;
+  
+  asString.ISO8601_FORMAT = "yyyy-MM-dd hh:mm:ss.SSS";
+  asString.ISO8601_WITH_TZ_OFFSET_FORMAT = "yyyy-MM-ddThh:mm:ssO";
+  asString.DATETIME_FORMAT = "dd MM yyyy hh:mm:ss.SSS";
+  asString.ABSOLUTETIME_FORMAT = "hh:mm:ss.SSS";
+  asString.TIMESTAMP = "yyyy-MM-dd hh:mm:ss";
+  
+  function padWithZeros(vNumber, width) {
+    var numAsString = vNumber + "";
+    while (numAsString.length < width) {
+      numAsString = "0" + numAsString;
+    }
+    return numAsString;
+  }
+  
+  function addZero(vNumber) {
+    return padWithZeros(vNumber, 2);
+  }
+  
+  /**
+   * Formats the TimeOffest
+   * Thanks to http://www.svendtofte.com/code/date_format/
+   * @private
+   */
+  function offset(date) {
+    // Difference to Greenwich time (GMT) in hours
+    var os = Math.abs(date.getTimezoneOffset());
+    var h = String(Math.floor(os / 60));
+    var m = String(os % 60);
+    if (h.length == 1) {
+      h = "0" + h;
+    }
+    if (m.length == 1) {
+      m = "0" + m;
+    }
+    return date.getTimezoneOffset() < 0 ? "+" + h + m : "-" + h + m;
+  }
+  
+  function asString(date) {
+    var format = asString.TIMESTAMP;
+    if (typeof date === "string") {
+      format = arguments[0];
+      date = arguments[1];
+    }
+  
+    if (!date) {
+      date = new Date();
+    }
+  
+    var vDay = addZero(date.getDate());
+    var vMonth = addZero(date.getMonth() + 1);
+    var vYearLong = addZero(date.getFullYear());
+    var vYearShort = addZero(date.getFullYear().toString().substring(2, 4));
+    var vYear = format.indexOf("yyyy") > -1 ? vYearLong : vYearShort;
+    var vHour = addZero(date.getHours());
+    var vMinute = addZero(date.getMinutes());
+    var vSecond = addZero(date.getSeconds());
+    var vMillisecond = padWithZeros(date.getMilliseconds(), 3);
+    var vTimeZone = offset(date);
+    var formatted = format.replace(/dd/g, vDay).replace(/MM/g, vMonth).replace(/y{1,4}/g, vYear).replace(/hh/g, vHour).replace(/mm/g, vMinute).replace(/ss/g, vSecond).replace(/SSS/g, vMillisecond).replace(/O/g, vTimeZone);
+    return formatted;
+  };
+  
+  asString.timestamp = function (date) {
+    return asString(asString.TIMESTAMP, date || new Date());
+  };
+
+});
+
+;/*!time*/
+define('time', function(require, exports, module) {
+
+  "use strict";
+  
+  var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+  
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+  
+  var Time = (function () {
+      function Time(options) {
+          _classCallCheck(this, Time);
+  
+          this.Date = require('time/lib/format');
+          this.TIMESTAMP = "yyyy-MM-dd hh:mm:ss";
+          this.options = options || { format: this.TIMESTAMP };
+      }
+  
+      _createClass(Time, [{
+          key: "now",
+          value: function now(string) {
+              return this.Date(string || this.options.format);
+          }
+      }, {
+          key: "get",
+          value: function get(time, string) {
+              return time instanceof Date ? this.Date(string || this.options.format, time) : this.Date(string || this.options.format, time ? new Date(time) : new Date());
+          }
+      }]);
+  
+      return Time;
+  })();
+  
+  var time = new Time();
+  Time.time = time;
+  Time.now = function (s) {
+      return time.now(s);
+  };
+  // export default Time;
+  module.exports = Time;
+
+});
+
 ;/*!zepto*/
 define('zepto', function(require, exports, module) {
 
@@ -10840,124 +10959,5 @@ define('verification-code', function(require, exports, module) {
   function randInt(start, end) {
       return Math.floor(Math.random() * (end - start)) + start;
   }
-
-});
-
-;/*!time/lib/format*/
-define('time/lib/format', function(require, exports, module) {
-
-  "use strict";
-  
-  module.exports = asString;
-  asString.asString = asString;
-  
-  asString.ISO8601_FORMAT = "yyyy-MM-dd hh:mm:ss.SSS";
-  asString.ISO8601_WITH_TZ_OFFSET_FORMAT = "yyyy-MM-ddThh:mm:ssO";
-  asString.DATETIME_FORMAT = "dd MM yyyy hh:mm:ss.SSS";
-  asString.ABSOLUTETIME_FORMAT = "hh:mm:ss.SSS";
-  asString.TIMESTAMP = "yyyy-MM-dd hh:mm:ss";
-  
-  function padWithZeros(vNumber, width) {
-    var numAsString = vNumber + "";
-    while (numAsString.length < width) {
-      numAsString = "0" + numAsString;
-    }
-    return numAsString;
-  }
-  
-  function addZero(vNumber) {
-    return padWithZeros(vNumber, 2);
-  }
-  
-  /**
-   * Formats the TimeOffest
-   * Thanks to http://www.svendtofte.com/code/date_format/
-   * @private
-   */
-  function offset(date) {
-    // Difference to Greenwich time (GMT) in hours
-    var os = Math.abs(date.getTimezoneOffset());
-    var h = String(Math.floor(os / 60));
-    var m = String(os % 60);
-    if (h.length == 1) {
-      h = "0" + h;
-    }
-    if (m.length == 1) {
-      m = "0" + m;
-    }
-    return date.getTimezoneOffset() < 0 ? "+" + h + m : "-" + h + m;
-  }
-  
-  function asString(date) {
-    var format = asString.TIMESTAMP;
-    if (typeof date === "string") {
-      format = arguments[0];
-      date = arguments[1];
-    }
-  
-    if (!date) {
-      date = new Date();
-    }
-  
-    var vDay = addZero(date.getDate());
-    var vMonth = addZero(date.getMonth() + 1);
-    var vYearLong = addZero(date.getFullYear());
-    var vYearShort = addZero(date.getFullYear().toString().substring(2, 4));
-    var vYear = format.indexOf("yyyy") > -1 ? vYearLong : vYearShort;
-    var vHour = addZero(date.getHours());
-    var vMinute = addZero(date.getMinutes());
-    var vSecond = addZero(date.getSeconds());
-    var vMillisecond = padWithZeros(date.getMilliseconds(), 3);
-    var vTimeZone = offset(date);
-    var formatted = format.replace(/dd/g, vDay).replace(/MM/g, vMonth).replace(/y{1,4}/g, vYear).replace(/hh/g, vHour).replace(/mm/g, vMinute).replace(/ss/g, vSecond).replace(/SSS/g, vMillisecond).replace(/O/g, vTimeZone);
-    return formatted;
-  };
-  
-  asString.timestamp = function (date) {
-    return asString(asString.TIMESTAMP, date || new Date());
-  };
-
-});
-
-;/*!time*/
-define('time', function(require, exports, module) {
-
-  "use strict";
-  
-  var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-  
-  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-  
-  var Time = (function () {
-      function Time(options) {
-          _classCallCheck(this, Time);
-  
-          this.Date = require('time/lib/format');
-          this.TIMESTAMP = "yyyy-MM-dd hh:mm:ss";
-          this.options = options || { format: this.TIMESTAMP };
-      }
-  
-      _createClass(Time, [{
-          key: "now",
-          value: function now(string) {
-              return this.Date(string || this.options.format);
-          }
-      }, {
-          key: "get",
-          value: function get(time, string) {
-              return time instanceof Date ? this.Date(string || this.options.format, time) : this.Date(string || this.options.format, time ? new Date(time) : new Date());
-          }
-      }]);
-  
-      return Time;
-  })();
-  
-  var time = new Time();
-  Time.time = time;
-  Time.now = function (s) {
-      return time.now(s);
-  };
-  // export default Time;
-  module.exports = Time;
 
 });
