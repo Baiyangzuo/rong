@@ -22,6 +22,6 @@ db.list = {};
     Model.Table = Table
     Model.delete = Model.destroy
     Model.filter = Extends.filter
-    // Model.sync({force: true})
+    Model.sync()
     db.list[name] = Model
 });
