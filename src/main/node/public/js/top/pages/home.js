@@ -10,6 +10,7 @@ $(function(){
         },
 
         enter: function(){
+            this.code();
             this.bind({
                 'click@.btn-submit': function(){
                     var msg;
@@ -36,6 +37,14 @@ $(function(){
                         $(this).addClass(selected)
                             .siblings(_selected).removeClass(selected)
                     }
+                },
+                'click@.vcode-img': function(){
+                    home.code()
+                },
+                'keypress@[name="vcode"]': e => {
+                    if(e.keyCode === 13){
+                        this.$dom.find('.btn-success').click()
+                    }
                 }
             })
         },
@@ -60,6 +69,12 @@ $(function(){
             if(!data.gender){
                 data.gender = 'male';
             }
+            if(!data.vcode){
+                return '请输入验证码'
+            }
+            if(data.vcode !== this.vcode.code){
+                return '验证码不正确'
+            }
         },
 
         getFormData: function(data) {
@@ -67,6 +82,7 @@ $(function(){
             data.username = this.pure(this.$dom.find('[name="username"]').val());
             data.tel = this.pure(this.$dom.find('[name="telphone"]').val());
             data.gender = this.$dom.find('.gender.selected').attr('data-value');
+            data.vcode = this.pure(this.$dom.find('[name="vcode"]').val());
             data.userguid = cookie.get('userId');
             return data;
         },
@@ -75,8 +91,14 @@ $(function(){
             string = string.replace(/-*/g, '');
             string = string.replace(/\s*/g, '');
             return string;
+        },
+
+        code: function(){
+            this.vcode = vcode.create();
+            console.log(this.vcode)
+            this.$dom.find('.vcode-img').attr('src', this.vcode.dataURL);
         }
     })
-    
+
     home.reg();
 });

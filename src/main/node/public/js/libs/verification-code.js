@@ -27,31 +27,33 @@
         ctx.fillStyle = '#f3fbfe';
         ctx.fillRect(0, 0, selfWidth, selfHeight);
         ctx.globalAlpha = .8;
-        ctx.font = '16px sans-serif';
+        ctx.font = '14px sans-serif';
 
         for (var _i = 0; _i < 10; _i++) {
             ctx.fillStyle = 'rgb(' + randInt(150, 225) + ',' + randInt(150, 225) + ',' + randInt(150, 225) + ')';
         }
 
-        ctx.font = 'bold 32px sans-serif';
+        ctx.font = 'bold 26px sans-serif';
         for (var i = 0; i < 4; i++) {
             var temp_index = randInt(0, temp.length);
             ctx.fillStyle = color;
-            ctx.fillText(temp[temp_index], 5 + i * 23, 25);
+            // vcode place
+            ctx.fillText(temp[temp_index], 1 + i * 23, 30);
             ctx.transform(randFloat(0.85, 1.0), randFloat(-0.04, 0), randFloat(-0.3, 0.3), randFloat(0.85, 1.0), 0, 0);
             vCode += temp[temp_index];
         }
 
         ctx.beginPath();
         ctx.strokeStyle = color;
-        var b         = randFloat(selfHeight / 4, 3 * selfHeight / 4),
-            f         = randFloat(selfHeight / 4, 3 * selfHeight / 4),
+        var b         = randFloat(selfHeight / 2, 3 * selfHeight / 2),
+            f         = randFloat(selfHeight / 2, 3 * selfHeight / 2),
             w         = 2 * Math.PI / (randFloat(selfHeight * 1.5, selfWidth)),
             linePoint = function (x) {
                 return randFloat(10, selfHeight / 2) * Math.sin(w * x + f) + b;
             };
 
-        ctx.lineWidth = 5;
+        // 干扰线强度
+        ctx.lineWidth = 1;
         for (var x = -20; x < 200; x += 4) {
             ctx.moveTo(x, linePoint(x));
             ctx.lineTo(x + 3, linePoint(x + 3));
