@@ -3,7 +3,7 @@
  */
 
 var path = require('path');
-var env = require('./dbservice');
+var env = require('./dbservice')();
 var Extends = require('./extends');
 var Sequelize = require('sequelize');
 var db = module.exports = new Sequelize(env.prod);
