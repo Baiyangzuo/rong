@@ -2,12 +2,11 @@
  * 数据库连接池
  */
 
-var devFlag = true;
-var env = require('./env');
 var path = require('path');
+var env = require('./dbservice');
 var Extends = require('./extends');
 var Sequelize = require('sequelize');
-var db = module.exports = new Sequelize(devFlag ? env.dev: env.pro);
+var db = module.exports = new Sequelize(env.prod);
 
 db.list = {};
 
