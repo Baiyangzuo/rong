@@ -105,6 +105,7 @@ $(function(){
             home.code();
             this.$dom.find('[name="username"]').val('');
             this.$dom.find('[name="telphone"]').val('');
+            this.$dom.find('[name="vcode"]').val('')
         }
     });
 
