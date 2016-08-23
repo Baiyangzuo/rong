@@ -23,7 +23,7 @@ $(function(){
                     home.post(data,
                         function(msg){
                             console.log(msg);
-                            let num = Number(cookie.get('userRegSuccess') || 0);
+                            var num = Number(cookie.get('userRegSuccess') || 0);
                             cookie.set('userRegSuccess', ++num, { expires: 7*365, path: '/' })
                         },
                         function(err){

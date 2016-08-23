@@ -6,7 +6,7 @@ router.get('/', function(req, res, next) {
     res.render('main/home', { title: 'Express' });
 })
 
-// .get('/demo', function(req, res, next) {
+// router.get('/demo', function(req, res, next) {
 //     res.render('main/index', { title: 'Express' });
 // })
 

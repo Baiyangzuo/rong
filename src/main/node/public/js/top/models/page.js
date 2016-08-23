@@ -22,7 +22,7 @@
             this.enter()
         },
 
-        bind(events) {
+        bind: function(events) {
             events = events || {};
             $.each(events, (key, fn) => {
                 let pair = key.split('@');
