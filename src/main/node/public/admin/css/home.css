@@ -145,6 +145,10 @@ body{color:#4c4c4c;font-size:14px;background:#eff3f8}
 .lincoapp-table .table-footer{display:-webkit-box;display:-moz-box;display:box;padding:10px 0}
 .lincoapp-table .table-footer .blue{color:#4e8ff2;margin:0 2px}
 .lincoapp-table .table-footer .info{-webkit-box-flex:1;-moz-box-flex:1;box-flex:1;text-align:left;line-height:34px;cursor:default}
+.lincoapp-table .label.label-sm{padding:3px 6px 2px}
+.lincoapp-table .label-pink{background-color:#ecace8}
+.lincoapp-table .label-high{background-color:#09b71f}
+.lincoapp-table [data-type=score] .label{min-width:26px;display:inline-block}
 /*!src/css/skin.less*/
 /*!
  * base For admin

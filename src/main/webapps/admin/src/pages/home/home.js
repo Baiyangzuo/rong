@@ -20,7 +20,7 @@ class home extends Page {
 
     get ajaxconfig() {
         return {
-            url: '/rose/getUsers',
+            url: '/rose/api/getUsers?date=0',
             dataType: 'json'
         }
     }
@@ -30,7 +30,9 @@ class home extends Page {
     }
 
     prerender(data) {
-        console.log(data, 1999)
+        console.group('今天注册数据：')
+        console.log(data)
+        console.groupEnd()
         let Table = require('table')
 
         this.exports('header footer')
@@ -79,7 +81,7 @@ class home extends Page {
                     // 日期类型
                     .config('datetype', 0)
                     // 单页长度
-                    .config('page.length', 10)
+                    .config('page.length', 15)
                     .config('ctrl', 'delete')
                     .render(app.find('#today'));
             }
@@ -91,7 +93,7 @@ class home extends Page {
             },
 
             'click@.lincoapp-header-bar': e => {
-                console.log(99)
+                // console.log(99)
             },
 
             'click@.btn-sm': function(){
@@ -134,12 +136,12 @@ class home extends Page {
         if($dom.length){
             aimee.app.loading2.show();
             $.ajax({
-                url: '/rose/getUsers?date=' + type,
+                url: '/rose/api/getUsers?date=' + type,
                 type: 'GET',
                 success: data => {
                     this.use('table')
                     .init(data.data)
-                    .config('page.length', 10)
+                    .config('page.length', 15)
                     .config('datetype', type)
                     .render($dom);
                     aimee.app.loading2.hide();

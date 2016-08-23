@@ -18,19 +18,20 @@
         },
 
         reg: function(){
-            this.init()
-            this.enter()
+            this.init();
+            this.enter();
         },
 
         bind: function(events) {
+            var it = this;
             events = events || {};
-            $.each(events, (key, fn) => {
-                let pair = key.split('@');
-                let evts = pair[0].split(/,\s*/g);
-                evts.forEach((type) => {
-                    this.$dom.on(type, pair[1], fn)
-                })
-            })
+            $.each(events, function(key, fn){
+                var pair = key.split('@');
+                var evts = pair[0].split(/,\s*/g);
+                evts.forEach(function(type){
+                    it.$dom.on(type, pair[1], fn);
+                });
+            });
         }
     });
     return Page;

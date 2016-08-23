@@ -16,8 +16,8 @@ $(function(){
                     var data = login.getFormData();
 
                     if(msg = login.check(data)){
-                        return alert(msg)
-                    }
+                        return alert(msg);
+                    };
 
                     login.post(data,
                         function(msg){
@@ -25,19 +25,19 @@ $(function(){
                             location.href = '/rose';
                         },
                         function(err){
-                            alert(404 + ': ' + err.responseText)
+                            alert(404 + ': ' + err.responseText);
                         }
-                    )
+                    );
                 },
                 'click@.vcode-img': function(){
-                    login.code()
+                    login.code();
                 },
-                'keypress@[name="vcode"]': e => {
+                'keypress@[name="vcode"]': function(e){
                     if(e.keyCode === 13){
-                        this.$dom.find('.btn-success').click()
+                        login.$dom.find('.btn-success').click();
                     }
                 }
-            })
+            });
         },
 
         post: function(data, succ, err) {
@@ -47,21 +47,21 @@ $(function(){
                 data: data,
                 success: succ,
                 error: err
-            })
+            });
         },
 
         check: function(data) {
             if(!data.username){
-                return '请输入用户名'
+                return '请输入用户名';
             }
             if(!data.password){
-                return '请输入密码'
+                return '请输入密码';
             }
             if(!data.vcode){
-                return '请输入验证码'
+                return '请输入验证码';
             }
             if(data.vcode !== this.vcode.code){
-                return '验证码不正确'
+                return '验证码不正确';
             }
         },
 
@@ -85,7 +85,7 @@ $(function(){
             this.vcode = vcode.create();
             this.$dom.find('.vcode-img').attr('src', this.vcode.dataURL);
         }
-    })
+    });
 
     login.reg();
 });

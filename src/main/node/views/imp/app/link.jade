@@ -1,0 +1,13 @@
+.section.links
+    .inner
+        h1 合作机构
+        .list
+            each key, i in new Array(6)
+                .item(class= i===0 ? 'first' : '')
+                    img(src="/images/a#{i+1}.png", alt="")
+            .clear
+        .list
+            each key, i in new Array(6)
+                .item(class= i===0 ? 'first' : '')
+                    img(src="/images/a#{i+6}.png", alt="")
+            .clear

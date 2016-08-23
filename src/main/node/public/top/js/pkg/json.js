@@ -1,50 +1,6 @@
 ;/*!pages/home/home.json*/
-define('pages/home/home.json', function(require, exports, module) {
-
-  /*!
-   * Mock data for Aimeejs
-   * https://github.com/gavinning/aimee
-   *
-   * Template
-   * Date: 2016-08-10
-   */
-  
-  "use strict";
-  
-  module.exports = {};
-
-});
-
+define("pages/home/home.json",function(e,o,s){"use strict";s.exports={}});
 ;/*!apply/apply.json*/
-define('apply/apply.json', function(require, exports, module) {
-
-  /*!
-   * Mock data for mock.js
-   * https://github.com/gavinning/aimee
-   *
-   * Template
-   * Date: 2016-08-10
-   */
-  
-  "use strict";
-  
-  module.exports = {};
-
-});
-
+define("apply/apply.json",function(p,e,n){"use strict";n.exports={}});
 ;/*!header/header.json*/
-define('header/header.json', function(require, exports, module) {
-
-  /*!
-   * Mock data for mock.js
-   * https://github.com/gavinning/aimee
-   *
-   * Template
-   * Date: 2016-08-10
-   */
-  
-  "use strict";
-  
-  module.exports = {};
-
-});
+define("header/header.json",function(e,n,r){"use strict";r.exports={}});

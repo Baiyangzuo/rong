@@ -8,10 +8,10 @@
 
 var aimee = require('aimee');
 var router = require('router');
-var System = require('system');
-var system = new System;
+// var System = require('system');
+// var system = new System;
 
-system.guid();
+// system.guid();
 
 router
     .option('pages/home')

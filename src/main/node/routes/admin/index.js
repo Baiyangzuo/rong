@@ -61,7 +61,7 @@ router.get('/login', (req, res, next) => {
 })
 
 // req.query.date: (0|1|2)(today|week|month)
-.get('/getUsers', (req, res) => {
+.get('/api/getUsers', (req, res) => {
     if(req.query.date === undefined || !req.session.user){
         return res.json({
             code: 0,

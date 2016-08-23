@@ -51,19 +51,17 @@ class table extends App {
         }
     }
 
-    // app渲染到页面之前执行，用于预处理渲染内容
     prerender(app) {
         this.ctrl();
         this.getExcel();
         this.paginator();
+        // 表格格式化
+        this.format();
     }
 
-    // app渲染到页面之后执行，此时app还在内存中，不能获取宽度高度等与尺寸相关的属性
     postrender(app) {
-        // app为模块的实例
     }
 
-    // 页面渲染到浏览器后执行，此时可以获取宽高等与尺寸相关的属性
     pagerender(app) {
         // some code
     }
@@ -109,6 +107,7 @@ class table extends App {
                 if(type === 'change'){
                     this.getCurrentPage(num-1);
                     this.config('ctrl') && this.ctrl();
+                    this.format();
                 }
             }
         })
@@ -146,6 +145,33 @@ class table extends App {
                 aimee.$('button.btn.btn-default.glyphicon.glyphicon-trash')
             ))
         })
+    }
+
+    format() {
+        // Format Gender
+        this.find('td[data-type="gender"] .inner').each(function(){
+            var text = this.innerText;
+            text === 'Male' ?
+                $(this).html(aimee.$('span').addClass('label label-sm label-info').text(text)):
+                $(this).html(aimee.$('span').addClass('label label-sm label-pink').text(text));
+        });
+        this.find('td[data-type="score"] .inner').each(function(){
+            var num = !isNaN(this.innerText) ?
+                    Number(this.innerText) : 0;
+
+            if(num < 3){
+                $(this).html(aimee.$('span').addClass('label label-sm label-danger').text(num));
+            }
+            if(num >= 3 && num <= 5){
+                $(this).html(aimee.$('span').addClass('label label-sm label-warning').text(num));
+            }
+            if(num > 5 && num <= 7){
+                $(this).html(aimee.$('span').addClass('label label-sm label-success').text(num));
+            }
+            if(num > 7){
+                $(this).html(aimee.$('span').addClass('label label-sm label-high').text(num));
+            }
+        });
     }
 }
 

@@ -36,6 +36,7 @@ app.use(session({
     maxAge: 1800000000
   }
 }));
+app.use(require('express-uglify').middleware({ src: __dirname + '/public' }));
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 // reg routes

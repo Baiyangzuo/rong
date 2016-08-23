@@ -17,36 +17,36 @@ $(function(){
                     var data = home.getFormData();
 
                     if(msg = home.check(data)){
-                        return alert(msg)
-                    }
+                        return alert(msg);
+                    };
 
                     home.post(data,
                         function(msg){
                             console.log(msg);
                             var num = Number(cookie.get('userRegSuccess') || 0);
-                            cookie.set('userRegSuccess', ++num, { expires: 7*365, path: '/' })
+                            cookie.set('userRegSuccess', ++num, { expires: 7*365, path: '/' });
                         },
                         function(err){
-                            console.log(err.status)
-                            console.log(err.responseText)
+                            console.log(err.status);
+                            console.log(err.responseText);
                         }
-                    )
+                    );
                 },
                 'click@.gender': function(){
                     if(!$(this).hasClass(selected)){
                         $(this).addClass(selected)
-                            .siblings(_selected).removeClass(selected)
+                            .siblings(_selected).removeClass(selected);
                     }
                 },
                 'click@.vcode-img': function(){
-                    home.code()
+                    home.code();
                 },
-                'keypress@[name="vcode"]': e => {
+                'keypress@[name="vcode"]': function(e){
                     if(e.keyCode === 13){
-                        this.$dom.find('.btn-success').click()
-                    }
+                        home.$dom.find('.btn-success').click();
+                    };
                 }
-            })
+            });
         },
 
         post: function(data, succ, err) {
@@ -56,24 +56,24 @@ $(function(){
                 data: data,
                 success: succ,
                 error: err
-            })
+            });
         },
 
         check: function(data) {
             if(!data.username){
-                return '请输入用户名'
+                return '请输入用户名';
             }
             if(!data.tel || !this.regTel.test(data.tel) || data.tel.length !== 11){
-                return '请输入正确的手机号'
+                return '请输入正确的手机号';
             }
             if(!data.gender){
                 data.gender = 'male';
             }
             if(!data.vcode){
-                return '请输入验证码'
+                return '请输入验证码';
             }
             if(data.vcode !== this.vcode.code){
-                return '验证码不正确'
+                return '验证码不正确';
             }
         },
 
@@ -95,10 +95,9 @@ $(function(){
 
         code: function(){
             this.vcode = vcode.create();
-            console.log(this.vcode)
             this.$dom.find('.vcode-img').attr('src', this.vcode.dataURL);
         }
-    })
+    });
 
     home.reg();
 });
