@@ -25,6 +25,7 @@ $(function(){
                             location.href = '/rose';
                         },
                         function(err){
+                            login.code();
                             alert(404 + ': ' + err.responseText);
                         }
                     );
