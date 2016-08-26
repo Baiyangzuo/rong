@@ -7,9 +7,12 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var routes = require('./routes');
 var format = require('date-format');
-var paths = require('./models/system/paths')(__dirname);
+var detector = require('express-detector');
+var paths = require('./models/system/paths');
 var app = express();
 
+// 注册核心模块路径
+paths(__dirname);
 
 // logger reg time
 logger.token('time', function getId(req) {
@@ -39,6 +42,7 @@ app.use(session({
 app.use(require('express-uglify').middleware({ src: __dirname + '/public' }));
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(detector());
 // reg routes
 routes(app);
 

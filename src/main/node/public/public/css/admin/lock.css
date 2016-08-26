@@ -196,7 +196,7 @@ body {
   }
 
   .lock-avatar {
-    margin-top: 20px;
+    margin: 20px auto 0;
   }
 
   .lock-avatar-block {
