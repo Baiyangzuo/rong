@@ -22,13 +22,16 @@ $(function(){
 
                     home.post(data,
                         function(msg){
-                            console.log(msg);
                             var num = Number(cookie.get('userRegSuccess') || 0);
                             cookie.set('userRegSuccess', ++num, { expires: 7*365, path: '/' });
+                            home.reset();
+                            alert('申请成功，请耐心等待客户经理联系您！');
                         },
                         function(err){
                             console.log(err.status);
                             console.log(err.responseText);
+                            alert('注册失败，请刷新再试一次');
+                            // location.reload();
                         }
                     );
                 },
@@ -96,6 +99,13 @@ $(function(){
         code: function(){
             this.vcode = vcode.create();
             this.$dom.find('.vcode-img').attr('src', this.vcode.dataURL);
+        },
+
+        reset: function(){
+            home.code();
+            this.$dom.find('[name="username"]').val('');
+            this.$dom.find('[name="telphone"]').val('');
+            this.$dom.find('[name="vcode"]').val('')
         }
     });
 
