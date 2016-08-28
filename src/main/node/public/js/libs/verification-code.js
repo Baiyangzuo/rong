@@ -75,7 +75,7 @@
      */
     function randFloat(start, end) {
         return start + Math.random() * (end - start);
-    }
+    };
 
     /**
      * 随机获得一个范围内的整数
@@ -85,7 +85,7 @@
      */
     function randInt(start, end) {
         return Math.floor(Math.random() * (end - start)) + start;
-    }
+    };
 
-    return { create: create }
+    return { create: create };
 }));

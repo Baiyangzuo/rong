@@ -8,8 +8,8 @@
     }
 }(function create(parent) {
     function Aimee(){
-        this.constructor.apply(this, arguments)
-    }
+        this.constructor.apply(this, arguments);
+    };
     if (parent) {
         var child = function(){};
         child.prototype = parent.prototype;
