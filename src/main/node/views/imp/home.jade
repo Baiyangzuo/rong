@@ -1,10 +1,13 @@
 extends ../layout/layout
 
 block append css
-    link(rel="stylesheet", href="/css/top/home.css")
+    if(isMobile)
+        link.main(rel="stylesheet", href="/css/top/m.css")
+    else
+        link.main(rel="stylesheet", href="/css/top/home.css")
 
 block body
-    body
+    body(class= isMobile ? 'm' : '')
         include app/header
         .content
             include app/banner          

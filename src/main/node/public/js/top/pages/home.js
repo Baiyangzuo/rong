@@ -7,6 +7,7 @@ $(function(){
         init: function(){
             this.$dom = $(document);
             this.regTel = /^1\d{10}/;
+            this.css = this.$dom.find('link.main');
         },
 
         enter: function(){
@@ -31,7 +32,6 @@ $(function(){
                             console.log(err.status);
                             console.log(err.responseText);
                             alert('注册失败，请刷新再试一次');
-                            // location.reload();
                         }
                     );
                 },
@@ -48,8 +48,33 @@ $(function(){
                     if(e.keyCode === 13){
                         home.$dom.find('.btn-success').click();
                     };
+                },
+                'click@.apply': function(e){
+                    var bm = home.$dom.find('body').hasClass('m');
+                    var lm = home.$dom.find('link.main').hasClass('m');
+                    if(lm || bm){
+                        window.scrollTo(0, 1000);
+                    }
+                    else{
+                        home.$dom.find('[name="username"]').focus();
+                    };
                 }
             });
+
+            // PC <=> MOBILE
+            window.onresize = this.detector;
+        },
+
+        detector: function(){
+            if(window.innerWidth < 1000 && !home.css.hasClass('m')){
+                console.log('Change to Mobile');
+                home.css.addClass('m').attr('href', '/css/top/m.css');
+            };
+            if(window.innerWidth >= 1000 && home.css.hasClass('m')){
+                console.log('Change to PC');
+                home.css.removeClass('m').attr('href', '/css/top/home.css');
+            };
+            home.$dom.find('body').show();
         },
 
         post: function(data, succ, err) {
@@ -105,7 +130,7 @@ $(function(){
             home.code();
             this.$dom.find('[name="username"]').val('');
             this.$dom.find('[name="telphone"]').val('');
-            this.$dom.find('[name="vcode"]').val('')
+            this.$dom.find('[name="vcode"]').val('');
         }
     });
 
