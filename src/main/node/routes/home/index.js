@@ -11,6 +11,10 @@ router.get('/m', function(req, res, next) {
     res.render('imp/home', { isMobile: true });
 })
 
+router.get('/profile', function(req, res, next) {
+    res.render('imp/profile', { isMobile: req.env.isMobile });
+})
+
 // router.get('/demo', function(req, res, next) {
 //     res.render('imp/demo', { title: 'Express' });
 // })

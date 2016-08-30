@@ -1,8 +1,6 @@
 extends ../layout/layout
 
 block append css
-    link(rel="stylesheet", href="/css/libs/remodal.css")
-    link(rel="stylesheet", href="/css/libs/remodal-default-theme.css")
     if(isMobile)
         link.main(rel="stylesheet", href="/css/top/m.css")
     else
@@ -12,10 +10,6 @@ block body
     body(class= isMobile ? 'm' : '')
         include app/header
         .content
-            include app/banner          
-            include app/bar          
-            include app/list
-            include app/link
-            include app/footer
             include app/userfile
+            include app/footer
         script(src="/js/top/pages/home.js")

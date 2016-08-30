@@ -69,6 +69,12 @@ $(function(){
 
             // PC <=> MOBILE
             window.onresize = this.detector;
+
+
+
+            var inst = $('[data-remodal-id=modal]').remodal();
+
+            inst.open()
         },
 
         detector: function(){

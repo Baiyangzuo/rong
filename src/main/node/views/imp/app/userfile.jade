@@ -1,0 +1,54 @@
+.lincoapp-userfile.remodal(data-remodal-id="modal")
+    button.remodal-close(data-remodal-action="close")
+    .lincoapp-section
+        h2 申请成功
+        p 请耐心等待客户经理联系您
+
+    .lincoapp-section.skin-white.skin-form
+        h3 完善资料
+        p 完善资料有助于加快审核速度和提升贷款金额上限，我们会对该资料进行保密。
+        
+    .lincoapp-profile.lincoapp-formui
+        .form
+            .group
+                p 测试
+                    span 先生
+            .group
+                span.u-title 所在城市
+                input.input(type='text', name='city')
+            .group
+                span.u-title 职业身份
+                .checkbox
+                    span.item.selected(data-value='1') 上班族
+                    span.item(data-value='0') 个体户
+                    span.item(data-value='0') 企业主
+                    span.item(data-value='0') 学生
+                    span.item(data-value='0') 无固定职业
+            .group
+                span.u-title 最高学历
+                .checkbox
+                    span.item(data-value='1') 博士
+                    span.item(data-value='0') 硕士
+                    span.item.selected(data-value='0') 本科
+                    span.item(data-value='0') 专科
+                    span.item(data-value='0') 其他
+            .group
+                span.u-title 是否有社保
+                .checkbox
+                    span.item.selected(data-value='1') 有
+                    span.item(data-value='0') 无
+            .group
+                span.u-title 是否有公积金
+                .checkbox
+                    span.item.selected(data-value='1') 有
+                    span.item(data-value='0') 无
+
+            .group
+                span.u-title 请输入验证码
+                .vcode
+                    .u-input
+                        input.input(type='text', name='vcode')
+                    .u-img
+                        img.vcode-img(src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII=")
+                    .clear
+            button.btn-submit 提交资料

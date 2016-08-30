@@ -4,4 +4,4 @@ window.cp = {
         var str2 = md5(str1 + username);
         return code ? md5(str2 + code) : str2;
     }
-}
+};
