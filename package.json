@@ -39,5 +39,8 @@
     "sequelize": "^3.23.6",
     "serve-favicon": "~2.3.0",
     "vpm-config": "^2.0.0"
+  },
+  "devDependencies": {
+    "request": "^2.74.0"
   }
 }

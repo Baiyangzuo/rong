@@ -61,7 +61,7 @@ $(function(){
             if(!data.vcode){
                 return '请输入验证码';
             }
-            if(data.vcode !== this.vcode.code){
+            if(data.vcode.toLowerCase() !== this.vcode.code){
                 return '验证码不正确';
             }
         },
