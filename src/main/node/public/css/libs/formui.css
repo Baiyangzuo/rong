@@ -1,0 +1,37 @@
+.lincoapp-formui {font-size:14px}
+.lincoapp-formui .red{color:#a94542}
+.lincoapp-formui .gray{color:#ccc}
+.lincoapp-formui .blue{color:#0e8dfd}
+.lincoapp-formui .green{color:#3a783c}
+.lincoapp-formui .black{color:#000}
+.lincoapp-formui .white{color:#fff}
+.lincoapp-formui .ired{background-color:#a94542}
+.lincoapp-formui .igray{background-color:#ccc}
+.lincoapp-formui .iblue{background-color:#0e8dfd}
+.lincoapp-formui .igreen{background-color:#3a783c}
+.lincoapp-formui .iblack{background-color:#000}
+.lincoapp-formui .iwhite{background-color:#fff}
+.lincoapp-formui .form-title{display:block;line-height:2.3}
+.lincoapp-formui .form-group{margin-bottom:6px}
+.lincoapp-formui .form-item,.lincoapp-formui .form-area{width:100%;font-size:14px;padding:0 8px;border-radius:2px;box-sizing:border-box;border:1px solid #ccc;resize:none;outline:0}
+.lincoapp-formui .form-item.error,.lincoapp-formui .form-area.error{border-color:#a94542}
+.lincoapp-formui .form-item.success,.lincoapp-formui .form-area.success{border-color:#3a783c}
+.lincoapp-formui .form-item:focus,.lincoapp-formui .form-area:focus{border-color:#4198e4}
+.lincoapp-formui .form-item{height:34px}
+.lincoapp-formui .form-area{height:90px;padding:6px 8px}
+.lincoapp-formui .form-msg{color:#a94542;line-height:2;font-size:12px}
+.lincoapp-formui .form-btn{font-size:16px;border-radius:3px;padding:0 20px}
+.lincoapp-formui .form-btn.skin-red{color:#fff;background-color:#a94542}
+.lincoapp-formui .form-btn.skin-blue{color:#fff;background-color:#0e8dfd}
+.lincoapp-formui .form-btn.skin-green{color:#fff;background-color:#3a783c}
+.lincoapp-formui .form-btn.skin-full{display:block;width:100%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
+.lincoapp-formui .caret{position:absolute;right:10px;top:50%;margin-top:-2px;display:inline-block;width:0;height:0;margin-left:2px;vertical-align:middle;border-top:4px dashed;border-top:4px solid \9;border-right:4px solid transparent;border-left:4px solid transparent}
+.lincoapp-formui .form-ui-tag .tags{margin-top:12px;overflow:hidden}
+.lincoapp-formui .form-ui-tag .tag{float:left}
+.lincoapp-formui .form-ui-tag .tag.selected{color:#fff;background:#0e8dfd}
+.lincoapp-formui .form-ui-tag i{display:inline-block;min-width:10px;height:26px;line-height:26px;font-size:14px;font-style:normal;padding:0 8px;border:1px solid #ddd;border-radius:13px;overflow:hidden;margin-right:6px;text-align:center;cursor:default;-webkit-user-select:none}
+.lincoapp-formui .form-ui-slide{display:block;width:60px;height:20px;padding:1px;padding-right:24px;border-radius:1px;background:#d4d4d4;overflow:hidden;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
+.lincoapp-formui .form-ui-slide .slideBtn{display:block;min-width:36px;padding:0 4px;font-size:12px;height:100%;line-height:18px;border-radius:1px;background:#fff}
+.lincoapp-formui .form-ui-slide.selected{background:#1b95fb;padding-left:23px;padding-right:1px}
+.lincoapp-formui .form-ui-slide.selected .slideBtn{color:#1b95fb}
+.lincoapp-formui .form-ui-slide.animate{transition:all 150ms ease}

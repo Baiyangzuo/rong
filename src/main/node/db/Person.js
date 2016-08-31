@@ -14,7 +14,11 @@ module.exports = {
     username: Sequelize.STRING,
     // UUID
     userguid: {
-        // type: Sequelize.TEXT('tiny')
+        type: Sequelize.UUID,
+        unique: true,
+        defaultValue: Sequelize.UUIDV4
+    },
+    clientId: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4
     },

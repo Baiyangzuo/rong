@@ -52,6 +52,26 @@ class Info {
         }
         return this.info
     }
+
+    // 获取完整信息
+    getFull() {
+        this.full = {
+            username: this.req.body.username,
+            userguid: this.req.cookies['userId'],
+            education: this.req.body.edu,
+            professional: this.req.body.job,
+            has_social_security: this.req.body.soc,
+            has_accumulation_fund: this.req.body.acc,
+            house_property: this.req.body.house,
+            city: this.req.body.city,
+            car: this.req.body.car,
+            ua: this.req.headers['user-agent'],
+            ip: clientIp(this.req),
+            os: this.req.env.os.name + this.req.env.os.fullVersion,
+            device: this.req.env.device.name + this.req.env.device.fullVersion
+        }
+        return this.full
+    }
 }
 
 module.exports = Info;

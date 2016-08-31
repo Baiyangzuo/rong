@@ -11,8 +11,11 @@ $(function(){
         },
 
         enter: function(){
+            var inst = $('[data-remodal-id=modal]').remodal();
+
             this.code();
             this.bind({
+                // 提交基础信息
                 'click@.btn-submit': function(){
                     var msg;
                     var data = home.getFormData();
@@ -25,13 +28,38 @@ $(function(){
                         function(msg){
                             var num = Number(cookie.get('userRegSuccess') || 0);
                             cookie.set('userRegSuccess', ++num, { expires: 7*365, path: '/' });
+                            cookie.set('username', data.username, { expires: 7*365, path: '/' });
+                            home.$dom.find('.username strong').text(data.username);
                             home.reset();
-                            alert('申请成功，请耐心等待客户经理联系您！');
+                            inst.open();
                         },
                         function(err){
                             console.log(err.status);
                             console.log(err.responseText);
                             alert('注册失败，请刷新再试一次');
+                        }
+                    );
+                },
+                // 提交完整信息
+                'click@.btn-full': function(){
+                    var msg;
+                    var data = home.getFullData();
+
+                    data.username = cookie.get('username');
+
+                    if(msg = home.checkFull(data)){
+                        return alert(msg);
+                    };
+
+                    home.postFull(data,
+                        function(msg){
+                            console.log(msg);
+                            home.reset();
+                            inst.close();
+                        },
+                        function(err){
+                            console.log(err.status);
+                            console.log(err.responseText);
                         }
                     );
                 },
@@ -69,12 +97,6 @@ $(function(){
 
             // PC <=> MOBILE
             window.onresize = this.detector;
-
-
-
-            var inst = $('[data-remodal-id=modal]').remodal();
-
-            inst.open()
         },
 
         detector: function(){
@@ -99,6 +121,16 @@ $(function(){
             });
         },
 
+        postFull: function(data, succ, err) {
+            $.ajax({
+                url: '/api/applyFull',
+                type: 'POST',
+                data: data,
+                success: succ,
+                error: err
+            });
+        },
+
         check: function(data) {
             if(!data.username){
                 return '请输入用户名';
@@ -112,11 +144,18 @@ $(function(){
             if(!data.vcode){
                 return '请输入验证码';
             }
-            if(data.vcode !== this.vcode.code){
+            if(data.vcode.toLowerCase() !== this.vcode.code){
                 return '验证码不正确';
             }
         },
 
+        checkFull: function(data){
+            if(data.vcode.toLowerCase() !== this.vcode.code){
+                return '验证码不正确';
+            }
+        },
+
+        // 获取基础表单信息
         getFormData: function(data) {
             data = {};
             data.username = this.pure(this.$dom.find('[name="username"]').val());
@@ -124,6 +163,20 @@ $(function(){
             data.gender = this.$dom.find('.gender.selected').attr('data-value');
             data.vcode = this.pure(this.$dom.find('[name="vcode"]').val());
             data.userguid = cookie.get('userId');
+            return data;
+        },
+
+        // 获取完整表单信息
+        getFullData: function(data){
+            data = {};
+            data.city = this.$dom.find('[name="city"]').val();
+            data.job = this.$dom.find('[name="job"]').find('option:selected').val();
+            data.edu = this.$dom.find('[name="edu"]').find('option:selected').val();
+            data.soc = this.$dom.find('[name="soc"]').find('option:selected').val();
+            data.acc = this.$dom.find('[name="acc"]').find('option:selected').val();
+            data.car = this.$dom.find('[name="car"]').find('option:selected').val();
+            data.house = this.$dom.find('[name="house"]').find('option:selected').val();
+            data.vcode = this.$dom.find('[name="vcodefull"]').val();
             return data;
         },
 
@@ -140,9 +193,19 @@ $(function(){
 
         reset: function(){
             home.code();
+            // Base
             this.$dom.find('[name="username"]').val('');
             this.$dom.find('[name="telphone"]').val('');
             this.$dom.find('[name="vcode"]').val('');
+            // Full
+            this.$dom.find('[name="city"]').val('');
+            this.$dom.find('[name="job"]').find('option:selected').val('');
+            this.$dom.find('[name="edu"]').find('option:selected').val('');
+            this.$dom.find('[name="soc"]').find('option:selected').val('');
+            this.$dom.find('[name="acc"]').find('option:selected').val('');
+            this.$dom.find('[name="car"]').find('option:selected').val('');
+            this.$dom.find('[name="house"]').find('option:selected').val('');
+            this.$dom.find('[name="vcodefull"]').val('');
         }
     });
 

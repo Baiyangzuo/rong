@@ -1,5 +1,6 @@
 var co = require('co');
 var db = require(paths.db);
+var uuid = require('node-uuid');
 var express = require('express');
 var router = express.Router();
 var Info = require(global.paths.info);
@@ -30,6 +31,8 @@ router.post('/apply', function(req, res, next) {
             stats.rv(info, val);
             // 缓存创建成功IP
             cache.get('ips').push(info.stats.ip);
+            // 设置userguid
+            res.cookie('userId', val.userguid, { expires: new Date(Date.now() + 8.64e+7*365), httpOnly: true });
             res.json({code: 0, msg: 'success'})
         })
         .catch(err => {
@@ -39,6 +42,24 @@ router.post('/apply', function(req, res, next) {
             stats.rv(info);
             res.status(500).send(err.message)
         })
+    })
+})
+
+router.post('/applyFull', function(req, res, next) {
+    // 用于获取用户信息
+    var info = new Info(req);
+    // 用户完整信息
+    var profile = info.getFull();
+    console.log(profile, 1999)
+
+    co(function *(){
+        // 完善用户资料
+        db.list.Profile.findOrCreate({
+            where: { userguid: profile.userguid },
+            defaults: profile
+        })
+        .then(val => res.json({code: 0, msg: 'success'}))
+        .catch(err => res.status(500).send(err.message))
     })
 })
 
