@@ -10,8 +10,15 @@ $(function(){
             this.css = this.$dom.find('link.main');
         },
 
+        isMobile: function(){
+            return home.css.hasClass('m');
+        },
+
         enter: function(){
-            var inst = $('[data-remodal-id=modal]').remodal();
+            // For PC
+            var pc = $('.lincoapp-userfile').eq(0).addClass('pc');
+            var mobile = $('.lincoapp-userfile').eq(1).addClass('mobile');
+            var inst = pc.show().remodal();
 
             this.code();
             this.bind({
@@ -210,4 +217,5 @@ $(function(){
     });
 
     home.reg();
+    window.home = home;
 });

@@ -1,6 +1,6 @@
 {
   "name": "rong",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "main": "./src/main/node/bin/www",
   "private": true,
   "scripts": {
