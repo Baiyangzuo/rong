@@ -15,10 +15,7 @@ $(function(){
         },
 
         enter: function(){
-            // For PC
-            var pc = $('.lincoapp-userfile').eq(0).addClass('pc');
-            var mobile = $('.lincoapp-userfile').eq(1).addClass('mobile');
-            var inst = pc.show().remodal();
+            var inst = $('[data-remodal-id=modal]').remodal();
 
             this.code();
             this.bind({
