@@ -15,7 +15,7 @@ $(function(){
         },
 
         enter: function(){
-            var inst = $('[data-remodal-id=modal]').remodal();
+            var inst = $('.lincoapp-userfile').remodal();
 
             this.code();
             this.bind({

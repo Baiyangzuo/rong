@@ -8,6 +8,7 @@ block append css
         link.main(rel="stylesheet", href="/css/top/m.css")
     else
         link.main(rel="stylesheet", href="/css/top/home.css")
+    include app/stats
 
 block body
     body(class= isMobile ? 'm' : '')
