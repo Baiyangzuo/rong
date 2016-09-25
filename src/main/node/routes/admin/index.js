@@ -48,11 +48,11 @@ router.get('/login', (req, res, next) => {
 
 // Login check
 .all('*', function(req, res, next) {
-    req.session.user = 'gavinning'
-    next()
-    // req.session.user ?
-    //     next() :
-    //     res.redirect('/rose/login')
+    // req.session.user = 'gavinning'
+    // next()
+    req.session.user ?
+        next() :
+        res.redirect('/rose/login')
 })
 
 .get('/', function(req, res, next) {
