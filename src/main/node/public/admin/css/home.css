@@ -44,6 +44,8 @@ html{font-size:100px}
 body{color:#4c4c4c;font-size:14px;background:#eff3f8}
 .pages{overflow:hidden}
 .page{margin:0 auto}
+@media (min-width:1300px){.container{width:1270px}}
+@media (min-width:1400px){.container{width:1370px}}
 /*!src/css/base.less*/
 /*!
  * base For admin

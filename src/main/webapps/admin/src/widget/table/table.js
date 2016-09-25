@@ -36,6 +36,8 @@ class table extends App {
             // 操作列 删除-复制-编辑
             ctrl: 'delete.copy.edit'
         };
+        let profiles = 'city education professional has_social_security has_accumulation_fund house_property car os'.split(' ');
+        let profiles_cn = '城市 学历 职业 社保 公积金 房产 汽车 系统'.split(' ');
 
         // 缓存数据
         this.config('data', this.clone(this.getData()));
@@ -46,9 +48,21 @@ class table extends App {
         if(!data.map){
             data.map = {};
             g.getKeyArray(data.list[0]).forEach(key => {
-                data.map[key] = key
+                // 在注册字段之前插入个人资料字段
+                if(key === 'createdAt'){
+                    profiles.forEach((item, i) => {
+                        data.map[item] = profiles_cn[i]
+                    })
+                    data.map[key] = '注册时间'
+                }
+                else{
+                    data.map[key] = key
+                }
             })
         }
+
+        delete data.map.profile;
+        data.profileField = profiles;
     }
 
     prerender(app) {

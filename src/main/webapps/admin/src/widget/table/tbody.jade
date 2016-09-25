@@ -3,5 +3,19 @@ tbody
         tr
             td(data-type="number")= i+1
             each value, key in item
-                td(data-type= key)
-                    .inner= value
+                //- 忽略profile字段本身
+                if(key !== 'profile')
+                    //- 在创建时间之前加入个人资料字段
+                    if(key === 'createdAt')
+                        //- 个人资料字段
+                        if(!item.profile)
+                            -item.profile = {}
+                        each pkey in profileField
+                            td(data-type= pkey)
+                                .inner= item.profile[pkey]
+                        //- 创建时间字段
+                        td(data-type= key)
+                            .inner= value
+                    else
+                        td(data-type= key)
+                            .inner= value

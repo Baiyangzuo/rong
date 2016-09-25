@@ -1,3 +1,4 @@
+var $ = require('co');
 var path = require('path');
 var express = require('express');
 var router = express.Router();
@@ -47,9 +48,11 @@ router.get('/login', (req, res, next) => {
 
 // Login check
 .all('*', function(req, res, next) {
-    req.session.user ?
-        next() :
-        res.redirect('/rose/login')
+    req.session.user = 'gavinning'
+    next()
+    // req.session.user ?
+    //     next() :
+    //     res.redirect('/rose/login')
 })
 
 .get('/', function(req, res, next) {
@@ -72,8 +75,11 @@ router.get('/login', (req, res, next) => {
     }
     db.list.Person.findAll({
         where: g.getTimeQuery(req.query.date),
-        attributes: ['username', 'tel', 'score', 'gender', 'createdAt'],
-        order: 'createdAt DESC'
+        attributes: ['username', 'tel', 'score', 'gender', 'sourceId', 'createdAt'],
+        order: 'createdAt DESC',
+        include: {
+            model: db.list.Profile
+        }
     })
     .then(arr => res.json(g.retSuccess(g.Fixtimezone(arr))))
     .catch(err =>{

@@ -32,7 +32,7 @@ router.post('/apply', function(req, res, next) {
             // 缓存创建成功IP
             cache.get('ips').push(info.stats.ip);
             // 设置userguid
-            res.cookie('userId', val.userguid, { expires: new Date(Date.now() + 8.64e+7*365), httpOnly: true });
+            res.cookie('userId', val.id, { expires: new Date(Date.now() + 8.64e+7*365), httpOnly: true });
             res.json({code: 0, msg: 'success'})
         })
         .catch(err => {
@@ -50,12 +50,11 @@ router.post('/applyFull', function(req, res, next) {
     var info = new Info(req);
     // 用户完整信息
     var profile = info.getFull();
-    console.log(profile, 1999)
 
     co(function *(){
         // 完善用户资料
         db.list.Profile.findOrCreate({
-            where: { userguid: profile.userguid },
+            where: { personId: profile.personId },
             defaults: profile
         })
         .then(val => res.json({code: 0, msg: 'success'}))

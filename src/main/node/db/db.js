@@ -26,3 +26,5 @@ db.list = {};
     // name === 'User' || Model.sync({force: true})
     db.list[name] = Model
 });
+
+db.list.Person.hasOne(db.list.Profile)

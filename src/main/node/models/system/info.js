@@ -57,7 +57,7 @@ class Info {
     getFull() {
         this.full = {
             username: this.req.body.username,
-            userguid: this.req.cookies['userId'],
+            personId: this.req.cookies['userId'],
             education: this.req.body.edu,
             professional: this.req.body.job,
             has_social_security: this.req.body.soc,

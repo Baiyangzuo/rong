@@ -33,7 +33,6 @@ class home extends Page {
         console.group('今天注册数据：')
         console.log(data)
         console.groupEnd()
-        let Table = require('table')
 
         this.exports('header footer')
         this.exports('header-bar')
