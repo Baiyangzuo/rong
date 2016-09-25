@@ -31,6 +31,8 @@ module.exports = {
     tel: Sequelize.BIGINT(11).UNSIGNED,
     // 质量评分 详见质量评分算法
     score: Sequelize.INTEGER,
+    sourceId: Sequelize.STRING,
+    client: Sequelize.STRING,
     // 备注
     remark: Sequelize.TEXT
 }

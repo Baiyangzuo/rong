@@ -117,7 +117,7 @@ $(function(){
 
         post: function(data, succ, err) {
             $.ajax({
-                url: '/api/apply',
+                url: '/api/apply?sid=' + this.getSourceId(),
                 type: 'POST',
                 data: data,
                 success: succ,
@@ -210,6 +210,20 @@ $(function(){
             this.$dom.find('[name="car"]').find('option:selected').val('');
             this.$dom.find('[name="house"]').find('option:selected').val('');
             this.$dom.find('[name="vcodefull"]').val('');
+        },
+
+        getSourceId: function(){
+            var args, sid;
+            if(location.search.length){
+                args = location.search.slice(1).split('&');
+                args.forEach(function(arg){
+                    var obj = arg.split('=');
+                    if(obj[0] === 'sid'){
+                        sid = obj[1];
+                    };
+                });
+            };
+            return sid;
         }
     });
 

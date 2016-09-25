@@ -10,6 +10,7 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true
     },
+    personId: Sequelize.BIGINT.UNSIGNED,
     // 用户名
     username: Sequelize.STRING,
     // UUID
@@ -27,6 +28,7 @@ module.exports = {
     has_accumulation_fund: Sequelize.STRING,
     // 房产
     house_property: Sequelize.STRING,
+    car: Sequelize.STRING,
     // 注册ip
     ip: Sequelize.STRING,
     // 所在城市

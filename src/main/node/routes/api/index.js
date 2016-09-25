@@ -18,10 +18,18 @@ router.post('/apply', function(req, res, next) {
     var user = info.getUser();
     // 用于评价用户质量
     var score = new Score(info.getData());
+    // 渠道号
+    var sourceId = req.query.sid || '无';
 
     co(function *(){
         // 获取用户质量分
         user.score = yield score.getScore();
+        // 记录注册用户渠道号
+        user.sourceId = sourceId;
+        // 记录终端类型
+        if(req.env){
+            req.env.isMobile ? user.client = 'Mobile' : user.client = 'PC';
+        };
         // 创建用户
         db.list.Person.create(user)
         .then(val => {

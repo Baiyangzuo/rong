@@ -75,7 +75,7 @@ router.get('/login', (req, res, next) => {
     }
     db.list.Person.findAll({
         where: g.getTimeQuery(req.query.date),
-        attributes: ['username', 'tel', 'score', 'gender', 'sourceId', 'createdAt'],
+        attributes: ['username', 'tel', 'score', 'gender', 'sourceId', 'client', 'createdAt'],
         order: 'createdAt DESC',
         include: {
             model: db.list.Profile

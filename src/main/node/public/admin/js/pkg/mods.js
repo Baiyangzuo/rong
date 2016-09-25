@@ -10748,8 +10748,8 @@ define('table', function(require, exports, module) {
                   // 操作列 删除-复制-编辑
                   ctrl: 'delete.copy.edit'
               };
-              var profiles = 'city education professional has_social_security has_accumulation_fund house_property car os'.split(' ');
-              var profiles_cn = '城市 学历 职业 社保 公积金 房产 汽车 系统'.split(' ');
+              var profiles = 'city education professional has_social_security has_accumulation_fund house_property car'.split(' ');
+              var profiles_cn = '城市 学历 职业 社保 公积金 房产 汽车'.split(' ');
   
               // 缓存数据
               this.config('data', this.clone(this.getData()));
