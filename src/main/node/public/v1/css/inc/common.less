@@ -1,0 +1,86 @@
+@yellow: #f60;
+@gray: #999;
+@dark: #666;
+@deep: #333;
+@blue: #0078ff;
+@bg: #fbfbfb;
+@border: #e5eaed;
+
+body{
+	background: #fff;
+	font: 14px/1.5 '微软雅黑', '宋体';
+
+	a{
+		font: 14px/1.5 '微软雅黑', '宋体';
+	}
+}
+
+.tc{
+	text-align: center;
+}
+
+.mb20{
+	margin-bottom: 20px;
+}
+
+.btn{
+	height: 40px;
+	line-height: 40px;
+	font-size: 18px;
+	color: #fff;
+	min-width: 180px;
+	padding: 0 20px;
+	border-radius: 3px;
+	border: none;
+	overflow: hidden;
+	font-family: '微软雅黑';
+	cursor: pointer;
+
+	&.btn-blue{
+		background: @blue;
+	}
+
+	&.btn-yellow{
+		background: @yellow;
+	}
+}
+
+.clear{
+	clear: both;
+}
+
+.highlight{
+	color: @yellow;
+}
+
+.wrapper{
+	min-width: 1200px;
+}
+
+.page{
+
+	> div > .inner{
+		width: 1200px;
+		margin: 0 auto;
+		overflow: hidden;
+	}
+}
+
+.main{
+	padding-bottom: 30px;
+
+	.lists{
+		float: left;
+		width: 840px;
+		overflow: hidden;
+
+		.list-text{
+			float: left;
+			width: 410px;
+
+			&.first{
+				margin-right: 20px;
+			}
+		}
+	}
+}

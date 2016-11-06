@@ -1,0 +1,21 @@
+.lincoapp-apply.aside
+    .title 申请贷款
+    .form.content
+        .group
+            span.u-title 请输入您的姓名
+            input.input(type='text', name='username')
+        .group
+            span.u-title 请输入您的手机号
+            input.input(type='text', name='telphone')
+        .group
+            .checkbox
+                span.item.gender.male.selected(data-value='male') 先生
+                spam.item.gender.female(data-value='female') 女士
+        .group
+            span.u-title 请输入验证码
+            .vcode
+                .u-input
+                    input.input(type='text', name='vcode')
+                .u-img
+                .clear
+        button.form-btn.btn-submit 立即申请

@@ -1,0 +1,74 @@
+.lincoapp-formui
+    .title 个人资质审核
+    .desc 完善资料有助于加快审核速度和提升贷款金额上限，我们会对该资料进行保密。
+    .form
+        table.table
+            tr
+                th 姓名
+                td
+                    input.form-item(name='username', type='text')
+            tr
+                th 手机号码
+                td
+                    input.form-item(name='tel', type='text')
+            tr
+                th 所在城市
+                td
+                    input.form-item(name='city', type='text')
+            tr
+                th 职业身份
+                td
+                    select.form-item(name='job')
+                        option(value='') 请选择
+                        option(value='上班族') 上班族
+                        option(value='个体户') 个体户
+                        option(value='企业主') 企业主
+                        option(value='学生') 学生
+                        option(value='无固定职业') 无固定职业
+            tr
+                th 最高学历
+                td
+                    select.form-item(name='soc')
+                        option(value='') 请选择
+                        option(value='有') 有
+                        option(value='无') 无
+            tr
+                th 是否有社保
+                td
+                    select.form-item(name='soc')
+                        option(value='') 请选择
+                        option(value='有') 有
+                        option(value='无') 无
+            tr
+                th 是否有公积金
+                td
+                    select.form-item(name='soc')
+                        option(value='') 请选择
+                        option(value='有') 有
+                        option(value='无') 无
+            tr
+                th 是否有车
+                td
+                    select.form-item(name='soc')
+                        option(value='') 请选择
+                        option(value='有') 有
+                        option(value='无') 无
+            tr
+                th 房产类型
+                td
+                    select.form-item(name='house')
+                        option(value='') 请选择
+                        option(value='无房产') 无房产
+                        option(value='小产权房') 小产权房
+                        option(value='经济/限价房') 经济/限价房
+                        option(value='房改/危改房') 房改/危改房
+                        option(value='厂房') 厂房
+                        option(value='办公楼') 办公楼
+                        option(value='商铺') 商铺
+                        option(value='商品住宅') 商品住宅
+                        option(value='商住两用房') 商住两用房
+                        option(value='自建房') 自建房
+            tr
+                th
+                td
+                    button.btn.btn-yellow 立即申请

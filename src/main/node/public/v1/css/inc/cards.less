@@ -1,0 +1,38 @@
+.cards{
+	display: table;
+	width: 1200px;
+	margin: 0 auto;
+	padding-bottom: 20px;
+
+	.inner{
+		display: table-row;
+	}
+
+	.item{
+		display: table-cell;
+		width: 25%;
+		text-align: center;
+
+		&.first{
+			text-align: left;
+		}
+
+		&.last{
+			text-align: right;
+		}
+
+		&.two{
+			padding-right: 5px;
+		}
+
+		&.three{
+			padding-left: 5px;
+		}
+
+		img{
+			display: inline-block;
+			width: 285px;
+			height: 150px;
+		}
+	}
+}

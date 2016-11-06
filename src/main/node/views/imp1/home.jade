@@ -1,0 +1,28 @@
+extends layout
+
+block append css
+	include app/stats
+
+block page
+	include app/topbar
+	include app/header
+	include app/bigbanner
+	include app/highbar
+
+	.main
+		.inner
+			include app/types
+			include app/apply
+			.clear
+
+	include app/cards
+
+	.main
+		.inner
+			include app/lists
+			.aside
+				include app/prod
+			.clear
+
+	include app/link
+	include app/footer

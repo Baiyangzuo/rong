@@ -1,22 +1,46 @@
+var extend = require('aimee-extend');
 var express = require('express');
 var router = express.Router();
+var nav = require(paths.nav);
+var public = {
+	version: 'v1'
+};
 
-
-/* GET home page. */
-router.get('/', function(req, res, next) {
-    res.render('imp/home', { isMobile: req.env.isMobile });
-})
 
 router.get('/m', function(req, res, next) {
     res.render('imp/home', { isMobile: true });
 })
 
-router.get('/profile', function(req, res, next) {
-    res.render('imp/profile', { isMobile: req.env.isMobile });
+// ======> v1.0.0
+
+router
+
+.get('/', (req, res, next) => {
+	res.render('imp1/home', { isMobile: req.env.isMobile, version: 'v1' })
 })
 
-// router.get('/demo', function(req, res, next) {
-//     res.render('imp/demo', { title: 'Express' });
-// })
+.get('/loan/credit', (req, res, next) => {
+	res.render('imp1/detail', public)
+})
+
+.get('/loan/house', (req, res, next) => {
+	res.render('imp1/detail', public)
+})
+
+.get('/loan/retired', (req, res, next) => {
+	res.render('imp1/detail', public)
+})
+
+.get('/loan/auto', (req, res, next) => {
+	res.render('imp1/detail', public)
+})
+
+.get('/loan/cards', (req, res, next) => {
+	res.render('imp1/detail', public)
+})
+
+.get('/loan/apply', (req, res, next) => {
+	res.render('imp1/apply', public)
+})
 
 module.exports = router;

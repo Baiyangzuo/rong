@@ -1,0 +1,16 @@
+extends layout
+
+block page
+	include app/topbar
+	include app/header
+	include app/place
+	
+	.main
+		.inner
+			include app/surong
+			.aside
+				include app/apply
+				include app/prod
+			.clear
+
+	include app/footer

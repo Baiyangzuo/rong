@@ -1,0 +1,32 @@
+[
+	{
+		"val": "首页",
+		"url": "/",
+		"type": "home"
+	},
+	{
+		"val": "房产贷款",
+		"url": "/loan/house",
+		"type": "house"
+	},
+	{
+		"val": "信用贷款",
+		"url": "/loan/credit",
+		"type": "credit"
+	},
+	{
+		"val": "退休贷款",
+		"url": "/loan/retired",
+		"type": "retired"
+	},
+	{
+		"val": "汽车贷款",
+		"url": "/loan/auto",
+		"type": "auto"
+	},
+	{
+		"val": "大额信用卡办理",
+		"url": "/loan/cards",
+		"type": "cards"
+	}
+]

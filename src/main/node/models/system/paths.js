@@ -15,6 +15,8 @@ module.exports = dirname => {
         excel   : path.join(dirname, 'models/system/excel'),
         crypto  : path.join(dirname, 'models/system/crypto'),
         config  : path.join(dirname, 'models/system/config'),
+
+        nav     : path.join(dirname, 'config/v1/nav'),
     }
 
     // 创建临时目录
