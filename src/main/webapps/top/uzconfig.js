@@ -22,5 +22,5 @@ fis.match('**', {
 })
 
 fis.match('index.html', {
-    release: false
+    // release: false
 })

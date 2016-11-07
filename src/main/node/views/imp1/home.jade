@@ -1,28 +1,35 @@
 extends layout
 
 block append css
-	include app/stats
+    include app/stats
+    
+block append js
+    script(src="/top/js/pkg/lib.js")
+    script(src="/top/js/pkg/json.js")
+    script(src="/top/js/pkg/mods.js")
+    script(src="/top/js/pkg/templates.js")
+    script(src="/top/js/pkg/page.js")
 
 block page
-	include app/topbar
-	include app/header
-	include app/bigbanner
-	include app/highbar
+    include app/topbar
+    include app/header
+    include app/bigbanner
+    include app/highbar
 
-	.main
-		.inner
-			include app/types
-			include app/apply
-			.clear
+    .main
+        .inner
+            include app/types
+            include app/apply
+            .clear
 
-	include app/cards
+    include app/cards
 
-	.main
-		.inner
-			include app/lists
-			.aside
-				include app/prod
-			.clear
+    .main
+        .inner
+            include app/lists
+            .aside
+                include app/prod
+            .clear
 
-	include app/link
-	include app/footer
+    include app/link
+    include app/footer

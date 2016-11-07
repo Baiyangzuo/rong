@@ -3,11 +3,11 @@
  * https://github.com/gavinning/aimee
  *
  * Aimee-app
- * Date: 2016-08-10
+ * Date: 2016-11-07
  */
 
 import App from 'app';
-import cookie from 'cookie';
+import Form from 'form';
 import template from 'apply.jade';
 
 class apply extends App {
@@ -24,29 +24,21 @@ class apply extends App {
 
     // app渲染到页面之前执行，用于预处理渲染内容
     prerender(app) {
-        this.bind({
-            'click@.btn-submit': () => {
-                var msg;
-                var data = this.getFormData();
+        var form = new Form;
+        var gender = {
+            male: '先生',
+            female: '女士',
+            default: 'male'
+        };
 
-                if(msg = this.check(data)){
-                    return alert(msg)
-                }
+        form.load('input').attr({name: 'username', class: 'input'})
+        form.load('input').attr({name: 'telphone', class: 'input'})
+        form.load('input').attr({name: 'vcode', class: 'input'})
+        form.load('checkbox').attr({name: 'gender'}).create(gender).action()
 
-                this.post(
-                    data,
-                    msg => {
-                        console.log(msg);
-                        let num = Number(cookie.get('userRegSuccess') || 0);
-                        cookie.set('userRegSuccess', ++num, { expires: 7*365, path: '/' })
-                    },
-                    err => {
-                        console.log(err.status)
-                        console.log(err.responseText)
-                    }
-                )
-            }
-        })
+        form.render(this.getApp());
+
+        this.find('.btn-submit').on('click', e => console.log(form.getData()))
     }
 
     // app渲染到页面之后执行，此时app还在内存中，不能获取宽度高度等与尺寸相关的属性
@@ -57,37 +49,6 @@ class apply extends App {
     // 页面渲染到浏览器后执行，此时可以获取宽高等与尺寸相关的属性
     pagerender(app) {
         // some code
-    }
-
-    post(data, succ, err) {
-        $.ajax({
-            url: '/api/apply',
-            type: 'POST',
-            data: data,
-            success: succ,
-            error: err
-        })
-    }
-
-    check(data) {
-        if(!data.username){
-            return '请输入用户名'
-        }
-        if(!data.tel){
-            return '请输入手机号'
-        }
-        if(!data.gender){
-            data.gender = 'male';
-        }
-    }
-
-    getFormData(data) {
-        data = {};
-        data.username = this.find('[name="username"]').val();
-        data.tel = this.find('[name="telphone"]').val();
-        data.gender = this.find('.gender.selected').attr('data-value');
-        data.userguid = cookie.get('userId');
-        return data;
     }
 }
 
