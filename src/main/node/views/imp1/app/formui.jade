@@ -10,11 +10,17 @@
             tr
                 th 手机号码
                 td
-                    input.form-item(name='tel', type='text')
+                    input.form-item(name='telphone', type='text')
             tr
                 th 所在城市
                 td
                     input.form-item(name='city', type='text')
+            tr
+                th 贷款金额
+                td
+                    .loan-number
+                        input.form-item(name='number', type='text')
+                        .unit 万元
             tr
                 th 职业身份
                 td
@@ -28,10 +34,14 @@
             tr
                 th 最高学历
                 td
-                    select.form-item(name='soc')
-                        option(value='') 请选择
-                        option(value='有') 有
-                        option(value='无') 无
+                    select.form-item(name='edu')
+                        option(value="") 请选择
+                        option(value="博士") 博士
+                        option(value="硕士") 硕士
+                        option(value="本科") 本科
+                        option(value="专科") 专科
+                        option(value="高中") 高中
+                        option(value="其他") 其他
             tr
                 th 是否有社保
                 td
@@ -42,14 +52,14 @@
             tr
                 th 是否有公积金
                 td
-                    select.form-item(name='soc')
+                    select.form-item(name='acc')
                         option(value='') 请选择
                         option(value='有') 有
                         option(value='无') 无
             tr
                 th 是否有车
                 td
-                    select.form-item(name='soc')
+                    select.form-item(name='car')
                         option(value='') 请选择
                         option(value='有') 有
                         option(value='无') 无
@@ -71,4 +81,4 @@
             tr
                 th
                 td
-                    button.btn.btn-yellow 立即申请
+                    button.btn.btn-yellow.btn-apply 立即申请

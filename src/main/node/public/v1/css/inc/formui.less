@@ -1,51 +1,77 @@
 .lincoapp-formui{
-	width: 800px;
-	margin: 0 auto;
-	padding-bottom: 80px;
+    width: 800px;
+    margin: 0 auto;
+    padding-bottom: 80px;
 
-	.title{
-		font-size: 20px;
-		text-align: center;
-		padding: 40px 0;
-	}
+    .title{
+        font-size: 20px;
+        text-align: center;
+        padding: 40px 0;
+    }
 
-	.desc{
-		display: none;
-		padding: 12px 0;
-		margin-bottom: 50px;
-		border-bottom: 1px solid @border;
-	}
+    .desc{
+        display: none;
+        padding: 12px 0;
+        margin-bottom: 50px;
+        border-bottom: 1px solid @border;
+    }
 
-	.form-item{
-		width: 460px;
-		height: 44px;
-		border-radius: 3px;
-		border: 1px solid @border;
-		padding: 0 10px;
-		font-size: 16px;
-		overflow: hidden;
-		box-sizing: border-box;
-		-webkit-box-sizing: border-box;
-		-moz-box-sizing: border-box;
-		-o-box-sizing: border-box;
-	}
+    .loan-number{
+        position: relative;
+        display: inline-block;
+        overflow: hidden;
 
-	.table{
-		width: 100%;
+        .unit{
+            position: absolute;
+            width: 80px;
+            height: 100%;
+            background: #eee;
+            font-size: 18px;
+            right: 0;
+            top: 0;
+            text-align: center;
+            line-height: 40px;
+            border: 1px solid @border;
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+            overflow: hidden;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -o-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+    }
 
-		th{
-			width: 23%;
-			font-size: 18px;
-			color: @deep;
-			text-align: right;
-		}
+    .form-item{
+        width: 460px;
+        height: 44px;
+        border-radius: 3px;
+        border: 1px solid @border;
+        padding: 0 10px;
+        font-size: 16px;
+        overflow: hidden;
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -o-box-sizing: border-box;
+    }
 
-		td{
-			padding: 16px 30px;
-		}
-	}
+    .table{
+        width: 100%;
 
-	.btn-yellow{
-		width: 460px;
-	}
+        th{
+            width: 23%;
+            font-size: 18px;
+            color: @deep;
+            text-align: right;
+        }
+
+        td{
+            padding: 16px 30px;
+        }
+    }
+
+    .btn-yellow{
+        width: 460px;
+    }
 }

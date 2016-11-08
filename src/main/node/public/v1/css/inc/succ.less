@@ -1,0 +1,41 @@
+.lincoapp-msg{
+    width: 600px;
+    padding: 30px;
+    text-align: center;
+    position: relative;
+
+    &.dn{
+        display: none;
+    }
+
+    .icon-msg{
+        margin: 0 auto;
+    }
+
+    .icon-close{
+        width: 36px;
+        height: 36px;
+        background: url(../images/icon-close.png) no-repeat center;
+        position: absolute;
+        right: 0;
+        top: 0;
+        cursor: pointer;
+        opacity: 0.5;
+        transition: opacity 200ms ease;
+
+        &:hover{
+            opacity: 1;
+        }
+    }
+
+    h3{
+        font-size: 23px;
+        color: @yellow;
+        line-height: 2;
+    }
+
+    p{
+        font-size: 14px;
+        color: @dark;
+    }
+}

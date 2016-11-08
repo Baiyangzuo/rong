@@ -4,11 +4,8 @@ block append css
     include app/stats
     
 block append js
-    script(src="/top/js/pkg/lib.js")
-    script(src="/top/js/pkg/json.js")
-    script(src="/top/js/pkg/mods.js")
-    script(src="/top/js/pkg/templates.js")
-    script(src="/top/js/pkg/page.js")
+    script(src="/js/libs/verification-code.js")
+    script(src="/js/libs/cookie.js")
 
 block page
     include app/topbar
@@ -33,3 +30,7 @@ block page
 
     include app/link
     include app/footer
+
+block footerjs
+    script(src="/v1/js/pages/home.js")
+    
