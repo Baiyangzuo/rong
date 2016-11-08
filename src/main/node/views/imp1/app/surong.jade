@@ -1,67 +1,73 @@
 .lincoapp-surong.article
-    .title 信用贷款
+    .title= name
     .sign
-        img(src='/#{version}/images/d12.png', alt='')
+        img(src= icon, alt='')
     .surong
         .datas
             table.table
                 tbody
                     tr
                         th 金额：
-                        td.two 50万元
+                        td.two= data.money
                         th 额度范围：
-                        td 1.00元~50.00万元
+                        td= data.range
                         td.last(rowspan='5')
                             .msg
-                                span.yellow 2000
+                                span.yellow= people
                                 | 人成功申请
-                            button.btn.btn-blue 免费申请
+                            button.btn.btn-blue(onclick="location.href='/apply';") 免费申请
                             .star
-                                img(src='/#{version}/images/s4.png', alt='')
+                                img(src='/#{version}/images/s#{lv}.png', alt='')
                     tr
                         th 期限：
-                        td 12个月
+                        td= data.time
                         th 期限范围：
-                        td 12~36个月
+                        td= data.timerange
                     tr
                         th 月供：
-                        td 19367元
+                        td= data.month
                         th 还款方式：
-                        td 分期还款
+                        td= data.type
                     tr
                         th 总费用：
-                        td 3.24万元
+                        td= data.total
                         th 放款时间：
-                        td 7个工作日（审批为4个工作日）
+                        td= data.loantime
                     tr
                         th 费用说明：
-                        td(colspan='3') 参考月利率 0.60% 月管理费 0.75% 
+                        td(colspan='3')= data.cost
         .stream
             img(src='/#{version}/images/l1.png', alt='')
         .detail
             .u-title 产品详情
             .u-content
-                h5 申请条件
-                p 25-55周岁、社保或公积金缴满1年、信用记录良好
-                p 1、25-55周岁
-                p 2、社保或公积金缴费1年以上（根据社保或公积金缴费基数判定额度）
-                p 3、社保个人缴费额度400以上，或者公积金个人缴费额度360以上可申请（额度不足者可提供附加财力证明）
-                p 4、可选择性提供本地产权清晰，无案件且可自由上市流通的房产（房龄不超过30年，市值50万以上）
-                p 5、要求客户信用记录良好（可接受征信空白客户）
-                h5.yellow 温馨提示：20-55周岁、社保或公积金缴满1年、信用记录良好方可申请
-                h5 所需材料
-                p 1、加盖单位公章、人事章、财务章的工作证明原件，需显示申请人的入职时间、职务或职级等信息
-                p
-                p 2、工牌复印件或拍照打印页（需显示申请人姓名、工作单位名称、部门及岗位职务等信息）
-                p
-                p 3、企业法人申请需要法人代表姓名与申请人姓名一致、且经过年检的企业法人营业执照副本（限法人）复印件或
-                p
-                    | 拍照打印页
-                p (以上材料任选其一)
-                p
-                h5 详细说明
-                p 现金分期是一款个人消费贷款
-                p 基础材料：身份证、工作证明、社保卡或者公积金联名卡、房产证或者购房合同（如有）
-                p.gray *相关信息由速融网收集，不保证完全准确，请您以信贷员咨询结果为准
+                each item in detail
+                    h5(class= item.class ? item.class : '')= item.title
+                    if(item.list && item.list.length)
+                        each cc in item.list
+                            p= cc
+                //- 
+                //- h5 申请条件
+                //- p 25-55周岁、社保或公积金缴满1年、信用记录良好
+                //- p 1、25-55周岁
+                //- p 2、社保或公积金缴费1年以上（根据社保或公积金缴费基数判定额度）
+                //- p 3、社保个人缴费额度400以上，或者公积金个人缴费额度360以上可申请（额度不足者可提供附加财力证明）
+                //- p 4、可选择性提供本地产权清晰，无案件且可自由上市流通的房产（房龄不超过30年，市值50万以上）
+                //- p 5、要求客户信用记录良好（可接受征信空白客户）
+                //- h5.yellow 温馨提示：20-55周岁、社保或公积金缴满1年、信用记录良好方可申请
+                //- h5 所需材料
+                //- p 1、加盖单位公章、人事章、财务章的工作证明原件，需显示申请人的入职时间、职务或职级等信息
+                //- p
+                //- p 2、工牌复印件或拍照打印页（需显示申请人姓名、工作单位名称、部门及岗位职务等信息）
+                //- p
+                //- p 3、企业法人申请需要法人代表姓名与申请人姓名一致、且经过年检的企业法人营业执照副本（限法人）复印件或
+                //- p
+                //-     | 拍照打印页
+                //- p (以上材料任选其一)
+                //- p
+                //- h5 详细说明
+                //- p 现金分期是一款个人消费贷款
+                //- p 基础材料：身份证、工作证明、社保卡或者公积金联名卡、房产证或者购房合同（如有）
+                //- p.gray *相关信息由速融网收集，不保证完全准确，请您以信贷员咨询结果为准
             .tc
-                button.btn.btn-blue 免费申请贷款
+                button.btn.btn-blue(onclick="location.href='/apply';") 免费申请贷款
