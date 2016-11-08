@@ -12,6 +12,11 @@ var house = extend(require('../../config/v1/house'), public);
 var credit = extend(require('../../config/v1/credit'), public);
 var retired = extend(require('../../config/v1/retired'), public);
 
+var cnbk = extend(require('../../config/v1/cnbk'), public);
+var pingan = extend(require('../../config/v1/pingan'), public);
+var yiche = extend(require('../../config/v1/yiche'), public);
+var rongyi = extend(require('../../config/v1/rongyi'), public);
+
 
 router.get('/m', function(req, res, next) {
     res.render('imp/home', { isMobile: true });
@@ -31,5 +36,10 @@ router
 .get('/loan/house', (req, res) => res.render('imp1/detail', house))
 .get('/loan/credit', (req, res) => res.render('imp1/detail', credit))
 .get('/loan/retired', (req, res) => res.render('imp1/detail', retired))
+
+.get('/loan/cnbk', (req, res) => res.render('imp1/detail', cnbk))
+.get('/loan/pingan', (req, res) => res.render('imp1/detail', pingan))
+.get('/loan/yiche', (req, res) => res.render('imp1/detail', yiche))
+.get('/loan/rongyi', (req, res) => res.render('imp1/detail', rongyi))
 
 module.exports = router;
