@@ -19,6 +19,7 @@ class Excel {
         let data = arr.map(seq => {
             return g.getValueArray(seq.get())
         })
+        console.log(data, 789)
         data.unshift(g.getKeyArray(arr[0].get()))
         return {
             data: data,

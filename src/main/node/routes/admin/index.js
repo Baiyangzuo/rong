@@ -1,6 +1,7 @@
 var $ = require('co');
 var path = require('path');
 var express = require('express');
+var extend = require('aimee-extend');
 var router = express.Router();
 var g = require(paths.g);
 var db = require(paths.db);
@@ -128,5 +129,41 @@ router.get('/login', (req, res, next) => {
         res.status(500).send(err.message)
     })
 })
+
+// .post('/getExcel', (req, res) => {
+//     if(req.body.date === undefined || !req.session.user){
+//         gre.warn('getExcel Fail')
+//         gre.warn(req.session.user.username, 'getExcel Fail')
+//         return res.status(400).send('fail')
+//     }
+//     $(function *(){
+//         var arr = yield db.list.Person.findAll({
+//             where: g.getTimeQuery(req.body.date),
+//             attributes: ['username', 'tel', 'gender', 'createdAt'],
+//             order: 'createdAt DESC'
+//         });
+// console.log(arr, 123)
+//         for(let i=0; i<arr.length; i++){
+//             let user = arr[i];
+//             let profile = yield db.list.Profile.find({
+//                 where: { personId: user.id },
+//                 attributes: ['loan', 'city', 'education', 'professional', 'has_social_security', 'has_accumulation_fund', 'house_property', 'car']
+//             });
+//             extend(user, profile);
+//         };
+// console.log(arr, 456)
+//         if(arr.length === 0){
+//             gre.warn(req.session.user.username, 'getExcel Fail')
+//             gre.info(req.body.date, arr, 'Empty data')
+//             res.status(400).send('Empty data')
+//         }else {
+//             excel.src(arr).dest(id => {
+//                 // 下载日志
+//                 gre.trace(req.session.user.username, 'datetype:' + req.body.date, 'download', id);
+//                 res.send(id)
+//             })
+//         }
+//     })
+// })
 
 module.exports = router;

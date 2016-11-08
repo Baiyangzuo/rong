@@ -203,11 +203,11 @@ buf.push("\n        <td" + (jade.attr("data-type", pkey, true, false)) + ">\n   
   }
 }).call(this);
 
-buf.push("\n        <td" + (jade.attr("data-type", key, true, false)) + ">\n          <div class=\"inner\">" + (jade.escape(null == (jade_interp = value || '无') ? "" : jade_interp)) + "</div>\n        </td>");
+buf.push("\n        <td" + (jade.attr("data-type", key, true, false)) + ">\n          <div class=\"inner\">" + (jade.escape(null == (jade_interp = value) ? "" : jade_interp)) + "</div>\n        </td>");
 }
 else
 {
-buf.push("\n        <td" + (jade.attr("data-type", key, true, false)) + ">\n          <div class=\"inner\">" + (jade.escape(null == (jade_interp = value || '无') ? "" : jade_interp)) + "</div>\n        </td>");
+buf.push("\n        <td" + (jade.attr("data-type", key, true, false)) + ">\n          <div class=\"inner\">" + (jade.escape(null == (jade_interp = value) ? "" : jade_interp)) + "</div>\n        </td>");
 }
 }
     }
@@ -247,11 +247,11 @@ buf.push("\n        <td" + (jade.attr("data-type", pkey, true, false)) + ">\n   
   }
 }).call(this);
 
-buf.push("\n        <td" + (jade.attr("data-type", key, true, false)) + ">\n          <div class=\"inner\">" + (jade.escape(null == (jade_interp = value || '无') ? "" : jade_interp)) + "</div>\n        </td>");
+buf.push("\n        <td" + (jade.attr("data-type", key, true, false)) + ">\n          <div class=\"inner\">" + (jade.escape(null == (jade_interp = value) ? "" : jade_interp)) + "</div>\n        </td>");
 }
 else
 {
-buf.push("\n        <td" + (jade.attr("data-type", key, true, false)) + ">\n          <div class=\"inner\">" + (jade.escape(null == (jade_interp = value || '无') ? "" : jade_interp)) + "</div>\n        </td>");
+buf.push("\n        <td" + (jade.attr("data-type", key, true, false)) + ">\n          <div class=\"inner\">" + (jade.escape(null == (jade_interp = value) ? "" : jade_interp)) + "</div>\n        </td>");
 }
 }
     }
@@ -306,11 +306,11 @@ buf.push("\n        <td" + (jade.attr("data-type", pkey, true, false)) + ">\n   
   }
 }).call(this);
 
-buf.push("\n        <td" + (jade.attr("data-type", key, true, false)) + ">\n          <div class=\"inner\">" + (jade.escape(null == (jade_interp = value || '无') ? "" : jade_interp)) + "</div>\n        </td>");
+buf.push("\n        <td" + (jade.attr("data-type", key, true, false)) + ">\n          <div class=\"inner\">" + (jade.escape(null == (jade_interp = value) ? "" : jade_interp)) + "</div>\n        </td>");
 }
 else
 {
-buf.push("\n        <td" + (jade.attr("data-type", key, true, false)) + ">\n          <div class=\"inner\">" + (jade.escape(null == (jade_interp = value || '无') ? "" : jade_interp)) + "</div>\n        </td>");
+buf.push("\n        <td" + (jade.attr("data-type", key, true, false)) + ">\n          <div class=\"inner\">" + (jade.escape(null == (jade_interp = value) ? "" : jade_interp)) + "</div>\n        </td>");
 }
 }
     }
@@ -350,11 +350,11 @@ buf.push("\n        <td" + (jade.attr("data-type", pkey, true, false)) + ">\n   
   }
 }).call(this);
 
-buf.push("\n        <td" + (jade.attr("data-type", key, true, false)) + ">\n          <div class=\"inner\">" + (jade.escape(null == (jade_interp = value || '无') ? "" : jade_interp)) + "</div>\n        </td>");
+buf.push("\n        <td" + (jade.attr("data-type", key, true, false)) + ">\n          <div class=\"inner\">" + (jade.escape(null == (jade_interp = value) ? "" : jade_interp)) + "</div>\n        </td>");
 }
 else
 {
-buf.push("\n        <td" + (jade.attr("data-type", key, true, false)) + ">\n          <div class=\"inner\">" + (jade.escape(null == (jade_interp = value || '无') ? "" : jade_interp)) + "</div>\n        </td>");
+buf.push("\n        <td" + (jade.attr("data-type", key, true, false)) + ">\n          <div class=\"inner\">" + (jade.escape(null == (jade_interp = value) ? "" : jade_interp)) + "</div>\n        </td>");
 }
 }
     }

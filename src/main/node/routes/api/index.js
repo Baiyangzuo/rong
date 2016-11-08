@@ -30,9 +30,8 @@ router.post('/apply', function(req, res, next) {
         if(req.env){
             req.env.isMobile ? user.client = 'Mobile' : user.client = 'PC';
         };
-        console.log(user)
         // 创建用户
-        db.list.Person.create(user, 123)
+        db.list.Person.create(user)
         .then(val => {
             info.user.id = val.id;
             info.stats.status = 1;
@@ -59,7 +58,6 @@ router.post('/applyFull', function(req, res, next) {
     var info = new Info(req);
     // 用户完整信息
     var profile = info.getFull();
-    console.log(profile, 456)
     co(function *(){
         // 完善用户资料
         db.list.Profile.findOrCreate({
