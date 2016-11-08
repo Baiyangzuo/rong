@@ -25,13 +25,14 @@ router.post('/apply', function(req, res, next) {
         // 获取用户质量分
         user.score = yield score.getScore();
         // 记录注册用户渠道号
-        user.sourceId = sourceId;
+        user.sourceId = sourceId || user.sid;
         // 记录终端类型
         if(req.env){
             req.env.isMobile ? user.client = 'Mobile' : user.client = 'PC';
         };
+        console.log(user)
         // 创建用户
-        db.list.Person.create(user)
+        db.list.Person.create(user, 123)
         .then(val => {
             info.user.id = val.id;
             info.stats.status = 1;
@@ -58,7 +59,7 @@ router.post('/applyFull', function(req, res, next) {
     var info = new Info(req);
     // 用户完整信息
     var profile = info.getFull();
-
+    console.log(profile, 456)
     co(function *(){
         // 完善用户资料
         db.list.Profile.findOrCreate({

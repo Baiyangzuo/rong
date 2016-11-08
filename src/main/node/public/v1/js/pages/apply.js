@@ -44,6 +44,9 @@ $(function(){
                     var top = page.getTopData();
                     var data = page.getFormData();
 
+                    data.username = pre.username || top.username;
+                    data.userguid = cookie.get('clientId');
+
                     console.log('pre data', pre);
                     console.log('top data', top);
                     console.log('full data', data);
@@ -196,7 +199,7 @@ $(function(){
         getFormData: function(data) {
             data = {};
             data.city = this.$dom.find('[name="city"]').val();
-            data.num = this.$dom.find('[name="number"]').val();
+            data.loan = this.$dom.find('[name="number"]').val();
             data.job = this.$dom.find('[name="job"]').find('option:selected').val();
             data.edu = this.$dom.find('[name="edu"]').find('option:selected').val();
             data.soc = this.$dom.find('[name="soc"]').find('option:selected').val();

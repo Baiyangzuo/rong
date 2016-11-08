@@ -57,12 +57,14 @@ class Info {
     getFull() {
         this.full = {
             username: this.req.body.username,
+            userguid: this.req.body.userguid,
             personId: this.req.cookies['userId'],
             education: this.req.body.edu,
             professional: this.req.body.job,
             has_social_security: this.req.body.soc,
             has_accumulation_fund: this.req.body.acc,
             house_property: this.req.body.house,
+            loan: this.req.body.loan,
             city: this.req.body.city,
             car: this.req.body.car,
             ua: this.req.headers['user-agent'],

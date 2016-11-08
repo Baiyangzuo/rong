@@ -18,6 +18,8 @@ module.exports = {
         type: Sequelize.UUID,
         unique: true
     },
+    // 贷款金额
+    loan: Sequelize.BIGINT.UNSIGNED,
     // 学历
     education: Sequelize.STRING,
     // 职业
