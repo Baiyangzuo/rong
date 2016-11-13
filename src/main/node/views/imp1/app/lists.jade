@@ -1,60 +1,17 @@
+- var a1 = list.slice(0, 13)
+- var a2 = list.slice(14, 27)
 .lists
     .list-text.first
-        .title 问答
+        .title 资讯
         ul.list
-            li
-                a(href='') 房子抵押贷款多久来考察
-            li
-                a(href='') 我是外地人
-            li
-                a(href='') 贷款需要那些东西，贷了要几天到
-            li
-                a(href='') 没有房产抵押能申请天津无抵押贷款吗
-            li
-                a(href='') 你好！我想贷款购车
-            li
-                a(href='') 无抵押可以吗 请问需要什么条件
-            li
-                a(href='') 个体户怎么申请信用贷款？要准备哪些材料？
-            li
-                a(href='') 企业在东莞市可不可以办企业贷款？
-            li
-                a(href='') 如何申请15的贷款
-            li
-                a(href='') 我的公司已经经营5年了，想向银行贷款需要什么条件
-            li
-                a(href='') 贷款需要那些东西，贷了要几天到
-            li
-                a(href='') 贷款可否不通过中介，自己找银行
-            li
-                a(href='') 2015年7月2号第一次扣房贷按哪个利率，是按最新的
+            each item in a1
+                li
+                    a(href='/article/#{item.id}')= item.title
+
     .list-text
-        .title 问答
+        .title 攻略
         ul.list
-            li
-                a(href='') 房子抵押贷款多久来考察
-            li
-                a(href='') 我是外地人
-            li
-                a(href='') 贷款需要那些东西，贷了要几天到
-            li
-                a(href='') 没有房产抵押能申请天津无抵押贷款吗
-            li
-                a(href='') 你好！我想贷款购车
-            li
-                a(href='') 无抵押可以吗 请问需要什么条件
-            li
-                a(href='') 个体户怎么申请信用贷款？要准备哪些材料？
-            li
-                a(href='') 企业在东莞市可不可以办企业贷款？
-            li
-                a(href='') 如何申请15的贷款
-            li
-                a(href='') 我的公司已经经营5年了，想向银行贷款需要什么条件
-            li
-                a(href='') 贷款需要那些东西，贷了要几天到
-            li
-                a(href='') 贷款可否不通过中介，自己找银行
-            li
-                a(href='') 2015年7月2号第一次扣房贷按哪个利率，是按最新的
+            each item in a2
+                li
+                    a(href='/article/#{item.id}')= item.title
     .clear

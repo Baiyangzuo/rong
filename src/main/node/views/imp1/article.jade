@@ -1,0 +1,24 @@
+extends layout
+
+block append js
+    script(src="/js/libs/verification-code.js")
+    script(src="/js/libs/cookie.js")
+
+block page
+    include app/topbar
+    include app/header
+    include app/place
+    
+    .main
+        .inner
+            include app/article
+            .aside2
+                include app/apply
+                include app/prod
+            .clear
+
+    include app/footer
+
+block footerjs
+    script(src="/v1/js/pages/home.js")
+    
