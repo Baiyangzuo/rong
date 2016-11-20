@@ -44,8 +44,9 @@ html{font-size:100px}
 body{color:#4c4c4c;font-size:14px;background:#eff3f8}
 .pages{overflow:hidden}
 .page{margin:0 auto}
-@media (min-width:1300px){.container{width:1270px}}
-@media (min-width:1400px){.container{width:1370px}}
+.container{width:90%;max-width:1800px}
+@media (min-width:1700px){.container{width:1600px}}
+@media (min-width:1900px){.container{width:1800px}}
 /*!src/css/base.less*/
 /*!
  * base For admin
@@ -82,8 +83,8 @@ body{color:#4c4c4c;font-size:14px;background:#eff3f8}
  * Aimee-app
  * Date: 2016-08-06
  */
-.page-home .row{overflow-x:auto}
-.page-home .lincoapp-panel{min-width:1260px}
+.page-home.overflow .row{overflow-x:auto}
+.page-home.overflow .lincoapp-panel{min-width:1400px}
 /*!src/widget/breadcrumb/breadcrumb.less*/
 /*!
  * base For admin
@@ -133,6 +134,9 @@ body{color:#4c4c4c;font-size:14px;background:#eff3f8}
  * Aimee-app
  * Date: 2016-08-06
  */
+.lincoapp-panel .scroll{float:left;padding:7px 10px}
+.lincoapp-panel .scroll .btn-scroll{color:#4DB3A2;border-radius:40px;padding:3px 10px;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-o-user-select:none;user-select:none;font-weight:700}
+.lincoapp-panel .scroll .btn-scroll.selected{color:#fff;background:#8895a9}
 /*!src/widget/stats/stats.less*/
 /*!
  * base For admin
@@ -151,6 +155,7 @@ body{color:#4c4c4c;font-size:14px;background:#eff3f8}
  */
 .lincoapp-table{overflow:hidden;text-align:right}
 .lincoapp-table .table{text-align:left;margin-bottom:0}
+.lincoapp-table .inner{max-width:160px}
 .lincoapp-table .btn-default{color:#313534;background-color:#e5e6e6;border-color:#e5e6e6;border-radius:2px}
 .lincoapp-table [data-type=ctrl]{text-align:right}
 .lincoapp-table .pagination{margin:0}

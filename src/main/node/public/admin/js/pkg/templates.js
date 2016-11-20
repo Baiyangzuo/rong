@@ -90,7 +90,7 @@ if ((config.icon))
 {
 buf.push("<i" + (jade.cls([config.icon.className], [true])) + "></i>");
 }
-buf.push("<span class=\"caption-subject font-green-sharp bold uppercase\">" + (jade.escape(null == (jade_interp = title ? title : 'Simple Table') ? "" : jade_interp)) + "</span>\n      </div>");
+buf.push("<span class=\"caption-subject font-green-sharp bold uppercase\">" + (jade.escape(null == (jade_interp = title ? title : 'Simple Table') ? "" : jade_interp)) + "</span>\n      </div>\n      <div class=\"scroll\">\n        <div class=\"btn-scroll\">SCROLL</div>\n      </div>");
 if ((config.action))
 {
 if ((config.action.date))
