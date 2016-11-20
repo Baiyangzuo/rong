@@ -30,6 +30,10 @@ router.get('/m', function(req, res, next) {
 
 router
 
+.get('*', (req, res, next) => {
+    req.env.isMobile ? res.redirect('/m') : next()
+})
+
 .get('/', (req, res) => {
     res.render('imp1/home', { version: 'v1', id: 'home', list: articleList })
 })
