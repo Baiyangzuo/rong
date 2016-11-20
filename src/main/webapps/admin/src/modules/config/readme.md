@@ -1,9 +1,9 @@
-# Config
-
+Config
+---
 为任意对象提供配置管理
 
 
-#### Install
+### Install
 
 ![INFO](https://nodei.co/npm/vpm-config.png?downloads=true&downloadRank=true&stars=true)  
 ![DOWNLOAD](https://nodei.co/npm-dl/vpm-config.png?height=3)  
@@ -18,9 +18,8 @@ aimee i config
 npm i vpm-config
 ```
 
-
 ### Usage
-```javascript
+```js
 // For Aimee
 var Config = require('config');
 var config = new Config;

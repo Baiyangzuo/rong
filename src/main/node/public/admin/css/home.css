@@ -74,6 +74,16 @@ body{color:#4c4c4c;font-size:14px;background:#eff3f8}
 .lincoapp-loading2.ap{position:fixed;top:40%;left:50%;margin-left:-68px;margin-top:-36px}
 .lincoapp-loading2 .icon-loading{display:inline-block;width:24px;height:24px;background:url(../images/loading2/img/loading.gif) no-repeat;background-size:100% auto;margin-right:8px}
 .lincoapp-loading2 .msg{display:inline-block;vertical-align:6px;font-size:14px;font-family:'PT Sans',Helvetica,'Helvetica Neuve',Arial,Tahoma,sans-serif}
+/*!src/pages/home/home.less*/
+/*!
+ * base For admin
+ * https://github.com/gavinning/aimee
+ *
+ * Aimee-app
+ * Date: 2016-08-06
+ */
+.page-home .row{overflow-x:auto}
+.page-home .lincoapp-panel{min-width:1260px}
 /*!src/widget/breadcrumb/breadcrumb.less*/
 /*!
  * base For admin
