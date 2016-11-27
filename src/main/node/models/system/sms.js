@@ -17,6 +17,6 @@ module.exports = function(username) {
     return sms.send(18910063857, {
         name: '老王',
         time: format('hh:mm'),
-        username: username
+        username: username || '未知'
     });
 }

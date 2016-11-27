@@ -44,7 +44,7 @@ router.post('/apply', function(req, res, next) {
             res.cookie('userId', val.id, { expires: new Date(Date.now() + 8.64e+7*365), httpOnly: true });
 
             // 发送短信通知管理员
-            sms()
+            sms(info.user.username)
                 .then(res => console.info(info.user.id, info.user.username, 'sms send success'))
                 .catch(err => console.error(info.user.id, info.user.username, 'sms send fail!', 'msg:', err.message));
 
