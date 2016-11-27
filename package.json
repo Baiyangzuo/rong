@@ -1,6 +1,6 @@
 {
   "name": "rong",
-  "version": "1.0.7",
+  "version": "1.1.0",
   "main": "./src/main/node/bin/www",
   "private": true,
   "scripts": {
@@ -9,6 +9,7 @@
   "dependencies": {
     "aimee-extend": "^1.0.1",
     "aimee-is": "^1.1.0",
+    "alidayu-sms": "^1.0.0",
     "bash-color": "0.0.4",
     "blueimp-md5": "^2.3.0",
     "body-parser": "~1.13.2",
