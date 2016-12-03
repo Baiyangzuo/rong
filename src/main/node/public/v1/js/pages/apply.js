@@ -30,7 +30,8 @@ $(function(){
         },
 
         reg: function() {
-            this.enter()
+            this.saveSourceId();
+            this.enter();
         },
 
         enter: function() {
@@ -123,7 +124,7 @@ $(function(){
 
         postFull: function(data, succ, err) {
             $.ajax({
-                url: '/api/applyFull',
+                url: '/api/applyFull?sid=' + this.getSourceId(),
                 type: 'POST',
                 data: data,
                 success: succ,
@@ -230,7 +231,12 @@ $(function(){
         // },
 
         getSourceId: function(){
-            return this.getUrlArguments().sid || 0;
+            return cookie.get('sid') || this.getUrlArguments().sid || 0;
+        },
+
+        saveSourceId: function(){
+            var sid = this.getSourceId();
+            !sid || cookie.set('sid', sid);
         }
     };
 

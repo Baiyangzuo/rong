@@ -30,7 +30,8 @@ $(function(){
         },
 
         reg: function() {
-            this.enter()
+            this.saveSourceId();
+            this.enter();
         },
 
         enter: function() {
@@ -153,8 +154,13 @@ $(function(){
         },
 
         getSourceId: function(){
-            var args, sid;
-            if(location.search.length){
+            var args;
+            var sid = cookie.get('sid');
+
+            if(sid){
+                return sid
+            }
+            else if(location.search.length){
                 args = location.search.slice(1).split('&');
                 args.forEach(function(arg){
                     var obj = arg.split('=');
@@ -162,8 +168,13 @@ $(function(){
                         sid = obj[1];
                     };
                 });
-            };
+            }
             return sid || 0;
+        },
+
+        saveSourceId: function(){
+            var sid = this.getSourceId();
+            !sid || cookie.set('sid', sid);
         }
     };
 

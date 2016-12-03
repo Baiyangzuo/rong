@@ -24,6 +24,7 @@ db.list = {};
     Model.delete = Model.destroy
     Model.filter = Extends.filter
     // name === 'User' || Model.sync({force: true})
+    // Model.sync()
     db.list[name] = Model
 });
 
