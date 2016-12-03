@@ -26,7 +26,7 @@ app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('[:time] :remote-user :remote-addr :method :status :url HTTP/:http-version :res[content-length] referrer[:referrer]'));
+// app.use(logger('[:time] :remote-user :remote-addr :method :status :url HTTP/:http-version :res[content-length] referrer[:referrer]'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());

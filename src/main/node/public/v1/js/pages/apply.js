@@ -44,51 +44,39 @@ $(function(){
                     var pre = page.getPreData();
                     var top = page.getTopData();
                     var data = page.getFormData();
+                    var fulldata = $.extend({}, top, data);
 
-                    data.username = pre.username || top.username;
-                    data.userguid = cookie.get('clientId');
+                    // 二次个更新需要tel作为查询字段
+                    data.tel = top.tel;
 
-                    console.log('pre data', pre);
-                    console.log('top data', top);
-                    console.log('full data', data);
+                    console.log('full data:', fulldata);
 
-                    if(!pre.isReg) {
+                    // 检查 username & tel
+                    if(!pre.isReg){
                         if(msg = page.check(top)){
                             return alert(msg);
-                        };
-
-                        page.post(top,
-                            function(msg){
-                                var num = Number(cookie.get('userRegSuccess') || 0);
-                                cookie.set('userRegSuccess', ++num, { expires: 7*365, path: '/' });
-                                cookie.set('username', data.username, { expires: 7*365, path: '/' });
-
-                                postFull()
-                            },
-                            function(err){
-                                console.log(err.status);
-                                console.log(err.responseText);
-                                page.fail.open();
-                            }
-                        )
-                    }
-                    else{
-                        postFull()
+                        }
                     }
 
-                    function postFull() {
-                        page.postFull(data,
-                            function(msg){
-                                console.log(msg);
-                                page.succ.open();
-                            },
-                            function(err){
-                                console.log(err.status);
-                                console.log(err.responseText);
-                                page.fail.open();
-                            }
-                        )
-                    }
+                    // 注册
+                    page.post(pre.isReg ? data : fulldata,
+                        function(msg){
+                            // 获取当前浏览器注册次数
+                            var num = Number(cookie.get('userRegSuccess') || 0);
+                            // 更新当前浏览器注册次数
+                            cookie.set('userRegSuccess', ++num, { expires: 7*365, path: '/' });
+                            // 设置当前注册用户名
+                            cookie.set('username', data.username, { expires: 7*365, path: '/' });
+                            // 清空注册缓存
+                            localStorage.removeItem('user');
+                            page.succ.open();
+                        },
+                        function(err){
+                            console.log(err.status);
+                            console.log(err.responseText);
+                            page.fail.open();
+                        }
+                    )
                 },
                 'click@.vcode-img': function(){
                     page.code();
@@ -207,7 +195,6 @@ $(function(){
             data.acc = this.$dom.find('[name="acc"]').find('option:selected').val();
             data.car = this.$dom.find('[name="car"]').find('option:selected').val();
             data.house = this.$dom.find('[name="house"]').find('option:selected').val();
-            data.sid = this.getSourceId();
             return data;
         },
 

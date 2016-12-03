@@ -15,8 +15,7 @@ db.list = {};
     'User',
     'Stats',
     'System',
-    'Person',
-    'Profile'
+    'Person'
 ].forEach(name => {
     let Table = require(path.join(__dirname, name))
     let Model = db.define(name.toLowerCase(), Table, env.conf)
@@ -27,5 +26,3 @@ db.list = {};
     // Model.sync()
     db.list[name] = Model
 });
-
-db.list.Person.hasOne(db.list.Profile)

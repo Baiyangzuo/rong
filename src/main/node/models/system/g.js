@@ -127,6 +127,11 @@ g.extend({
             item.createdAt = date.asString(config.get('timestamp'), new Date(item.createdAt))
             return item
         })
+    },
+
+    // 判断时间是否是当天
+    isToday(time) {
+        return date('dd') === date('dd', new Date(time))
     }
 })
 

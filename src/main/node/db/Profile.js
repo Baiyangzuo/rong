@@ -41,5 +41,8 @@ module.exports = {
     os: Sequelize.STRING,
     // 注册ua
     ua: Sequelize.TEXT,
+    success: Sequelize.BIGINT.UNSIGNED,
+    toll: Sequelize.BIGINT.UNSIGNED,
+    ratio: Sequelize.BIGINT.UNSIGNED,
     remark: Sequelize.TEXT
 }

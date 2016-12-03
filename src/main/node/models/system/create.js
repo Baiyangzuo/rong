@@ -5,8 +5,8 @@
 var db = require('../../db/db');
 var crypto = require('./crypto');
 var User = {
-    username: 'username',
-    password: 'password'
+    username: 'gavinning',
+    password: '8891'
 }
 
 db.list.User.findOrCreate({
