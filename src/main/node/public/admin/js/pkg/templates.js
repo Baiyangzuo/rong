@@ -173,16 +173,7 @@ buf.push("\n      <tr>\n        <td data-type=\"number\">" + (jade.escape(null =
     for (var key = 0, $$l = $$obj.length; key < $$l; key++) {
       var value = $$obj[key];
 
-buf.push("\n        <td" + (jade.attr("data-type", key, true, false)) + ">");
-if ((key === 'loan'))
-{
-buf.push("\n          <div class=\"inner\">" + (jade.escape(null == (jade_interp = value + '万元') ? "" : jade_interp)) + "</div>");
-}
-else
-{
-buf.push("\n          <div class=\"inner\">" + (jade.escape(null == (jade_interp = value) ? "" : jade_interp)) + "</div>");
-}
-buf.push("\n        </td>");
+buf.push("\n        <td" + (jade.attr("data-type", key, true, false)) + ">\n          <div class=\"inner\">" + (jade.escape(null == (jade_interp = value) ? "" : jade_interp)) + "</div>\n        </td>");
     }
 
   } else {
@@ -190,16 +181,7 @@ buf.push("\n        </td>");
     for (var key in $$obj) {
       $$l++;      var value = $$obj[key];
 
-buf.push("\n        <td" + (jade.attr("data-type", key, true, false)) + ">");
-if ((key === 'loan'))
-{
-buf.push("\n          <div class=\"inner\">" + (jade.escape(null == (jade_interp = value + '万元') ? "" : jade_interp)) + "</div>");
-}
-else
-{
-buf.push("\n          <div class=\"inner\">" + (jade.escape(null == (jade_interp = value) ? "" : jade_interp)) + "</div>");
-}
-buf.push("\n        </td>");
+buf.push("\n        <td" + (jade.attr("data-type", key, true, false)) + ">\n          <div class=\"inner\">" + (jade.escape(null == (jade_interp = value) ? "" : jade_interp)) + "</div>\n        </td>");
     }
 
   }
@@ -222,16 +204,7 @@ buf.push("\n      <tr>\n        <td data-type=\"number\">" + (jade.escape(null =
     for (var key = 0, $$l = $$obj.length; key < $$l; key++) {
       var value = $$obj[key];
 
-buf.push("\n        <td" + (jade.attr("data-type", key, true, false)) + ">");
-if ((key === 'loan'))
-{
-buf.push("\n          <div class=\"inner\">" + (jade.escape(null == (jade_interp = value + '万元') ? "" : jade_interp)) + "</div>");
-}
-else
-{
-buf.push("\n          <div class=\"inner\">" + (jade.escape(null == (jade_interp = value) ? "" : jade_interp)) + "</div>");
-}
-buf.push("\n        </td>");
+buf.push("\n        <td" + (jade.attr("data-type", key, true, false)) + ">\n          <div class=\"inner\">" + (jade.escape(null == (jade_interp = value) ? "" : jade_interp)) + "</div>\n        </td>");
     }
 
   } else {
@@ -239,16 +212,7 @@ buf.push("\n        </td>");
     for (var key in $$obj) {
       $$l++;      var value = $$obj[key];
 
-buf.push("\n        <td" + (jade.attr("data-type", key, true, false)) + ">");
-if ((key === 'loan'))
-{
-buf.push("\n          <div class=\"inner\">" + (jade.escape(null == (jade_interp = value + '万元') ? "" : jade_interp)) + "</div>");
-}
-else
-{
-buf.push("\n          <div class=\"inner\">" + (jade.escape(null == (jade_interp = value) ? "" : jade_interp)) + "</div>");
-}
-buf.push("\n        </td>");
+buf.push("\n        <td" + (jade.attr("data-type", key, true, false)) + ">\n          <div class=\"inner\">" + (jade.escape(null == (jade_interp = value) ? "" : jade_interp)) + "</div>\n        </td>");
     }
 
   }
