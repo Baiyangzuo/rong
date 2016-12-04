@@ -36,8 +36,8 @@ class table extends App {
             // 操作列 删除-复制-编辑
             ctrl: 'delete.copy.edit'
         };
-        let profiles = 'loan city education professional has_social_security has_accumulation_fund house_property car'.split(' ');
-        let profiles_cn = '贷款金额 城市 学历 职业 社保 公积金 房产 汽车'.split(' ');
+        let profiles = 'username tel score gender sid client loan city education professional has_social_security has_accumulation_fund house_property car'.split(' ');
+        let profiles_cn = '姓名 手机 评分 性别 渠道 终端 贷款金额 城市 学历 职业 社保 公积金 房产 汽车'.split(' ');
 
         // 缓存数据
         this.config('data', this.clone(this.getData()));
@@ -74,7 +74,7 @@ class table extends App {
     }
 
     postrender(app) {
-        
+
     }
 
     pagerender(app) {

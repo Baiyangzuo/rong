@@ -132,6 +132,15 @@ g.extend({
     // 判断时间是否是当天
     isToday(time) {
         return date('dd') === date('dd', new Date(time))
+    },
+
+    // 清洗数据，删除空字段
+    flush(data) {
+        for(let i in data){
+            if(!data[i])
+                delete data[i]
+        }
+        return data
     }
 })
 

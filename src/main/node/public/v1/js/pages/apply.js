@@ -52,10 +52,8 @@ $(function(){
                     console.log('full data:', fulldata);
 
                     // 检查 username & tel
-                    if(!pre.isReg){
-                        if(msg = page.check(top)){
-                            return alert(msg);
-                        }
+                    if(msg = page.check(top)){
+                        return alert(msg);
                     }
 
                     // 注册
@@ -144,19 +142,6 @@ $(function(){
             this.$dom.find('[name="telphone"]').val(data.tel);
         },
 
-        getUrlArguments: function() {
-            var args = {}, arr;
-            if(location.search){
-                arr = location.search.slice(1).split('&');
-                arr.forEach(function(item){
-                    var tmp = item.split('=');
-                    args[tmp[0]] = tmp[1];
-                    tmp = null;
-                })
-            }
-            return args;
-        },
-
         getPreData: function() {
             var data = {};
             var args = this.getUrlArguments();
@@ -217,8 +202,21 @@ $(function(){
         //     this.$dom.find('[name="vcode"]').val('');
         // },
 
+        getUrlArguments: function() {
+            var args = {}, arr;
+            if(location.search){
+                arr = location.search.slice(1).split('&');
+                arr.forEach(function(item){
+                    var tmp = item.split('=');
+                    args[tmp[0]] = tmp[1];
+                    tmp = null;
+                })
+            }
+            return args;
+        },
+
         getSourceId: function(){
-            return cookie.get('sid') || this.getUrlArguments().sid || 0;
+            return this.getUrlArguments().sid || cookie.get('sid') || 0;
         },
 
         saveSourceId: function(){

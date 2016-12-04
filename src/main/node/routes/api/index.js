@@ -17,6 +17,10 @@ router.post('/apply', (req, res) => {
     var user = info.getUser();
     var score = new Score(info.getData());
 
+    // 清洗数据
+    // 防止空字段覆盖已有字段
+    g.flush(user)
+
     co(function *(){
         // 获取用户评分 TODO: 该评分系统需要重写
         user.score = yield score.getScore();
@@ -79,29 +83,16 @@ router.post('/apply', (req, res) => {
                 stats.rv(info);
 
                 // Log
-                console.log(`user reg fail user.username:${user.username} user.tel:${user.tel}`)
+                console.error(`user reg fail user.username:${user.username} user.tel:${user.tel}`)
+                console.error(err.message)
+
                 // sms(user.username+user.tel)
                 //     .then(res => console.info(info.user.id, info.user.username, 'sms send success'))
                 //     .catch(err => console.error(info.user.id, info.user.username, 'sms send fail!', 'msg:', err.message));
+                
                 res.status(500).send(err.message)
             })
         }
-    })
-})
-
-router.post('/applyFull', function(req, res, next) {
-    // 用于获取用户信息
-    var info = new Info(req);
-    // 用户完整信息
-    var profile = info.getFull();
-    co(function *(){
-        // 完善用户资料
-        db.list.Profile.findOrCreate({
-            where: { personId: profile.personId },
-            defaults: profile
-        })
-        .then(val => res.json({code: 0, msg: 'success'}))
-        .catch(err => res.status(500).send(err.message))
     })
 })
 

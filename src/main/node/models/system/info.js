@@ -21,6 +21,7 @@ class Info {
     getUser() {
         this.user = {
             tel: this.req.body.tel,
+            sid: this.req.body.sid,
             gender: this.req.body.gender,
             username: this.req.body.username,
             userguid: this.req.body.userguid,

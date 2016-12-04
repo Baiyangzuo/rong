@@ -60,7 +60,7 @@ $(function(){
                                             'username=' + data.username + '&' +
                                             'telphone=' + data.tel + '&' +
                                             'gender=' + data.gender + '&' +
-                                            'sourceId=' + data.sid;
+                                            'sid=' + data.sid;
                         },
                         function(err){
                             console.log(err.status);
@@ -153,23 +153,21 @@ $(function(){
             this.$dom.find('[name="vcode"]').val('');
         },
 
-        getSourceId: function(){
-            var args;
-            var sid = cookie.get('sid');
+        getUrlArguments: function() {
+            var args = {}, arr;
+            if(location.search){
+                arr = location.search.slice(1).split('&');
+                arr.forEach(function(item){
+                    var tmp = item.split('=');
+                    args[tmp[0]] = tmp[1];
+                    tmp = null;
+                })
+            }
+            return args;
+        },
 
-            if(sid){
-                return sid
-            }
-            else if(location.search.length){
-                args = location.search.slice(1).split('&');
-                args.forEach(function(arg){
-                    var obj = arg.split('=');
-                    if(obj[0] === 'sid'){
-                        sid = obj[1];
-                    };
-                });
-            }
-            return sid || 0;
+        getSourceId: function(){
+            return this.getUrlArguments().sid || cookie.get('sid') || 0;
         },
 
         saveSourceId: function(){

@@ -76,11 +76,8 @@ router.get('/login', (req, res, next) => {
     }
     db.list.Person.findAll({
         where: g.getTimeQuery(req.query.date),
-        attributes: ['username', 'tel', 'score', 'gender', 'sourceId', 'client', 'createdAt'],
-        order: 'createdAt DESC',
-        include: {
-            model: db.list.Profile
-        }
+        attributes: ['username', 'tel', 'score', 'gender', 'sid', 'client', 'city', 'loan', 'car', 'education', 'professional', 'has_social_security', 'has_accumulation_fund', 'house_property', 'createdAt'],
+        order: 'createdAt DESC'
     })
     .then(arr => res.json(g.retSuccess(g.Fixtimezone(arr))))
     .catch(err =>{
