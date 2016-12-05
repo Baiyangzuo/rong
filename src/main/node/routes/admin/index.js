@@ -139,7 +139,7 @@ router.get('/login', (req, res, next) => {
 //             attributes: ['username', 'tel', 'gender', 'createdAt'],
 //             order: 'createdAt DESC'
 //         });
-// console.log(arr, 123)
+// logger.log(arr, 123)
 //         for(let i=0; i<arr.length; i++){
 //             let user = arr[i];
 //             let profile = yield db.list.Profile.find({
@@ -148,7 +148,7 @@ router.get('/login', (req, res, next) => {
 //             });
 //             extend(user, profile);
 //         };
-// console.log(arr, 456)
+// logger.log(arr, 456)
 //         if(arr.length === 0){
 //             gre.warn(req.session.user.username, 'getExcel Fail')
 //             gre.info(req.body.date, arr, 'Empty data')

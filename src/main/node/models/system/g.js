@@ -101,11 +101,14 @@ g.extend({
     },
 
     // 根据时间参数返回 today, week, month 的数据
-    getTimeQuery(type) {
+    getTimeQuery(index) {
         let times = this.times()
+        // 修正index溢出
+        index >= times.length ? index = 0 : index;
+
         return {
             createdAt: {
-                $gt: times[type || 0]
+                $gt: times[index || 0]
             }
         }
     },
@@ -141,6 +144,13 @@ g.extend({
                 delete data[i]
         }
         return data
+    },
+
+    flushTel(arr){
+        return arr.map(data => {
+            data.tel = data.tel.toString().replace(/\d{3}(\d{4})/, (s1, s2) => s1.replace(s2, '****'))
+            return data
+        })
     }
 })
 

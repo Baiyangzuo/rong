@@ -15,7 +15,8 @@ db.list = {};
     'User',
     'Stats',
     'System',
-    'Person'
+    'Person',
+    'Report'
 ].forEach(name => {
     let Table = require(path.join(__dirname, name))
     let Model = db.define(name.toLowerCase(), Table, env.conf)
@@ -23,6 +24,6 @@ db.list = {};
     Model.delete = Model.destroy
     Model.filter = Extends.filter
     // name === 'User' || Model.sync({force: true})
-    // Model.sync()
+    Model.sync()
     db.list[name] = Model
 });

@@ -16,4 +16,6 @@ module.exports = app => {
     app.use('/api', require('./api'));
     app.use('/rose', require('./admin'));
     app.use('/', require('./system/stats'));
+
+    app.use('/stats/report', require('./stats/report'));
 }

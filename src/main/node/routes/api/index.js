@@ -67,12 +67,12 @@ router.post('/apply', (req, res) => {
                 res.cookie('userId', val.id, { expires: new Date(Date.now() + 8.64e+7*365), httpOnly: true });
 
                 // Log
-                console.log(`user reg success: user.username:${user.username} user.tel:${user.tel}`)
+                logger.log(`user reg success: user.username:${user.username} user.tel:${user.tel}`)
 
                 // 发送短信通知管理员
                 sms(user.username)
-                    .then(res => console.info(info.user.id, info.user.username, 'sms send success'))
-                    .catch(err => console.error(info.user.id, info.user.username, 'sms send fail!', 'msg:', err.message));
+                    .then(res => logger.info(info.user.id, info.user.username, 'sms send success'))
+                    .catch(err => logger.error(info.user.id, info.user.username, 'sms send fail!', 'msg:', err.message));
 
                 res.json({code: 0, msg: 'success'})
             })
@@ -83,13 +83,13 @@ router.post('/apply', (req, res) => {
                 stats.rv(info);
 
                 // Log
-                console.error(`user reg fail: user.username:${user.username} user.tel:${user.tel}`)
-                console.error(err.message)
+                logger.error(`user reg fail: user.username:${user.username} user.tel:${user.tel}`)
+                logger.error(err.message)
 
                 // 发送短信通知管理员
                 sms(user.username+user.tel)
-                    .then(res => console.info(info.user.id, info.user.username, 'sms send success'))
-                    .catch(err => console.error(info.user.id, info.user.username, 'sms send fail!', 'msg:', err.message));
+                    .then(res => logger.info(info.user.id, info.user.username, 'sms send success'))
+                    .catch(err => logger.error(info.user.id, info.user.username, 'sms send fail!', 'msg:', err.message));
 
                 res.status(500).send(err.message)
             })

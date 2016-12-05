@@ -1,4 +1,5 @@
 var express = require('express');
+var gre = require('gre');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -10,6 +11,12 @@ var format = require('date-format');
 var detector = require('express-detector');
 var paths = require('./models/system/paths');
 var app = express();
+
+// 全局日志模块
+global.g = global.logger = gre.create({
+    format: 'prod',
+    project: path.dirname(__dirname)
+})
 
 // 注册核心模块路径
 paths(__dirname);

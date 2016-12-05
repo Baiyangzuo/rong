@@ -15,6 +15,7 @@ module.exports = dirname => {
         excel   : path.join(dirname, 'models/system/excel'),
         crypto  : path.join(dirname, 'models/system/crypto'),
         config  : path.join(dirname, 'models/system/config'),
+        configs : path.join(dirname, 'config'),
 
         // Alidayu-sms
         sms     : path.join(dirname, 'models/system/sms'),

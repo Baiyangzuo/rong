@@ -8,7 +8,7 @@ var Info = require(global.paths.info);
 // router.all('*', function(req, res, next) {
 //     let info = new Info(req);
 //
-//     console.log(info.getData())
+//     logger.log(info.getData())
 //     return 97
 // })
 

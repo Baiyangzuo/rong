@@ -52,11 +52,11 @@ router
 
 .get('/article/:id', (req, res) => {
     let data;
-    console.log(path.join('../../config/arts', req.params.id + '.json'))
+    logger.log(path.join('../../config/arts', req.params.id + '.json'))
 
     if(!req.params.id) return res.status(404).send('404');
     try{
-        console.log(path.join('../../config/arts', req.params.id + '.json'))
+        logger.log(path.join('../../config/arts', req.params.id + '.json'))
         data = require(path.join('../../config/arts', req.params.id + '.json'));
     }
     catch(err){
