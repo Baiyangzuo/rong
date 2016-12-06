@@ -58,6 +58,8 @@ module.exports = {
     os: Sequelize.STRING,
     // 注册ua
     ua: Sequelize.TEXT,
+    // 是否是有效注册用户
+    valid: Sequelize.STRING,
     // 是否成功
     success: Sequelize.BIGINT.UNSIGNED,
     // 收费

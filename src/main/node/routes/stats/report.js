@@ -32,7 +32,7 @@ router.post('/fineadcpa', function(req, res, next) {
                 sid: 'fineadcpa',
                 createdAt: g.getTimeQuery(date || 0).createdAt
             },
-            attributes: ['username', 'tel', 'sid', 'city', 'createdAt'],
+            attributes: ['username', 'tel', 'sid', 'city', 'valid', 'createdAt'],
             order: 'createdAt DESC'
         })
         .then(data => {
