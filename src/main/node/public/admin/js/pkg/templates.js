@@ -141,7 +141,10 @@ buf.push("\n<div class=\"lincoapp-table\">\n  <table class=\"table\">\n    <thea
     for (var key = 0, $$l = $$obj.length; key < $$l; key++) {
       var value = $$obj[key];
 
+if ((key !== 'id'))
+{
 buf.push("\n        <th" + (jade.attr("data-type", key, true, false)) + ">" + (jade.escape(null == (jade_interp = value) ? "" : jade_interp)) + "</th>");
+}
     }
 
   } else {
@@ -149,7 +152,10 @@ buf.push("\n        <th" + (jade.attr("data-type", key, true, false)) + ">" + (j
     for (var key in $$obj) {
       $$l++;      var value = $$obj[key];
 
+if ((key !== 'id'))
+{
 buf.push("\n        <th" + (jade.attr("data-type", key, true, false)) + ">" + (jade.escape(null == (jade_interp = value) ? "" : jade_interp)) + "</th>");
+}
     }
 
   }
@@ -164,7 +170,7 @@ buf.push("\n      </tr>\n    </thead>\n    <tbody>");
     for (var i = 0, $$l = $$obj.length; i < $$l; i++) {
       var item = $$obj[i];
 
-buf.push("\n      <tr>\n        <td data-type=\"number\">" + (jade.escape(null == (jade_interp = i+1) ? "" : jade_interp)) + "</td>");
+buf.push("\n      <tr" + (jade.attr("data-id", item.id, true, false)) + ">\n        <td data-type=\"number\">" + (jade.escape(null == (jade_interp = i+1) ? "" : jade_interp)) + "</td>");
 // iterate item
 ;(function(){
   var $$obj = item;
@@ -173,7 +179,32 @@ buf.push("\n      <tr>\n        <td data-type=\"number\">" + (jade.escape(null =
     for (var key = 0, $$l = $$obj.length; key < $$l; key++) {
       var value = $$obj[key];
 
-buf.push("\n        <td" + (jade.attr("data-type", key, true, false)) + ">\n          <div class=\"inner\">" + (jade.escape(null == (jade_interp = value) ? "" : jade_interp)) + "</div>\n        </td>");
+if ((key !== 'id'))
+{
+buf.push("\n        <td" + (jade.attr("data-type", key, true, false)) + ">");
+if ((key === 'valid'))
+{
+buf.push("\n          <div class=\"inner\">");
+if ((value == 1))
+{
+buf.push("<span class=\"label label-sm label-green\">是</span>");
+}
+else if ((value == 2))
+{
+buf.push("<span class=\"label label-sm label-red\">否</span>");
+}
+else
+{
+buf.push("\n            <button data-value=\"1\" class=\"btn-sure label label-sm label-green\">有效</button>\n            <button data-value=\"2\" class=\"btn-fail label label-sm label-red\">无效</button>");
+}
+buf.push("\n          </div>");
+}
+else
+{
+buf.push("\n          <div class=\"inner\">" + (jade.escape(null == (jade_interp = value) ? "" : jade_interp)) + "</div>");
+}
+buf.push("\n        </td>");
+}
     }
 
   } else {
@@ -181,7 +212,32 @@ buf.push("\n        <td" + (jade.attr("data-type", key, true, false)) + ">\n    
     for (var key in $$obj) {
       $$l++;      var value = $$obj[key];
 
-buf.push("\n        <td" + (jade.attr("data-type", key, true, false)) + ">\n          <div class=\"inner\">" + (jade.escape(null == (jade_interp = value) ? "" : jade_interp)) + "</div>\n        </td>");
+if ((key !== 'id'))
+{
+buf.push("\n        <td" + (jade.attr("data-type", key, true, false)) + ">");
+if ((key === 'valid'))
+{
+buf.push("\n          <div class=\"inner\">");
+if ((value == 1))
+{
+buf.push("<span class=\"label label-sm label-green\">是</span>");
+}
+else if ((value == 2))
+{
+buf.push("<span class=\"label label-sm label-red\">否</span>");
+}
+else
+{
+buf.push("\n            <button data-value=\"1\" class=\"btn-sure label label-sm label-green\">有效</button>\n            <button data-value=\"2\" class=\"btn-fail label label-sm label-red\">无效</button>");
+}
+buf.push("\n          </div>");
+}
+else
+{
+buf.push("\n          <div class=\"inner\">" + (jade.escape(null == (jade_interp = value) ? "" : jade_interp)) + "</div>");
+}
+buf.push("\n        </td>");
+}
     }
 
   }
@@ -195,7 +251,7 @@ buf.push("\n      </tr>");
     for (var i in $$obj) {
       $$l++;      var item = $$obj[i];
 
-buf.push("\n      <tr>\n        <td data-type=\"number\">" + (jade.escape(null == (jade_interp = i+1) ? "" : jade_interp)) + "</td>");
+buf.push("\n      <tr" + (jade.attr("data-id", item.id, true, false)) + ">\n        <td data-type=\"number\">" + (jade.escape(null == (jade_interp = i+1) ? "" : jade_interp)) + "</td>");
 // iterate item
 ;(function(){
   var $$obj = item;
@@ -204,7 +260,32 @@ buf.push("\n      <tr>\n        <td data-type=\"number\">" + (jade.escape(null =
     for (var key = 0, $$l = $$obj.length; key < $$l; key++) {
       var value = $$obj[key];
 
-buf.push("\n        <td" + (jade.attr("data-type", key, true, false)) + ">\n          <div class=\"inner\">" + (jade.escape(null == (jade_interp = value) ? "" : jade_interp)) + "</div>\n        </td>");
+if ((key !== 'id'))
+{
+buf.push("\n        <td" + (jade.attr("data-type", key, true, false)) + ">");
+if ((key === 'valid'))
+{
+buf.push("\n          <div class=\"inner\">");
+if ((value == 1))
+{
+buf.push("<span class=\"label label-sm label-green\">是</span>");
+}
+else if ((value == 2))
+{
+buf.push("<span class=\"label label-sm label-red\">否</span>");
+}
+else
+{
+buf.push("\n            <button data-value=\"1\" class=\"btn-sure label label-sm label-green\">有效</button>\n            <button data-value=\"2\" class=\"btn-fail label label-sm label-red\">无效</button>");
+}
+buf.push("\n          </div>");
+}
+else
+{
+buf.push("\n          <div class=\"inner\">" + (jade.escape(null == (jade_interp = value) ? "" : jade_interp)) + "</div>");
+}
+buf.push("\n        </td>");
+}
     }
 
   } else {
@@ -212,7 +293,32 @@ buf.push("\n        <td" + (jade.attr("data-type", key, true, false)) + ">\n    
     for (var key in $$obj) {
       $$l++;      var value = $$obj[key];
 
-buf.push("\n        <td" + (jade.attr("data-type", key, true, false)) + ">\n          <div class=\"inner\">" + (jade.escape(null == (jade_interp = value) ? "" : jade_interp)) + "</div>\n        </td>");
+if ((key !== 'id'))
+{
+buf.push("\n        <td" + (jade.attr("data-type", key, true, false)) + ">");
+if ((key === 'valid'))
+{
+buf.push("\n          <div class=\"inner\">");
+if ((value == 1))
+{
+buf.push("<span class=\"label label-sm label-green\">是</span>");
+}
+else if ((value == 2))
+{
+buf.push("<span class=\"label label-sm label-red\">否</span>");
+}
+else
+{
+buf.push("\n            <button data-value=\"1\" class=\"btn-sure label label-sm label-green\">有效</button>\n            <button data-value=\"2\" class=\"btn-fail label label-sm label-red\">无效</button>");
+}
+buf.push("\n          </div>");
+}
+else
+{
+buf.push("\n          <div class=\"inner\">" + (jade.escape(null == (jade_interp = value) ? "" : jade_interp)) + "</div>");
+}
+buf.push("\n        </td>");
+}
     }
 
   }
@@ -243,7 +349,7 @@ buf.push("\n<tbody>");
     for (var i = 0, $$l = $$obj.length; i < $$l; i++) {
       var item = $$obj[i];
 
-buf.push("\n  <tr>\n    <td data-type=\"number\">" + (jade.escape(null == (jade_interp = i+1) ? "" : jade_interp)) + "</td>");
+buf.push("\n  <tr" + (jade.attr("data-id", item.id, true, false)) + ">\n    <td data-type=\"number\">" + (jade.escape(null == (jade_interp = i+1) ? "" : jade_interp)) + "</td>");
 // iterate item
 ;(function(){
   var $$obj = item;
@@ -252,7 +358,32 @@ buf.push("\n  <tr>\n    <td data-type=\"number\">" + (jade.escape(null == (jade_
     for (var key = 0, $$l = $$obj.length; key < $$l; key++) {
       var value = $$obj[key];
 
-buf.push("\n    <td" + (jade.attr("data-type", key, true, false)) + ">\n      <div class=\"inner\">" + (jade.escape(null == (jade_interp = value) ? "" : jade_interp)) + "</div>\n    </td>");
+if ((key !== 'id'))
+{
+buf.push("\n    <td" + (jade.attr("data-type", key, true, false)) + ">");
+if ((key === 'valid'))
+{
+buf.push("\n      <div class=\"inner\">");
+if ((value == 1))
+{
+buf.push("<span class=\"label label-sm label-green\">是</span>");
+}
+else if ((value == 2))
+{
+buf.push("<span class=\"label label-sm label-red\">否</span>");
+}
+else
+{
+buf.push("\n        <button data-value=\"1\" class=\"btn-sure label label-sm label-green\">有效</button>\n        <button data-value=\"2\" class=\"btn-fail label label-sm label-red\">无效</button>");
+}
+buf.push("\n      </div>");
+}
+else
+{
+buf.push("\n      <div class=\"inner\">" + (jade.escape(null == (jade_interp = value) ? "" : jade_interp)) + "</div>");
+}
+buf.push("\n    </td>");
+}
     }
 
   } else {
@@ -260,7 +391,32 @@ buf.push("\n    <td" + (jade.attr("data-type", key, true, false)) + ">\n      <d
     for (var key in $$obj) {
       $$l++;      var value = $$obj[key];
 
-buf.push("\n    <td" + (jade.attr("data-type", key, true, false)) + ">\n      <div class=\"inner\">" + (jade.escape(null == (jade_interp = value) ? "" : jade_interp)) + "</div>\n    </td>");
+if ((key !== 'id'))
+{
+buf.push("\n    <td" + (jade.attr("data-type", key, true, false)) + ">");
+if ((key === 'valid'))
+{
+buf.push("\n      <div class=\"inner\">");
+if ((value == 1))
+{
+buf.push("<span class=\"label label-sm label-green\">是</span>");
+}
+else if ((value == 2))
+{
+buf.push("<span class=\"label label-sm label-red\">否</span>");
+}
+else
+{
+buf.push("\n        <button data-value=\"1\" class=\"btn-sure label label-sm label-green\">有效</button>\n        <button data-value=\"2\" class=\"btn-fail label label-sm label-red\">无效</button>");
+}
+buf.push("\n      </div>");
+}
+else
+{
+buf.push("\n      <div class=\"inner\">" + (jade.escape(null == (jade_interp = value) ? "" : jade_interp)) + "</div>");
+}
+buf.push("\n    </td>");
+}
     }
 
   }
@@ -274,7 +430,7 @@ buf.push("\n  </tr>");
     for (var i in $$obj) {
       $$l++;      var item = $$obj[i];
 
-buf.push("\n  <tr>\n    <td data-type=\"number\">" + (jade.escape(null == (jade_interp = i+1) ? "" : jade_interp)) + "</td>");
+buf.push("\n  <tr" + (jade.attr("data-id", item.id, true, false)) + ">\n    <td data-type=\"number\">" + (jade.escape(null == (jade_interp = i+1) ? "" : jade_interp)) + "</td>");
 // iterate item
 ;(function(){
   var $$obj = item;
@@ -283,7 +439,32 @@ buf.push("\n  <tr>\n    <td data-type=\"number\">" + (jade.escape(null == (jade_
     for (var key = 0, $$l = $$obj.length; key < $$l; key++) {
       var value = $$obj[key];
 
-buf.push("\n    <td" + (jade.attr("data-type", key, true, false)) + ">\n      <div class=\"inner\">" + (jade.escape(null == (jade_interp = value) ? "" : jade_interp)) + "</div>\n    </td>");
+if ((key !== 'id'))
+{
+buf.push("\n    <td" + (jade.attr("data-type", key, true, false)) + ">");
+if ((key === 'valid'))
+{
+buf.push("\n      <div class=\"inner\">");
+if ((value == 1))
+{
+buf.push("<span class=\"label label-sm label-green\">是</span>");
+}
+else if ((value == 2))
+{
+buf.push("<span class=\"label label-sm label-red\">否</span>");
+}
+else
+{
+buf.push("\n        <button data-value=\"1\" class=\"btn-sure label label-sm label-green\">有效</button>\n        <button data-value=\"2\" class=\"btn-fail label label-sm label-red\">无效</button>");
+}
+buf.push("\n      </div>");
+}
+else
+{
+buf.push("\n      <div class=\"inner\">" + (jade.escape(null == (jade_interp = value) ? "" : jade_interp)) + "</div>");
+}
+buf.push("\n    </td>");
+}
     }
 
   } else {
@@ -291,7 +472,32 @@ buf.push("\n    <td" + (jade.attr("data-type", key, true, false)) + ">\n      <d
     for (var key in $$obj) {
       $$l++;      var value = $$obj[key];
 
-buf.push("\n    <td" + (jade.attr("data-type", key, true, false)) + ">\n      <div class=\"inner\">" + (jade.escape(null == (jade_interp = value) ? "" : jade_interp)) + "</div>\n    </td>");
+if ((key !== 'id'))
+{
+buf.push("\n    <td" + (jade.attr("data-type", key, true, false)) + ">");
+if ((key === 'valid'))
+{
+buf.push("\n      <div class=\"inner\">");
+if ((value == 1))
+{
+buf.push("<span class=\"label label-sm label-green\">是</span>");
+}
+else if ((value == 2))
+{
+buf.push("<span class=\"label label-sm label-red\">否</span>");
+}
+else
+{
+buf.push("\n        <button data-value=\"1\" class=\"btn-sure label label-sm label-green\">有效</button>\n        <button data-value=\"2\" class=\"btn-fail label label-sm label-red\">无效</button>");
+}
+buf.push("\n      </div>");
+}
+else
+{
+buf.push("\n      <div class=\"inner\">" + (jade.escape(null == (jade_interp = value) ? "" : jade_interp)) + "</div>");
+}
+buf.push("\n    </td>");
+}
     }
 
   }

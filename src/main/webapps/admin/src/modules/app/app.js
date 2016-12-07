@@ -301,6 +301,21 @@ class App extends Base {
         }
     }
 
+    post(url, data, fn) {
+        $.post(url, data, fn)
+        return this
+    }
+
+    get(url, fn) {
+        $.get(url, fn)
+        return this
+    }
+
+    ajax(options) {
+        $.ajax(options)
+        return this
+    }
+
     // Rewrite
 
     // 初始化后

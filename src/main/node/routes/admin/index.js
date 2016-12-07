@@ -76,7 +76,7 @@ router.get('/login', (req, res, next) => {
     }
     db.list.Person.findAll({
         where: g.getTimeQuery(req.query.date),
-        attributes: ['username', 'tel', 'valid', 'gender', 'score', 'sid', 'client', 'city', 'loan', 'car', 'education', 'professional', 'has_social_security', 'has_accumulation_fund', 'house_property', 'createdAt'],
+        attributes: ['id', 'username', 'tel', 'valid', 'gender', 'score', 'sid', 'client', 'city', 'loan', 'car', 'education', 'professional', 'has_social_security', 'has_accumulation_fund', 'house_property', 'createdAt'],
         order: 'createdAt DESC'
     })
     .then(arr => res.json(g.retSuccess(g.Fixtimezone(arr))))
@@ -123,6 +123,27 @@ router.get('/login', (req, res, next) => {
     .catch(err => {
         gre.error(err)
         gre.warn(req.session.user.username, 'getExcel Fail')
+        res.status(500).send(err.message)
+    })
+})
+
+// 修改Person.valid
+.post('/api/signValid', (req, res) => {
+    let id = req.body.id;
+    let valid = req.body.valid || 0;
+    db.list.Person.update({
+        valid: valid
+    }, {
+        where: {
+            id: id
+        }
+    })
+    .then(val => {
+        console.info(id, 'valid change to', valid, 'Success')
+        res.send('success')
+    })
+    .catch(err => {
+        console.error(id, 'valid change to', valid, 'Fail', err.message)
         res.status(500).send(err.message)
     })
 })

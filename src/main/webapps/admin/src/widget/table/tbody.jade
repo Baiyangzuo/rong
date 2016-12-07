@@ -1,7 +1,19 @@
 tbody
     each item, i in list
-        tr
+        tr(data-id= item.id)
             td(data-type="number")= i+1
             each value, key in item
-                td(data-type= key)
-                    .inner= value
+                if(key !== 'id')
+                    td(data-type= key)
+                        if(key === 'valid')
+                            .inner
+                                if(value == 1)
+                                    span.label.label-sm.label-green 是
+                                else if(value == 2)
+                                    span.label.label-sm.label-red 否
+                                else
+                                    button.btn-sure.label.label-sm.label-green(data-value="1") 有效
+                                    button.btn-fail.label.label-sm.label-red(data-value="2") 无效
+                        else
+                            .inner= value
+                    

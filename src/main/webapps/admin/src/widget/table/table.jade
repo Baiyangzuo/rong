@@ -4,7 +4,8 @@
             tr
                 th(data-type="number") $
                 each value, key in map
-                    th(data-type= key)= value
+                    if(key !== 'id')
+                        th(data-type= key)= value
         include ./tbody
     .table-footer
         .info 共
