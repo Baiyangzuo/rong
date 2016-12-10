@@ -75,6 +75,12 @@ $(function(){
                             .siblings(_selected).removeClass(selected);
                     }
                 },
+                'touchend@.gender': function(){
+                    if(!$(this).hasClass(selected)){
+                        $(this).addClass(selected)
+                            .siblings(_selected).removeClass(selected);
+                    }
+                },
                 'click@.vcode-img': function(){
                     home.code();
                 },
