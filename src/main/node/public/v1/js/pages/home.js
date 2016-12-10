@@ -84,6 +84,9 @@ $(function(){
                 'click@.vcode-img': function(){
                     home.code();
                 },
+                'touchend@.vcode-img': function(){
+                    home.code();
+                },
                 'keypress@[name="vcode"]': function(e){
                     if(e.keyCode === 13){
                         home.$dom.find('.btn-success').click();
