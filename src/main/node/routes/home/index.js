@@ -22,23 +22,24 @@ var rongyi = extend(require('../../config/v1/rongyi'), public);
 var articleList = require('../../config/v1/articles');
 
 
-router.get('/m', function(req, res, next) {
-    res.render('imp/home', { isMobile: true });
-})
+
 
 // ======> v1.0.0
 
 router
 
-.get('*', (req, res, next) => {
-    req.env.isMobile ? res.redirect('/m') : next()
-})
+// .get('*', (req, res, next) => {
+//     req.env.isMobile ? res.redirect('/m') : next()
+// })
 
 .get('/', (req, res) => {
-    res.render('imp1/home', { version: 'v1', id: 'home', list: articleList })
+    res.render('imp1/home', { version: 'v1', id: 'home', list: articleList, isMobile: req.env.isMobile })
+})
+.get('/m', function(req, res, next) {
+    res.render('imp1/home', { version: 'v1', id: 'home', list: articleList, isMobile: true })
 })
 
-.get('/apply', (req, res) => res.render('imp1/apply', public))
+.get('/apply', (req, res) => res.render('imp1/apply', extend({isMobile: req.env.isMobile}, public)))
 .get('/loan/auto', (req, res) => res.render('imp1/detail', auto))
 .get('/loan/cards', (req, res) => res.render('imp1/detail', cards))
 .get('/loan/house', (req, res) => res.render('imp1/detail', house))

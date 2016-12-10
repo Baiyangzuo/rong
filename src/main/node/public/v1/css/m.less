@@ -1,0 +1,168 @@
+@yellow: #f60;
+
+.page{
+    min-width: 320px;
+
+    > div > .inner{
+        width: 100%;
+        margin: 0 auto;
+        overflow: hidden;
+    }
+}
+
+
+.header{
+    height: 50px;
+
+    img{
+        height: 50px;
+    }
+}
+
+
+.topbar,
+.header .nav,
+.types,
+.link,
+.cards,
+.main.question,
+.footer .nav,
+.footer .right
+{
+    display: none !important;
+}
+
+.aside{
+    float: none;
+}
+
+.cards{
+    display: block;
+    width: 100%;
+
+    .inner{
+        overflow: hidden;
+    }
+
+    .item{
+        width: 50%;
+        display: block;
+        float: left;
+        padding: 0 !important;
+
+        img{
+            width:100%;
+            height: auto;
+        }
+    }
+}
+
+.footer{
+    order: 4;
+}
+
+.bigbanner, .sbanner{
+
+    img{
+        width: 100%;
+    }
+}
+
+.highbar{
+    height: auto;
+    padding: 20px 0;
+
+    .item{
+        width: 50%;
+
+        &:first-child,
+        &:nth-child(2){
+            margin-bottom: 10px;
+        }
+    }
+
+    img{
+        height: 50px;
+    }
+}
+
+.pros{
+    display: block;
+    margin: 12px;
+
+    .list{
+
+        .item{
+            height: 220px-40;
+            padding: 12px 20px;
+            background: #fff;
+            margin-bottom: 12px;
+            position: relative;
+            border: 1px solid #e5eaed;
+        }
+
+        .title{
+            font-size: 16px;
+            line-height: 2;
+            color: @yellow;
+        }
+
+        .desc{
+            font-size: 12px;
+            color: #444;
+        }
+
+        .apply{
+            font-size: 12px;
+            color: @yellow;
+            position: absolute;
+            left: 20px;
+            bottom: 20px;
+        }
+
+    }
+
+    .icon{
+        position: absolute;
+        right: 20px;
+        bottom: 20px;
+    }
+}
+
+.lincoapp-apply{
+    width: auto;
+    margin: 0 12px;
+
+    .input{
+        width: 100%;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+}
+
+.footer{
+    padding: 16px 0;
+
+    .copyright{
+        text-align: center;
+        font-size: 12px;
+
+        span{
+            display: block;
+        }
+    }
+}
+
+.m{
+
+    .lincoapp-msg{
+
+        h3{
+            font-size: 18px;
+        }
+
+        p{
+            font-size: 12px;
+        }
+    }
+}

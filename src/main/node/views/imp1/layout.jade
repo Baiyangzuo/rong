@@ -12,11 +12,13 @@ html
         link(rel='apple-touch-icon-precomposed', href='/images/desktop.png')
         block css
             link(rel='stylesheet', type='text/css', href='/v1/css/home.css')
+            if(isMobile)
+                link(rel='stylesheet', type='text/css', href='/v1/css/m.css')
         block js
             include app/stats
             script(src='/public/plugins/jquery.min.js')
 
-    body
+    body(class= isMobile ? 'm' : '')
         .wrapper
         .page
             block page

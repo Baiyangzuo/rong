@@ -12,7 +12,10 @@ block page
     include app/topbar
     include app/header
     include app/sbanner
-    include app/formui
+    if(isMobile)
+        include app/formui2
+    else
+        include app/formui
     include app/footer
     include app/succ
     include app/fail
