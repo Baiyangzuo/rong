@@ -1,0 +1,47 @@
+
+.about-main{
+	margin-top: 30px;
+
+	.aside-left{
+		float: left;
+		width: 280px;
+		padding: 30px 20px;
+		background: #f7f7f7;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		-o-box-sizing: border-box;
+		box-sizing: border-box;
+		border: 1px solid @border;
+
+		.item{
+			display: block;
+			color: @dark;
+			line-height: 50px;
+			text-align: center;
+			font-size: 16px;
+			background: url(../images/arrow-right-black.png) no-repeat no-repeat 30px center;
+
+			&.selected{
+				color: #fff;
+				background: @yellow url(../images/arrow-right-white.png) no-repeat no-repeat 30px center;
+			}
+		}
+	}
+
+	.lincoapp-article{
+		float: right;
+		width: 900px;
+		min-height: 1000px;
+
+		p{
+			color: @dark;
+			text-indent: 0;
+			margin-bottom: 16px;
+		}
+
+		.u-title{
+			border-bottom: 1px solid @border;
+			padding-bottom: 6px;
+		}
+	}
+}

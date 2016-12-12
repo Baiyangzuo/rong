@@ -51,6 +51,15 @@ router
 .get('/loan/yiche', (req, res) => res.render('imp1/detail', yiche))
 .get('/loan/rongyi', (req, res) => res.render('imp1/detail', rongyi))
 
+// ABOUT
+.get('/about/about', (req, res) => res.render('imp1/about/about', public))
+.get('/about/fuwu', (req, res) => res.render('imp1/about/fuwu', public))
+.get('/about/jiaru', (req, res) => res.render('imp1/about/jiaru', public))
+.get('/about/lianxi', (req, res) => res.render('imp1/about/lianxi', public))
+.get('/about/shangwu', (req, res) => res.render('imp1/about/shangwu', public))
+.get('/about/shangye', (req, res) => res.render('imp1/about/shangye', public))
+.get('/about/yijian', (req, res) => res.render('imp1/about/yijian', public))
+
 .get('/article/:id', (req, res) => {
     let data;
     logger.log(path.join('../../config/arts', req.params.id + '.json'))
