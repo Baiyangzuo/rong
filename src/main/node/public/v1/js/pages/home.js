@@ -96,7 +96,7 @@ $(function(){
                     var bm = home.$dom.find('body').hasClass('m');
                     var lm = home.$dom.find('link.main').hasClass('m');
                     if(lm || bm){
-                        window.scrollTo(0, 1600);
+                        window.scrollTo(0, 0);
                     }
                     else{
                         home.$dom.find('[name="username"]').focus();

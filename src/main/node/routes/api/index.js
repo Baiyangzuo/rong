@@ -70,9 +70,10 @@ router.post('/apply', (req, res) => {
                 logger.log(`user reg success: user.username:${user.username} user.tel:${user.tel}`)
 
                 // 发送短信通知管理员
-                sms(user.username)
-                    .then(res => logger.info(info.user.id, info.user.username, 'sms send success'))
-                    .catch(err => logger.error(info.user.id, info.user.username, 'sms send fail!', 'msg:', err.message));
+                // TODO 由于阿里大鱼短信平台被合并到阿里云通信业务模块，导致api变更无法使用，等待更新
+                // sms(user.username, user.tel)
+                //     .then(res => logger.info(info.user.id, info.user.username, 'sms send success'))
+                //     .catch(err => logger.error(info.user.id, info.user.username, 'sms send fail!', 'msg:', err.message));
 
                 res.json({code: 0, msg: 'success'})
             })
@@ -87,9 +88,9 @@ router.post('/apply', (req, res) => {
                 logger.error(err.message)
 
                 // 发送短信通知管理员
-                sms(user.username+user.tel)
-                    .then(res => logger.info(info.user.id, info.user.username, 'sms send success'))
-                    .catch(err => logger.error(info.user.id, info.user.username, 'sms send fail!', 'msg:', err.message));
+                // sms(user.username, user.tel)
+                //     .then(res => logger.info(info.user.id, info.user.username, 'sms send success'))
+                //     .catch(err => logger.error(info.user.id, info.user.username, 'sms send fail!', 'msg:', err.message));
 
                 res.status(500).send(err.message)
             })

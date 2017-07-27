@@ -36,7 +36,7 @@ router
     res.render('imp1/home', { version: 'v1', id: 'home', list: articleList, isMobile: req.env.isMobile })
 })
 .get('/m', function(req, res, next) {
-    res.render('imp1/home', { version: 'v1', id: 'home', list: articleList, isMobile: true })
+    res.render('imp1/m', { version: 'v1', id: 'mobile', list: articleList, isMobile: true })
 })
 
 .get('/apply', (req, res) => res.render('imp1/apply', extend({isMobile: req.env.isMobile}, public)))
